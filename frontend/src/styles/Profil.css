@@ -1,0 +1,21 @@
+.bg-profil {
+    background-image: url('../assets/pexels-fauxels-3184418.jpg');
+    background-size: cover;
+}
+
+.bi-person-circle {
+    font-size: 4em;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+}
+
+.avatar img{
+    width: 100%;
+}
+
+.bi-pencil {
+    font-size: 0.8em;
+}

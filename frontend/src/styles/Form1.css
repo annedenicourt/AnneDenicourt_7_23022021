@@ -1,0 +1,32 @@
+p {
+    color: #bf1650;
+    margin-top: -20px;
+  }
+  
+p::before {
+    display: inline;
+    content: "⚠ ";
+  }
+
+  .btnSubmit{
+    text-decoration: none;
+    width: 60%;
+    color: #282c34;
+    background-color: #fff;
+    border: none;
+    border-radius: 1.5rem;
+    padding:10px;
+    transition: 0.5s;
+}
+.btnSubmit:hover {
+    color: white;
+    background-color: #f05837;
+    font-weight: bold;
+}
+
+.login-form-1{
+  padding-left: 70px;
+  padding-right: 70px;
+  background:#282c34;
+  height: 650px;
+}

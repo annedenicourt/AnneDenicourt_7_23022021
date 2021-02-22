@@ -1,0 +1,17 @@
+.bg-login {
+    background-image: url('../assets/pexels-picjumbocom-461077.jpg');
+    background-size: cover ;
+}
+.login-logo{
+    position: relative;
+    left: -45px;
+    top: 260px;
+}
+.login-logo img{
+    position: absolute;
+    width: 20%;
+    border-radius: 4.5rem;
+}
+
+
+
