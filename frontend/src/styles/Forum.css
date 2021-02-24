@@ -5,3 +5,29 @@ ul {
 overflow-y: auto;
 height: 1000px;
 }
+
+.scroll2 {
+    overflow-y: auto;
+    height: 300px;
+}
+
+.scroll3 {
+    overflow-x: auto;
+    height: 100px;
+}
+
+.membres::after {
+    content: "";
+    display: block;
+    background-color:#f05837;
+    height: 3px;
+    width: 200px;
+    margin-bottom: 20px; }
+
+.last-post::after {
+    content: "";
+    display: block;
+    background-color:#f05837;
+    height: 3px;
+    width: 200px;
+    margin-bottom: 20px; }

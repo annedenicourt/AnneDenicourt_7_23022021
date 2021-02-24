@@ -1,20 +1,13 @@
-.fileContainer [type="file"] {
-    overflow: hidden;
-    opacity: 0;
-    cursor: pointer;
-    display: block;
-    text-align: right;
-}
-
 #textarea{
     width: 100%;
 }
 
 .new-postbox {
+    position: relative;
 }
 
 .attachments{
-    position: relative;
-    left: 600px;
-    top: -60px;
+    position: absolute;
+    right: 30px;
+    top: 130px;
 }

@@ -8,7 +8,6 @@
     font-weight: bold;
     font-size: 1.2em;
     transition: 0.5s;
-
 }
 .bouton:hover {
     box-shadow: 3px 3px 3px grey;
@@ -24,4 +23,16 @@
     padding-left: 100px;
     padding-right: 100px;
     font-style: italic;
+}
+@media screen and (max-width: 1023px) {
+    .logo-home{
+        margin-top: -80px;
+    }
+    #carousel {
+       display: none;
+    }
+    .title {
+        font-family: 'Shadows Into Light', cursive;
+        font-size: 3em;
+    }
 }

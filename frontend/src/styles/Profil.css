@@ -2,20 +2,47 @@
     background-image: url('../assets/pexels-fauxels-3184418.jpg');
     background-size: cover;
 }
-
-.bi-person-circle {
-    font-size: 4em;
-}
-
 .avatar {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    margin-top: -50px;
+    display: flex;
+    align-items: center;
 }
-
 .avatar img{
     width: 100%;
 }
 
+.label-file {
+    cursor: pointer;
+    font-weight: bold;
+    color: #282c34;
+    background-color: white;
+    border-radius: 5px;
+    transition:0.5s;
+}
+.label-file:hover {
+    background: #f05837;
+    color: white;
+}
+.input-file {
+    display: none;
+}
 .bi-pencil {
     font-size: 0.8em;
+}
+.bouton2 {
+    text-decoration: none;
+    height: 60px;
+    width: 400px;
+    border-radius: 40px;
+    background-color: white;
+    color: #282c34;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: 0.5s;
+}
+.bouton2:hover {
+    box-shadow: 3px 3px 3px grey;
+    background: #f05837;
+    color: white;
 }

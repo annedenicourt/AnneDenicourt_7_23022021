@@ -3,7 +3,7 @@ import '../styles/Banner.css'
 import { NavLink } from 'react-router-dom';
 
 function Banner() {
-	return  <div className='banner ps-4 pe-4 mb-5'>
+	return  <div className='row banner ps-4 pe-4 mb-5'>
                 <nav className="navbar navbar-expand-lg navbar-dark">
                     <div className="container-fluid">
                         <NavLink className="nav-link" to="/"><img src={logo} height="50" alt='Groupomania'/></NavLink>
@@ -13,8 +13,8 @@ function Banner() {
                         <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                             <ul className="navbar-nav">
                                 <li className="nav-item"><NavLink className="nav-link fw-bold" to="/login">SE CONNECTER</NavLink></li>
-                                <li className="nav-item ms-4"><NavLink className="nav-link fw-bold" to="/forum">FORUM</NavLink></li>
-                                <li className="nav-item ms-4"><NavLink className="nav-link fw-bold" to="/profil">MON PROFIL<i className="bi bi-person-circle ms-2"></i></NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link fw-bold" to="/forum">FORUM</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link fw-bold" to="/profil">MON PROFIL<i className="bi bi-person-circle ms-2"></i></NavLink></li>
                             </ul>
                         </div>
                     </div>
