@@ -21,7 +21,30 @@
     font-weight: bold;
 }
 
-h2 {
+.title-form {
     font-family: 'Shadows Into Light', cursive;
     font-size: 2.9em;
+}
+
+
+@media screen and (min-width: 992px) {
+    .login-form-2{
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .title-form  {
+        font-size: 2.4em;
+        margin-top: 50px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .login-form-2{
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .title-form {
+        display: none;
+    }
+    
 }

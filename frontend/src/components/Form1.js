@@ -2,22 +2,43 @@ import '../styles/Form1.css'
 import _ from "lodash/fp";
 import { useForm } from "react-hook-form";
 import { useRef } from 'react';
+import UserDataService from "../services/user.service";
+
+function onSubmit (data) {
+    let newUser = {
+        name: data.name,
+        email: data.email,
+        password: data.password
+    }
+    console.log(newUser)
+
+    UserDataService.create(data)
+    .then(response => {
+        this.setState({
+          name: response.data.name,
+          email: response.data.email,
+          password: response.data.password
+        });
+        console.log(response)
+    })
+    .catch(
+        error=>console.log(error))
+}
+
 
 function Form1 () {
 
     const { register, handleSubmit, watch, errors } = useForm();
     const password = useRef({});
     password.current = watch('password', '');
-    const onSubmit = data => {
-    alert(JSON.stringify(data));
-  };
-
-  console.log(watch("example")); 
+    //const onSubmit = data => {
+    //alert(JSON.stringify(data));
+  //};
 
   return (
     <form className='login-form-1' onSubmit={e => e.preventDefault()}>
         <h3 className='text-center text-white mb-4 border-bottom pt-5 pb-2'>S'INSCRIRE</h3>
-
+        
         <label htmlFor="pseudo" className="form-label text-white">Nom/Pseudo</label>
         <input className="form-control mb-4" name="name" placeholder="Votre nom/pseudo *"ref={register({required: true, maxLength: 15})}/>
         {_.get("name.type", errors) === "required" && (<p>Le champ est obligatoire</p>)}

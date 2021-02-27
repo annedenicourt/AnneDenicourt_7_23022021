@@ -14,7 +14,7 @@ function MemberItem({ picture, name, member_id, service}) {
 					</div>
 				</li>
 			</ul>
-    </div>
+    	</div>
 	</div>
 	)
 }

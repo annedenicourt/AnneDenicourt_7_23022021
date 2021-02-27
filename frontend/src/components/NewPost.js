@@ -12,10 +12,10 @@ function NewPost() {
             <textarea rows='5' className="p-3" placeholder="Ecrivez quelquechose..." id="textarea"></textarea>
             <label htmlFor="textarea"></label>
             <div className="attachments">
-                    <i className="bi bi-image me-2"></i>
-                    <i className="bi bi-camera-video-fill me-2"></i>
-                    <i className="bi bi-camera-fill me-2"></i>
-                    <button type="submit">Publier</button>
+                <i className="bi bi-image me-2"></i>
+                <i className="bi bi-camera-video-fill me-2"></i>
+                <i className="bi bi-camera-fill me-2"></i>
+                <button type="submit">Publier</button>
             </div>
 		</div>
     </div>

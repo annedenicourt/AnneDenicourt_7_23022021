@@ -27,7 +27,7 @@ function Form2 () {
 
         <div className='text-center'><Link className="text-dark" to="/forum"><button type="submit" className="btnSubmit2 mt-4">Se connecter</button></Link></div>
         <div className='text-center text-white mt-5 mb-4'>* Champs obligatoires</div>
-        <h2 className='text-white text-center'>Connecting people</h2>
+        <h2 className='title-form text-white text-center'>Connecting people</h2>
         <div className="login-logo text-center mt-4"><img src={logo} alt="logo Groupomania"/></div>
     </form>
   );

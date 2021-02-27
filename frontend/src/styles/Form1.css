@@ -30,3 +30,11 @@ p::before {
   background:#282c34;
   height: 650px;
 }
+
+@media screen and (min-width: 992px) {
+  .login-form-1{
+      padding-left: 40px;
+      padding-right: 40px;
+  }
+  
+}
