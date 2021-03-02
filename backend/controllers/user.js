@@ -20,9 +20,34 @@ exports.signup = (req, res, next) => {
     .catch(error => res.status(500).json({ error })) 
 };
 
-
 exports.login = (req, res, next) => {
-    res.status(201).json({ message: 'Utilisateur connecté !'})
-    console.log("utilisateur connecte")
-       
+    db.User.findOne({where: { email: req.body.email } }) // on vérifie que l'e-mail entré par l'utilisateur correspond à un utilisateur existant de la base de données 
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({ error: 'Utilisateur non trouvé !' });
+            }
+            bcrypt.compare(req.body.password, user.password) // on utilise la fonction compare de bcrypt pour comparer le mot de passe entré par l'utilisateur avec le hash enregistré dans la base de données
+                .then(valid => {
+                    if (!valid) {
+                        return res.status(401).json({ error: 'Mot de passe incorrect !' });
+                    }
+                    res.status(200).json({
+                        userId: user.id,
+                        token: jwt.sign( // on utilise la fonction sign dejsonwebtoken pour encoder un nouveau token
+                          { userId: user._id },
+                            process.env.JWT_RAND_SECRET, // on utilise une chaîne secrète de développement temporaire
+                            {expiresIn: '24h'} // pour définir la durée de validité du token
+                        )
+                    });
+                })
+                .catch(error => res.status(500).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));
 };
+
+exports.getAllUsers = (req, res, next) => {
+    console.log("requete GET")
+    db.User.findAll()
+        .then(users => res.status(200).json(users))
+        .catch(error => res.status(500).json({ error }))
+}

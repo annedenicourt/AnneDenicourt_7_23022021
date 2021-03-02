@@ -4,5 +4,6 @@ const userCtrl = require('../controllers/user'); // pour importer les controleur
 
 router.post('/signup', userCtrl.signup); // pour importer la fonction avec ('URI', nomDuController.nomDeLaRoute)
 router.post('/login', userCtrl.login);
+router.get('/users', userCtrl.getAllUsers);
 
 module.exports = router; // pour exporter le router vers app.js

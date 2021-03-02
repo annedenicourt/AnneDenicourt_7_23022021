@@ -11,15 +11,16 @@ const app = express();
 const cors = require('cors')
 
 const db = require("./models");
+db.sequelize.sync()
 // // drop the table if it already exists
-db.sequelize.sync({ force: true }).then(() => {
-console.log("Drop and re-sync db.");
-});
+//db.sequelize.sync({ force: true }).then(() => {
+//console.log("Drop and re-sync db.");
+//});
 
 app.use(cors())
 app.use(bodyParser.json()); // pour transformer le corps de la requête en objet JS
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes); // pour enregistrer le routeur pour toutes les demandes effectuées vers /api/auth
-app.use('/api/post', postRoutes); // pour enregistrer le routeur pour toutes les demandes effectuées vers /api/sauces
-app.use('/api/comment', commentRoutes); // pour enregistrer le routeur pour toutes les demandes effectuées vers /api/sauces
+app.use('/api/posts', postRoutes); // pour enregistrer le routeur pour toutes les demandes effectuées vers /api/sauces
+app.use('/api/comments', commentRoutes); // pour enregistrer le routeur pour toutes les demandes effectuées vers /api/sauces
 module.exports = app;

@@ -115,8 +115,8 @@ class SignupForm extends Component {
                 <p className="err_message">{errors['confirm_password']}</p>
                 ) : '' }
 
-                <div className='text-center'><button type="submit" className="btnSubmit mt-4" >Créer un profil</button></div>
-                <div className='text-white text-center mt-4'>Déjà inscrit ? <Link className='text-white' to="/">Connectez-vous</Link></div>
+                <div className='text-center mt-4 mb-4'><button type="submit" className="btnSubmit mt-4" >Créer un profil</button></div>
+                <div className='text-white text-center pb-5'>Déjà inscrit ? <Link className='text-white' to="/">Connectez-vous</Link></div>
           </form>
       );
   }

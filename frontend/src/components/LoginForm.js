@@ -1,7 +1,8 @@
 import '../styles/LoginForm.css'
 import logo from '../assets/icon.png';
-import UserDataService from "../services/user.service"
+//import UserDataService from "../services/user.service"
 import { Component } from 'react';
+import axios from "axios";
 
 
 class LoginForm extends Component {
@@ -39,15 +40,14 @@ class LoginForm extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
     if (this.handleValidation()) {
-        let { fields } = this.state; 
-        UserDataService.loginUser()
-        .then(response => {
-            let newUser = {
-            email: fields['email'],
-            password: fields['password']
-        };
-        console.log(newUser)
-        window.location.href = "/forum";
+        let { fields } = this.state;
+        console.log(fields)
+        axios.post('http://localhost:3000/api/auth/login', {
+                email: fields['email'],
+                password: fields['password']
+        }) 
+        .then(res => {
+            window.location.href = "/forum";
         })
         .catch(
         error=>console.log(error))

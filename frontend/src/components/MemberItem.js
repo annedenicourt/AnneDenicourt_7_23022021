@@ -1,16 +1,17 @@
 import '../styles/MemberItem.css'
+import avatar from '../assets/avatar2.png'
 
-function MemberItem({ picture, name, member_id, service}) {
+function MemberItem({ name, id, email}) {
 	
 	return ( 
     <div className=''>
 		<div className="align-items-center">
 			<ul className="member-item p-0">
 				<li className="d-flex">
-					<img className='me-2' src={picture} height='40' alt=""/>
+					<img className='me-2' src={avatar} height='40' alt=""/>
 					<div className="member-info">
 						<div>{name}</div>
-						<div className="member-service text-muted fst-italic ">{service}</div>
+						<div className="member-service text-muted fst-italic ">{email}</div>
 					</div>
 				</li>
 			</ul>
