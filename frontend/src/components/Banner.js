@@ -13,7 +13,7 @@ function Banner() {
                     </button>
                     <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul className="navbar-nav">
-                            <li className="nav-item"><NavLink className="nav-link fw-bold" to="/login">SE CONNECTER</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link fw-bold" to="/register">S'INSCRIRE</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link fw-bold" to="/forum">FORUM</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link fw-bold" to="/profil">MON PROFIL<i className="bi bi-person-circle ms-2"></i></NavLink></li>
                         </ul>

@@ -1,6 +1,9 @@
-.bg-profil {
+.bg-profilepage {
     background-image: url('../assets/pexels-fauxels-3184418.jpg');
     background-size: cover;
+}
+.bg-profile {
+    background-color: #282c34;
 }
 .avatar {
     width: 200px;

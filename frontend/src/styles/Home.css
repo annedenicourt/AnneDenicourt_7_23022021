@@ -1,3 +1,10 @@
+.bg-homepage {
+    background-color: #282c34;
+}
+.logo-home{
+    margin-top: -90px;
+    height: 400px;
+}
 .bouton {
     text-decoration: none;
     height: 60px;
@@ -15,24 +22,33 @@
     color: white;
 }
 .title {
-    margin-top: -40px;
+    margin-top: -150px;
     font-family: 'Shadows Into Light', cursive;
-    font-size: 4em;
+    font-size: 2.2em;
 }
-.text-presentation {
-    padding-left: 100px;
-    padding-right: 100px;
-    font-style: italic;
+.title_register {
+    font-family: 'Shadows Into Light', cursive;
 }
-@media screen and (max-width: 1023px) {
-    .logo-home{
-        margin-top: -80px;
-    }
+@media screen and (max-width: 991px) {
     #carousel {
        display: none;
     }
     .title {
         font-family: 'Shadows Into Light', cursive;
-        font-size: 3em;
+        font-size: 2em;
+    }
+}
+
+@media screen and (max-width: 499px) {
+    #carousel {
+       display: none;
+    }
+    .title {
+        font-family: 'Shadows Into Light', cursive;
+        font-size: 2em;
+        margin-top: -100px;
+    }
+    .logo-home{
+     height: 300px;
     }
 }

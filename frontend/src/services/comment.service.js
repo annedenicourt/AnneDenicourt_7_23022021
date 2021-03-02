@@ -2,23 +2,23 @@ import http from "../http-common";
 
 class CommentDataService {
   getAll() {
-    return http.get("/comments");
+    return http.get("/comment");
   }
 
   get(id) {
-    return http.get(`/comments/${id}`);
+    return http.get(`/comment/${id}`);
   }
 
   create(data) {
-    return http.post("/comments", data);
+    return http.post("/comment", data);
   }
 
   update(id, data) {
-    return http.put(`/comments/${id}`, data);
+    return http.put(`/comment/${id}`, data);
   }
 
   delete(id) {
-    return http.delete(`/comments/${id}`);
+    return http.delete(`/comment/${id}`);
   }
 }
 

@@ -1,12 +1,25 @@
-p {
+  .err_message {
     color: #bf1650;
     margin-top: -20px;
+    font-size: 0.7em;
   }
   
-p::before {
+  .err_message::before {
     display: inline;
     content: "⚠ ";
   }
+
+  .err_message2 {
+    color: white;
+    margin-top: -20px;
+    font-size: 0.7em;
+  }
+  
+  .err_message2::before {
+    display: inline;
+    content: "⚠ ";
+  }
+
 
   .btnSubmit{
     text-decoration: none;

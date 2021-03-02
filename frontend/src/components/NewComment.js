@@ -1,8 +1,24 @@
 import '../styles/NewComment.css'
 import avatar from '../assets/avatar2.png'
+import { useForm } from "react-hook-form";
+import CommentDataService from "../services/comment.service";
+
+
+
+function onSubmit (data) {
+    CommentDataService.create(data)
+    .then(response => {
+        let newComment = document.getElementById('textarea2').value;
+        console.log(newComment)
+    })
+    .catch(
+        error=>console.log(error))
+}
 
 
 function NewComment() {
+
+    const { register, handleSubmit, watch, errors } = useForm();
 
     return(
         <div className=" mb-3">
@@ -18,7 +34,7 @@ function NewComment() {
                     <i className="bi bi-emoji-frown me-1"></i>
                     <i className="bi bi-emoji-angry me-1"></i>
                     <i className="bi bi-emoji-laughing"></i>
-                    <button className='comment-button' type="submit"><i className="bi bi-arrow-right-circle-fill"></i></button>
+                    <button className='comment-button' type="submit" onClick={handleSubmit(onSubmit)}><i className="bi bi-arrow-right-circle-fill"></i></button>
                 </div>
 		    </div>
         </div>

@@ -2,7 +2,6 @@
     padding-left: 70px;
     padding-right: 70px;
     background: #f05837;
-    height: 650px;
 }
 
 .btnSubmit2{
@@ -21,20 +20,10 @@
     font-weight: bold;
 }
 
-.title-form {
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 2.9em;
-}
-
-
 @media screen and (min-width: 992px) {
     .login-form-2{
         padding-left: 40px;
         padding-right: 40px;
-    }
-    .title-form  {
-        font-size: 2.4em;
-        margin-top: 50px;
     }
 }
 
@@ -43,8 +32,12 @@
         padding-left: 40px;
         padding-right: 40px;
     }
-    .title-form {
-        display: none;
-    }
     
+}
+
+@media screen and (max-width: 499px) {
+    .login-form-2{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
