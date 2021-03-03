@@ -11,7 +11,7 @@ router.post('/', commentCtrl.createComment);
 //pour afficher un commentaire
 //router.get('/:id', auth, commentCtrl.getOneComment);
 //pour modifier un commentaire  
-//router.put('/:id', auth, multer, commentCtrl.modifyComment);
+//router.put('/:id', auth, commentCtrl.modifyComment);
 //pour liker un commentaire
 //router.post('/:id/like', auth, commentCtrl.likeComment)
 //pour supprimer un commentaire 

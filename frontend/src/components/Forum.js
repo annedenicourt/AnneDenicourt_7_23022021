@@ -18,11 +18,13 @@ import axios from 'axios';
 class Forum extends Component {
 
     state = {
-        users: []
+        users: [],
+        posts: []
     }
 
     componentDidMount() {
         this.getAllUsers();
+        this.getAllPosts()
     }
 
     getAllUsers() {
@@ -36,8 +38,20 @@ class Forum extends Component {
             })
     }
 
+    getAllPosts() {
+        axios.get('http://localhost:3000/api/posts')
+            .then(res => {
+                this.setState({ posts: res.data });
+            })
+            .catch(err => {
+                console.log(err);
+                window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
+            })
+    }
+
     render() {
         let { users } = this.state;
+        let { posts } = this.state;
 
         return  (
             <div> <Banner />
@@ -73,12 +87,13 @@ class Forum extends Component {
                         <NewPost />
                         <div className='last-post pt-3 pb-3 ms-2 fw-bold'>DERNIERS POSTS</div>
                         <div className='scroll post-list'>
-                            {PostList.map(({ picture, description,post_id }) => (
-                                <div key={post_id}>
-                                    <PostItem
-                                        picture={picture}
-                                        description={description}
-                                        id={post_id}
+                            {posts.map(({ content,image,id,createdAt }) => (
+                                <div className="border rounded mb-4" key={id}>
+                                    <PostItem 
+                                        image={image}
+                                        content={content}
+                                        post_id={id}
+                                        date= {createdAt}
                                     />
                                     <NewComment />
                                 </div>
