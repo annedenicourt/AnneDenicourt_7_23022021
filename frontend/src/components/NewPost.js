@@ -45,22 +45,19 @@ class NewPost extends Component {
                 content: fields['content'],
                 image: this.fileInput.current.files[0]
             }
-            console.log(newPost)
             
-            
-            /*let formData = new FormData();
+            let formData = new FormData();
             formData.append('content', fields['content']);
             formData.append('image', this.fileInput.current.files[0]);
-            //console.log(formData)*/
+            //console.log(formData)
 
-            /*axios.post('http://localhost:3000/api/posts', formData, {
+            axios.post('http://localhost:3000/api/posts', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer '
                 }
-            })*/
-
-            axios.post('http://localhost:3000/api/posts', newPost)
+            })
+            //axios.post('http://localhost:3000/api/posts', newPost)
                 .then(res => {
                     console.log(newPost)
                     this.newPostForm.current.reset();
