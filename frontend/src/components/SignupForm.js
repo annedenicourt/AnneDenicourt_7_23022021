@@ -12,7 +12,8 @@ class SignupForm extends Component {
           email: '',
           name: '',
           password: '',
-          confirm_password:''
+          confirm_password:'',
+          job: ''
       },
       errors: {}
   }
@@ -38,6 +39,11 @@ class SignupForm extends Component {
         errors['email'] = 'L\'email n\'est pas valide';
     }
 
+    // validation poste travail 
+    if (!fields['job']) {
+        errors['job'] = 'Ce champ ne peut pas être vide';
+    }
+
     // validation confirm_password
     if (!fields['confirm_password']) {
         errors['confirm_password'] = 'Ce champ ne peut pas être vide';
@@ -47,10 +53,6 @@ class SignupForm extends Component {
     // validation password 
     if (!/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(fields['password'])) {
         errors['password'] = '8 caractères min. dont 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial';
-    }
-
-    if (Object.keys(errors).length !== 0) {
-        formIsValid = false;
     }
     
     this.setState({ errors });
@@ -65,7 +67,8 @@ class SignupForm extends Component {
         axios.post('http://localhost:3000/api/auth/signup', {
                 email: fields['email'],
                 name: fields['name'],
-                password: fields['password']
+                password: fields['password'],
+                job: fields['job']
         }) 
         //UserDataService.createUser()
         .then(res => {
@@ -88,35 +91,40 @@ class SignupForm extends Component {
       let { errors } = this.state;
 
       return (
-          <form className='login-form-1 rounded' action="" method="post" noValidate onSubmit={this.handleFormSubmit}>
-            <h3 className='text-center text-white mb-4 border-bottom pt-5 pb-2'>S'INSCRIRE</h3>
+          <form className='login-form-2 rounded' action="" method="post" noValidate onSubmit={this.handleFormSubmit}>
+            <h3 className='text-center text-white mb-4 border-bottom pt-4 pb-2'>S'INSCRIRE</h3>
 
                 <label htmlFor="name" className="form-label text-white">Nom/Pseudo *</label>
                 <input type="text" name="name" id="name" className="form-control mb-4" placeholder="Votre nom d'utilisateur" value={this.state.fields['name']} onChange={this.handleChange}/>
                 {errors['name'] ? (
-                  <p className="err_message">{errors['name']}</p>
+                  <p className="err_message2">{errors['name']}</p>
                 ) : '' }
 
                 <label htmlFor="email" className="form-label text-white">Adresse mail *</label>
                 <input type="email" name="email" id="email" className="form-control mb-4" placeholder="Votre adresse mail" value={this.state.fields['email']} onChange={this.handleChange}/>
                 {errors['email'] ? (
-                  <p className="err_message">{errors['email']}</p>
+                  <p className="err_message2">{errors['email']}</p>
                 ) : '' }
 
                 <label htmlFor="password" className="form-label text-white">Mot de passe *</label>
                 <input type="password" name="password" id="password" className="form-control mb-4" placeholder="Votre mot de passe" value={this.state.fields['password']} onChange={this.handleChange}/>
                 {errors['password'] ? (
-                  <p className="err_message">{errors['password']}</p>
+                  <p className="err_message2">{errors['password']}</p>
                 ) : '' }
 
                 <label htmlFor="confirm-password" className="form-label text-white">Confirmation mot de passe *</label>
                 <input type="password" className="form-control mb-4" name="confirm_password" id="confirm_password" placeholder="Confirmation mot de passe" value={this.state.fields['confirm_password']} onChange={this.handleChange}/>
                 {errors['confirm_password'] ? (
-                <p className="err_message">{errors['confirm_password']}</p>
+                <p className="err_message2">{errors['confirm_password']}</p>
                 ) : '' }
 
-                <div className='text-center mt-4 mb-4'><button type="submit" className="btnSubmit mt-4" >Créer un profil</button></div>
-                <div className='text-white text-center pb-5'>Déjà inscrit ? <Link className='text-white' to="/">Connectez-vous</Link></div>
+                <label htmlFor="job" className="form-label text-white">Poste occupé *</label>
+                <input type="text" className="form-control mb-4" name="job" id="job" placeholder="Votre poste de travail" value={this.state.fields['job']} onChange={this.handleChange}/>
+                {errors['job'] ? (
+                <p className="err_message2">{errors['job']}</p>
+                ) : '' }
+
+                <div className='text-center mt-4 mb-4 pb-4'><button type="submit" className="btnSubmit mt-4" >Créer un profil</button></div>
           </form>
       );
   }

@@ -22,10 +22,10 @@ function Home() {
                 <div id="carousel" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img src={img1} className="d-block w-100" alt=""/>
+                            <img src={img1} className="d-block h-100" alt=""/>
                         </div>
                         <div className="carousel-item">
-                            <img src={img2} className="d-block w-100" alt=""/>
+                            <img src={img2} className="d-block h-100" alt=""/>
                         </div>
                     </div>
                 </div>

@@ -20,6 +20,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    job: { 
+      type: Sequelize.STRING, 
+      allowNull: false,
+    }, 
     role: {
       type: Sequelize.JSON,
       allowNull: false,

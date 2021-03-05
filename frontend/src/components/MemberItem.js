@@ -1,7 +1,7 @@
 import '../styles/MemberItem.css'
 import avatar from '../assets/avatar2.png'
 
-function MemberItem({ name, id, email}) {
+function MemberItem({ name, id, email, job}) {
 	
 	return ( 
     <div className=''>
@@ -11,7 +11,7 @@ function MemberItem({ name, id, email}) {
 					<img className='me-2' src={avatar} height='40' alt=""/>
 					<div className="member-info">
 						<div>{name}</div>
-						<div className="member-service text-muted fst-italic ">{email}</div>
+						<div className="member-service text-muted fst-italic ">{job}</div>
 					</div>
 				</li>
 			</ul>

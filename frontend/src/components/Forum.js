@@ -6,7 +6,6 @@ import Footer from './Footer';
 //import logo from '../assets/icon.png'
 import PostItem from './PostItem';
 import ProfileCard from './ProfileCard';
-import { PostList } from '../datas/PostList';
 import NewPost from './NewPost';
 import MemberItem from './MemberItem';
 import MemberItem2 from './MemberItem2';
@@ -60,23 +59,25 @@ class Forum extends Component {
                         <ProfileCard />
                         <div className='membres fw-bold mb-2 ms-2 '>MEMBRES</div>
                         <div className='scroll2 member-list border rounded p-2 ms-2'>
-                            {users.map(({ name, id, email }) => (
+                            {users.map(({ name, id, email, job }) => (
                                 <div key={id}>
                                     <MemberItem
                                         name={name}
                                         member_id={id}
                                         email={email}
+                                        job={job}
                                     />
                                 </div>
                             ))}
                         </div>
                         <div className='scroll3 member-list2 d-flex mb-3 p-2'>
-                            {users.map(({ name, id, email }) => (
+                            {users.map(({ name, id, email, job }) => (
                                 <div key={id}>
                                     <MemberItem2
                                         name={name}
                                         member_id={id}
                                         email={email}
+                                        job={job}
                                     />
                                 </div>
                             ))}

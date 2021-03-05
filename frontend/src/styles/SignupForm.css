@@ -1,15 +1,10 @@
-  .err_message {
-    color: #bf1650;
-    margin-top: -20px;
-    font-size: 0.7em;
-  }
-  
-  .err_message::before {
-    display: inline;
-    content: "⚠ ";
-  }
+.login-form-2{
+  padding-left: 40px;
+  padding-right: 40px;
+  background: #f05837;
+}
 
-  .err_message2 {
+.err_message2 {
     color: white;
     margin-top: -20px;
     font-size: 0.7em;
@@ -19,7 +14,6 @@
     display: inline;
     content: "⚠ ";
   }
-
 
   .btnSubmit{
     text-decoration: none;
@@ -32,21 +26,14 @@
     transition: 0.5s;
 }
 .btnSubmit:hover {
-    color: white;
-    background-color: #f05837;
-    font-weight: bold;
+  color: white;
+  background-color: #282c34;
+  font-weight: bold;
 }
 
-.login-form-1{
-  padding-left: 70px;
-  padding-right: 70px;
-  background:#282c34;
-}
-
-@media screen and (min-width: 992px) {
+@media screen and (max-width: 499px) {
   .login-form-1{
-      padding-left: 40px;
-      padding-right: 40px;
+      padding-left: 10px;
+      padding-right: 10px;
   }
-  
 }

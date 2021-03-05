@@ -9,6 +9,7 @@ exports.signup = (req, res, next) => {
         db.User.create ({
             email: req.body.email,
             name: req.body.name,
+            job: req.body.job,
             password: hash
         })
         .then(user =>{
@@ -34,7 +35,10 @@ exports.login = (req, res, next) => {
                     res.status(200).json({
                         userId: user.id,
                         token: jwt.sign( // on utilise la fonction sign dejsonwebtoken pour encoder un nouveau token
-                          { userId: user._id },
+                            {
+                                userId: user.id,
+                                role: user.role,
+                            },
                             process.env.JWT_RAND_SECRET, // on utilise une chaîne secrète de développement temporaire
                             {expiresIn: '24h'} // pour définir la durée de validité du token
                         )

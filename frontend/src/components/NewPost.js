@@ -3,7 +3,6 @@ import avatar from '../assets/avatar2.png';
 import React, { Component } from 'react';
 import axios from 'axios';
 
-
 class NewPost extends Component {
 
     state = {
@@ -19,8 +18,6 @@ class NewPost extends Component {
         this.newPostForm = React.createRef();
         //this.handleSubmit = this.handleSubmit.bind(this);
       }
-
-
 
     handleValidation() {
         let { fields } = this.state;
@@ -45,6 +42,7 @@ class NewPost extends Component {
                 content: fields['content'],
                 image: this.fileInput.current.files[0]
             }
+            console.log(newPost)
             
             let formData = new FormData();
             formData.append('content', fields['content']);
@@ -57,7 +55,6 @@ class NewPost extends Component {
                     'Authorization': 'Bearer '
                 }
             })
-            //axios.post('http://localhost:3000/api/posts', newPost)
                 .then(res => {
                     console.log(newPost)
                     this.newPostForm.current.reset();

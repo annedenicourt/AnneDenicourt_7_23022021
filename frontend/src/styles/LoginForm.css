@@ -1,6 +1,6 @@
 .login-form-2{
-    padding-left: 70px;
-    padding-right: 70px;
+    padding-left: 60px;
+    padding-right: 60px;
     background: #f05837;
 }
 
@@ -20,7 +20,7 @@
     font-weight: bold;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (max-width: 991px) {
     .login-form-2{
         padding-left: 40px;
         padding-right: 40px;
@@ -35,7 +35,7 @@
     
 }
 
-@media screen and (max-width: 499px) {
+@media screen and (max-width:501px) {
     .login-form-2{
         padding-left: 10px;
         padding-right: 10px;

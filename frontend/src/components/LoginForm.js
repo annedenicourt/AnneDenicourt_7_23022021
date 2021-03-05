@@ -47,6 +47,7 @@ class LoginForm extends Component {
                 password: fields['password']
         }) 
         .then(res => {
+            window.localStorage.setItem('token', JSON.stringify(res.data.token))
             window.location.href = "/forum";
         })
         .catch(

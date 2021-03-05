@@ -14,8 +14,8 @@ function PostItem({ content, image, post_id, date}) {
 				</div>
 							
 				<div className="post-meta">
+					<div className="description mt-3 mb-5 ps-5">{content}</div>
 					<figure className="text-center"><img className="w-75" src={image}  alt=""/></figure>
-					<div className="description mt-3">{content}</div>
 					<div className="">
 						<span className="like"><i className="bi bi-hand-thumbs-up" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cliquez pour aimer"></i></span>
 					</div>
