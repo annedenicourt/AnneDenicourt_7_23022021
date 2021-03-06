@@ -10,6 +10,8 @@ require('dotenv').config();
 const app = express();
 const cors = require('cors')
 
+
+
 const db = require("./models");
 db.sequelize.sync()
 // // drop the table if it already exists

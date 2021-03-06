@@ -13,10 +13,11 @@ module.exports = (sequelize, Sequelize) => {
     image: { 
       type: Sequelize.STRING
     }, 
-  
      createdAt: Sequelize.DATE, 
      updatedAt: Sequelize.DATE, 
 }) 
+
+
   
     return Post;
 };

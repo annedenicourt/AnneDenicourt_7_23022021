@@ -1,13 +1,13 @@
 const express = require('express'); // pour importer application Express
 const router = express.Router(); // pour créer un routeur Express
-//const auth = require('../middleware/auth'); // pour importer le middleware auth
+const auth = require('../middleware/auth'); // pour importer le middleware auth
 const multer = require('../middleware/multer-config'); // pour importer le middleware multer
 const postCtrl = require('../controllers/post'); // pour importer le controleur
 
 //pour afficher tous les posts
 router.get('/', postCtrl.getAllPosts);
 //pour enregistrer des posts dans la BDD
-router.post('/', multer, postCtrl.createPost);
+router.post('/', auth, multer, postCtrl.createPost);
 //pour afficher un post
 //router.get('/:id', auth, postCtrl.getOnePost);
 //pour modifier un post  

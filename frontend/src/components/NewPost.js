@@ -43,6 +43,8 @@ class NewPost extends Component {
                 image: this.fileInput.current.files[0]
             }
             console.log(newPost)
+
+            const token = localStorage.getItem("token")
             
             let formData = new FormData();
             formData.append('content', fields['content']);
@@ -52,7 +54,7 @@ class NewPost extends Component {
             axios.post('http://localhost:3000/api/posts', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer '
+                    'Authorization': `Bearer ${token}`,
                 }
             })
                 .then(res => {

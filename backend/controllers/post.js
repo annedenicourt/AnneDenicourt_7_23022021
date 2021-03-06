@@ -1,11 +1,16 @@
 const db = require('../models');
 const Post = require('../models/Post');
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 
 exports.createPost = (req, res, next) => {
-    console.log(req.file)
+    //console.log(req.file)
+    //console.log(res.locals.userId)
+    
     db.Post.create({
+        UserId: 1, //donnée provisoire en attendant de récupérer le userId du token
         content: req.body.content,
         image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
         //image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
