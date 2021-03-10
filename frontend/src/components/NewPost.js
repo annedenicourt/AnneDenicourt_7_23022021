@@ -44,7 +44,9 @@ class NewPost extends Component {
             }
             console.log(newPost)
 
-            const token = localStorage.getItem("token")
+            const token = JSON.parse(localStorage.getItem("token"));
+            console.log(token)
+            
             
             let formData = new FormData();
             formData.append('content', fields['content']);
@@ -54,13 +56,12 @@ class NewPost extends Component {
             axios.post('http://localhost:3000/api/posts', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${token}`
                 }
             })
                 .then(res => {
-                    console.log(newPost)
-                    this.newPostForm.current.reset();
-                    this.setState({ fields: { content: '' } });
+                    console.log(res.data)
+                    window.location.reload()
                 })
                 .catch(error=>console.log(error))
         }

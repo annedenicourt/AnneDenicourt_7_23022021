@@ -1,0 +1,22 @@
+#content_comment{
+    width: 100%;
+    border-radius: 10px;
+    background-color: grey;
+    filter: brightness(190%);
+}
+.comment {
+    position: relative;
+}
+.emojis{
+    position: absolute;
+    right: 30px;
+    top: 25px;
+}
+.comment-button {
+    border:none;
+    background-color: white;
+}
+.bi-arrow-right-circle-fill {
+    font-size: 1.4em;
+    color: #282c34;
+}

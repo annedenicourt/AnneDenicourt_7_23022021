@@ -1,15 +1,11 @@
 import '../styles/Forum.css'
-//import { Link } from 'react-router-dom';
 import Banner from './Banner';
 import Footer from './Footer';
-//import Profil from './Profil';
-//import logo from '../assets/icon.png'
 import PostItem from './PostItem';
 import ProfileCard from './ProfileCard';
 import NewPost from './NewPost';
 import MemberItem from './MemberItem';
 import MemberItem2 from './MemberItem2';
-import NewComment from './NewComment';
 import { Component } from 'react';
 import axios from 'axios';
 
@@ -18,14 +14,13 @@ class Forum extends Component {
 
     state = {
         users: [],
-        posts: []
+        posts: [],
     }
 
     componentDidMount() {
         this.getAllUsers();
-        this.getAllPosts()
+        this.getAllPosts();
     }
-
     getAllUsers() {
         axios.get('http://localhost:3000/api/auth/users')
             .then(res => {
@@ -36,18 +31,17 @@ class Forum extends Component {
                 window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
             })
     }
-
     getAllPosts() {
         axios.get('http://localhost:3000/api/posts')
             .then(res => {
                 this.setState({ posts: res.data });
+                console.log(res.data)
             })
             .catch(err => {
                 console.log(err);
                 window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
             })
     }
-
     render() {
         let { users } = this.state;
         let { posts } = this.state;
@@ -88,18 +82,15 @@ class Forum extends Component {
                         <NewPost />
                         <div className='last-post pt-3 pb-3 ms-2 fw-bold'>DERNIERS POSTS</div>
                         <div className='scroll post-list'>
-                            {posts.map(({ content,image,id,createdAt }) => (
-                                <div className="border rounded mb-4" key={id}>
+                            {posts.map(post=> (
+                                <div className="border rounded mb-4" key={post.id}>
                                     <PostItem 
-                                        image={image}
-                                        content={content}
-                                        post_id={id}
-                                        date= {createdAt}
+                                        post={post}
+                                        //user={this.props.User}
                                     />
-                                    <NewComment />
                                 </div>
                             ))}
-                                        
+                               
                         </div>
                     </div>   
                 </div>

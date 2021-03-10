@@ -6,15 +6,9 @@ module.exports = (sequelize, Sequelize) => {
           allowNull:false, 
           primaryKey:true
       }, 
-      message: { 
+      content: { 
         type: Sequelize.TEXT, 
         allowNull:false
-      }, 
-      ownerId: { 
-        type: Sequelize.STRING
-      }, 
-      postId: { 
-        type: Sequelize.STRING
       }, 
 
        createdAt: Sequelize.DATE, 

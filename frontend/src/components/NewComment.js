@@ -1,6 +1,5 @@
 import '../styles/NewComment.css'
 import avatar from '../assets/avatar2.png'
-import CommentDataService from "../services/comment.service";
 import React, { Component } from 'react';
 import axios from 'axios';
 
@@ -37,10 +36,25 @@ class NewComment extends Component {
         if (this.handleValidation()) {
             let { fields } = this.state;
 
+            const newComment ={
+                content: fields['content'],
+                PostId: this.props.PostId
+            }
+            console.log(newComment)
+
+            const token = JSON.parse(localStorage.getItem("token"));
+            console.log(token)
+
             axios.post('http://localhost:3000/api/comments', {
-                content: fields['content']
+                content: fields['content'],
+                PostId: this.props.PostId
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
                 .then(res => {
+                    console.log(res.data)
                     this.newCommentForm.current.reset();
                     this.setState({ fields: { content: '' } });
                 })

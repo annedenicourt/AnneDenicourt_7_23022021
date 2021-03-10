@@ -3,22 +3,18 @@ require('dotenv').config();
 
 module.exports = (req, res, next) => {
     try {
-        // Checks for the presence of the Authorization header
         if (!req.headers.authorization) {
             throw 'Token d\'authentification manquant !';
         }
-
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
         const userId = decodedToken.userId;
-        const userRoles = decodedToken.role;
+        //const userRoles = decodedToken.role;
 
-        // Checks if the user sent in request matches the one stored in the token
         if (req.body.userId && req.body.userId !== userId) {
             throw 'Identifiant utilisateur invalide';
         } else {
-            res.locals.userId = userId;
-            res.locals.userRoles = userRoles;
+            console.log("jwt succes userId", userId)
             next();
         }
     } catch (error) {

@@ -37,6 +37,7 @@ exports.login = (req, res, next) => {
                             {
                                 userId: user.id,
                                 role: user.role,
+                                userName: user.name
                             },
                             process.env.JWT_RAND_SECRET, // on utilise une chaîne secrète de développement temporaire
                             {expiresIn: '24h'} // pour définir la durée de validité du token
