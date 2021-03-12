@@ -42,7 +42,7 @@ class NewComment extends Component {
             }
             console.log(newComment)
 
-            const token = JSON.parse(localStorage.getItem("token"));
+            const token = localStorage.getItem("token");
             console.log(token)
 
             axios.post('http://localhost:3000/api/comments', {

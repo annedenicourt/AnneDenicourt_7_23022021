@@ -13,6 +13,7 @@
 }
 .avatar img{
     width: 100%;
+    object-fit: cover;
 }
 
 .label-file {
@@ -28,10 +29,7 @@
     color: white;
 }
 .input-file {
-    display: none;
-}
-.bi-pencil {
-    font-size: 0.8em;
+    
 }
 .bouton2 {
     text-decoration: none;

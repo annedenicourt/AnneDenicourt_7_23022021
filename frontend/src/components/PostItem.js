@@ -18,7 +18,6 @@ class PostItem extends Component {
     getAllComments() {
 		
 		axios.get('http://localhost:3000/api/posts/'+this.props.post.id+'/comments')
-		//axios.get('http://localhost:3000/api/comments')
             .then(res => {
                 this.setState({ comments: res.data });
             })
@@ -29,7 +28,7 @@ class PostItem extends Component {
 	}
 
 	handlePostDelete = (event) => {
-			const token = JSON.parse(localStorage.getItem("token"));
+			const token = localStorage.getItem("token");
 
             axios.delete('http://localhost:3000/api/posts/' + this.props.post.id, {
                 headers: {
@@ -53,9 +52,11 @@ class PostItem extends Component {
 			<div className='post-item p-3 mb-3'>
 				<div className="user-post">
 					<div className="title_post d-flex align-items-center">
-						<img className='me-3 mb-3' src={avatar} height='40' alt=""/>
+                    { this.props.post.User.image === null ?
+                        <img className='rounded-circle me-3 mb-3' height="40"  src={avatar} alt="avatar"/> 
+                        : <img className='rounded-circle me-3 mb-3' height="40" width="40" src={this.props.post.User.image} alt="avatar"/>
+                	    }
 						<div className="">
-							<span> (Post n°{this.props.post.id})</span>
 							<a href="time-line.html" title="">{this.props.post.User.name}</a>      
 							<span> a publié le {new Date(this.props.post.createdAt).toLocaleDateString('fr-FR')} à {new Date(this.props.post.createdAt).toLocaleTimeString('fr-FR')}</span>
 						</div>
@@ -84,7 +85,8 @@ class PostItem extends Component {
                             date= {comment.createdAt}
 							CommentId= {comment.id}
 							UserName= {comment.User.name}
-							UserRole= {comment.User.role}
+                            UserRole= {comment.User.role}
+                            image= {comment.User.image}
                         />
                     </div>
                 ))}    

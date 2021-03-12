@@ -72,3 +72,20 @@ exports.getCurrentUser = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error: 'erreur bdd' }))
 }
+
+exports.modifyUser = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const userId = decodedToken.userId;
+    console.log(userId)
+
+    db.User.findOne({ where: { id: userId } })
+        .then(user => {
+            user.update({
+                image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
+            })
+            .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
+            .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour !' }));
+        })
+        .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé !' }))
+  };

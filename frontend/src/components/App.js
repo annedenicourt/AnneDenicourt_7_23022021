@@ -8,7 +8,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
 function App() {
-    //const token = JSON.parse(localStorage.getItem("token"));
     const token = localStorage.getItem("token");
     console.log(token)
 

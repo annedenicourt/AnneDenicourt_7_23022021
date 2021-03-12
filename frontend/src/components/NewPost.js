@@ -44,14 +44,13 @@ class NewPost extends Component {
             }
             console.log(newPost)
 
-            const token = JSON.parse(localStorage.getItem("token"));
+            const token = localStorage.getItem("token");
             console.log(token)
             
             
             let formData = new FormData();
             formData.append('content', fields['content']);
             formData.append('image', this.fileInput.current.files[0]);
-            //console.log(formData)
 
             axios.post('http://localhost:3000/api/posts', formData, {
                 headers: {
@@ -77,8 +76,11 @@ class NewPost extends Component {
         let { errors } = this.state;
         return (
             <form className="border mb-3" onSubmit={this.handleSubmit} ref={this.newPostForm}>
-                <div action="" className="new-postbox d-flex p-3">
-                    <img className='me-3' src={avatar} height='50' alt=""/>
+                <div className="new-postbox d-flex p-3">
+                    { this.props.image === null ?
+                        <img className='rounded-circle me-3' height="50" width="50" src={avatar} alt="avatar"/> 
+                        : <img className='rounded-circle me-3' height="50" width="50" src={this.props.image} alt="avatar"/>
+                	}
                     <label htmlFor="content"></label>
                     <textarea name="content" id="content" rows="5" className="p-3" placeholder="Ecrivez quelquechose..." value={this.state.fields['content']} onChange={this.handleChange}/>
                     

@@ -24,7 +24,7 @@ class Forum extends Component {
         this.getCurrentUser();
     }
     getAllUsers() {
-        axios.get('http://localhost:3000/api/auth/users')
+        axios.get('http://localhost:3000/api/users')
             .then(res => {
                 this.setState({ users: res.data });
             })
@@ -46,9 +46,9 @@ class Forum extends Component {
     }
 
     getCurrentUser() {
-        const token = JSON.parse(localStorage.getItem("token"));
+        const token = localStorage.getItem("token");
 
-        axios.get('http://localhost:3000/api/auth/users/monprofil',{
+        axios.get('http://localhost:3000/api/users/monprofil',{
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -81,23 +81,26 @@ class Forum extends Component {
                         </div>
                         <div className='membres fw-bold mb-2 ms-2 '>MEMBRES</div>
                         <div className='scroll2 member-list border rounded p-2 ms-2'>
-                            {users.map(({ name, id, job }) => (
+                            {users.map(({ name, id, job, image }) => (
                                 <div key={id}>
                                     <MemberItem
                                         name={name}
                                         member_id={id}
                                         job={job}
+                                        image={image}
                                     />
                                 </div>
                             ))}
                         </div>
                         <div className='scroll3 member-list2 d-flex mb-3 p-2'>
-                            {users.map(({ name, id, job }) => (
+                            {users.map(({ name, id, job, image }) => (
                                 <div key={id}>
                                     <MemberItem2
                                         name={name}
                                         member_id={id}
                                         job={job}
+                                        image={image}
+
                                     />
                                 </div>
                             ))}
@@ -105,7 +108,7 @@ class Forum extends Component {
                     </div>
                         
                     <div className="col-12 col-lg-9">
-                        <NewPost />
+                        <NewPost image={user.image} />
                         <div className='last-post pt-3 pb-3 ms-2 fw-bold'>DERNIERS POSTS</div>
                         <div className='scroll post-list'>
                             {posts.map(post=> (

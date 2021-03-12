@@ -29,7 +29,7 @@ exports.getAllPosts = (req, res, next) => {
     db.Post.findAll({
         include: {
             model: db.User,
-            attributes: ["name", "role"]
+            attributes: ["name", "role", "image"]
         },
         order: [
             ['createdAt', 'DESC']
@@ -44,7 +44,7 @@ exports.getAllComments = (req, res, next) => {
         where: { PostId: req.params.id},
         include: {
             model: db.User,
-            attributes: ["name", "role"]
+            attributes: ["name", "role", "image"]
         }
     }) 
         .then(comments => res.status(200).json(comments))

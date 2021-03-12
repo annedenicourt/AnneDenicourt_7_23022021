@@ -9,10 +9,10 @@ function ProfileCard({name, image, job}) {
         <div className="ms-2 ">
             <div className="col bg-dark p-3 rounded mb-4">
                 <div className="text-center text-white">
-                    <div className='avatar2 rounded-circle mx-auto p-1 bg-light'>
+                    <div className='avatar2 rounded-circle mx-auto'>
                         { image === null ?
-                        <img src={avatar} alt="avatar"/> 
-                        : <img src={image} alt="avatar"/>
+                        <img className='rounded-circle' height="130px" src={avatar} alt="avatar"/> 
+                        : <img className='rounded-circle' height="130px" src={image} alt="avatar"/>
                 	    }
                     </div>
                     <h4 className="mt-4">Bienvenue</h4>

@@ -1,6 +1,5 @@
 import '../styles/LoginForm.css'
 import logo from '../assets/icon.png';
-//import UserDataService from "../services/user.service"
 import { Component } from 'react';
 import axios from "axios";
 
@@ -47,7 +46,7 @@ class LoginForm extends Component {
                 password: fields['password']
         }) 
         .then(res => {
-            window.localStorage.setItem('token', JSON.stringify(res.data.token))
+            window.localStorage.setItem('token', res.data.token)
             window.location.href = "/forum";
         })
         .catch(
