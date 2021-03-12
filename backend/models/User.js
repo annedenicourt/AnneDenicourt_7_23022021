@@ -24,10 +24,13 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING, 
       allowNull: false,
     }, 
+    image: { 
+      type: Sequelize.STRING
+    },
     role: {
-      type: Sequelize.JSON,
+      type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: ['SuperUser'],
+      defaultValue: "SuperUser",
     },
   
      createdAt: Sequelize.DATE, 

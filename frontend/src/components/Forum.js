@@ -15,11 +15,13 @@ class Forum extends Component {
     state = {
         users: [],
         posts: [],
+        user: {}
     }
 
     componentDidMount() {
         this.getAllUsers();
         this.getAllPosts();
+        this.getCurrentUser();
     }
     getAllUsers() {
         axios.get('http://localhost:3000/api/auth/users')
@@ -35,42 +37,66 @@ class Forum extends Component {
         axios.get('http://localhost:3000/api/posts')
             .then(res => {
                 this.setState({ posts: res.data });
-                console.log(res.data)
+                //console.log(res.data)
             })
             .catch(err => {
                 console.log(err);
                 window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
             })
     }
+
+    getCurrentUser() {
+        const token = JSON.parse(localStorage.getItem("token"));
+
+        axios.get('http://localhost:3000/api/auth/users/monprofil',{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                this.setState({ user: res.data });
+            })
+            .catch(err => {
+                console.log(err);
+                window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
+            })
+    }
+
     render() {
         let { users } = this.state;
         let { posts } = this.state;
+        let { user } = this.state;
+
 
         return  (
             <div> <Banner />
                 <div className="row justify-content-center">
                     <div className="col-12 col-lg-3 ">
-                        <ProfileCard />
+                        <div>
+                            <ProfileCard
+                                name={user.UserName}
+                                image={user.image}
+                                job={user.job}
+                            />
+                        </div>
                         <div className='membres fw-bold mb-2 ms-2 '>MEMBRES</div>
                         <div className='scroll2 member-list border rounded p-2 ms-2'>
-                            {users.map(({ name, id, email, job }) => (
+                            {users.map(({ name, id, job }) => (
                                 <div key={id}>
                                     <MemberItem
                                         name={name}
                                         member_id={id}
-                                        email={email}
                                         job={job}
                                     />
                                 </div>
                             ))}
                         </div>
                         <div className='scroll3 member-list2 d-flex mb-3 p-2'>
-                            {users.map(({ name, id, email, job }) => (
+                            {users.map(({ name, id, job }) => (
                                 <div key={id}>
                                     <MemberItem2
                                         name={name}
                                         member_id={id}
-                                        email={email}
                                         job={job}
                                     />
                                 </div>
@@ -86,7 +112,6 @@ class Forum extends Component {
                                 <div className="border rounded mb-4" key={post.id}>
                                     <PostItem 
                                         post={post}
-                                        //user={this.props.User}
                                     />
                                 </div>
                             ))}

@@ -1,4 +1,4 @@
-import http from "../http-common";
+/*import http from "../http-common";
 
 class PostDataService {
   getAll() {
@@ -22,4 +22,4 @@ class PostDataService {
   }
 }
 
-export default new PostDataService();
+export default new PostDataService();*/

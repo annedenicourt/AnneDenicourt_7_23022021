@@ -1,4 +1,4 @@
-import http from "../http-common";
+/*import http from "../http-common";
 
 class CommentDataService {
   getAll() {
@@ -22,4 +22,4 @@ class CommentDataService {
   }
 }
 
-export default new CommentDataService();
+export default new CommentDataService();*/

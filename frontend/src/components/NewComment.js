@@ -55,8 +55,8 @@ class NewComment extends Component {
             })
                 .then(res => {
                     console.log(res.data)
-                    this.newCommentForm.current.reset();
-                    this.setState({ fields: { content: '' } });
+                    window.location.reload()
+
                 })
                 .catch(error=>console.log(error))
         }
@@ -75,12 +75,11 @@ class NewComment extends Component {
                 <div className="new-comment d-flex p-3">
                     <img className='me-3' src={avatar} height='30' alt=""/>
                     <label htmlFor='content'></label>
-                    <textarea className="p-3" name='content' id='content' rows="1" placeholder="Ecrivez un commentaire..." onChange={this.handleChange} value={this.state.fields['content']} />
+                    <textarea className="form-control" name='content' id='content_newcomment'  placeholder="Ecrivez un commentaire..." onChange={this.handleChange} value={this.state.fields['content']} />
                     {errors['content'] ? (
                         <span className="">{errors['content']}</span>
                     ) : '' }
                     <div className="emojis">
-                        <i className="bi bi-hand-thumbs-up me-1"></i>
                         <button className="comment-button" type="submit"><i className="bi bi-arrow-right-circle-fill"></i></button>
                     </div>
                 </div>

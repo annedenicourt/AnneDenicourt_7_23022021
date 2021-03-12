@@ -54,3 +54,21 @@ exports.getAllUsers = (req, res, next) => {
         .then(users => res.status(200).json(users))
         .catch(error => res.status(500).json({ error }))
 }
+
+exports.getCurrentUser = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const userId = decodedToken.userId;
+    console.log(userId)
+
+    db.User.findOne({ where: { id: userId } })
+        .then(user => {
+            res.status(200).json({
+                UserName: user.name,
+                job: user.job,
+                image: user.image,
+                email: user.email
+            });
+        })
+        .catch(error => res.status(500).json({ error: 'erreur bdd' }))
+}

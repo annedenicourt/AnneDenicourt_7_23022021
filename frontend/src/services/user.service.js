@@ -1,4 +1,4 @@
-import http from "../http-common";
+/*import http from "../http-common";
 
 class UserDataService {
   getAll() {
@@ -26,4 +26,4 @@ class UserDataService {
   }
 }
 
-export default new UserDataService();
+export default new UserDataService();*/

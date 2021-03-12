@@ -1,0 +1,17 @@
+.like_post {
+    border:none;
+    background-color: white;
+}
+.title_post {
+    position: relative;
+}
+.post_delete {
+    border: none;
+    background: white;
+    position: absolute;
+    right: 10px;
+}
+
+.bi-x-circle {
+    font-size: 1.4em;
+}
