@@ -9,8 +9,15 @@ import '../styles/PostItem.css'
 class PostItem extends Component {
 
     state = {
-		comments: [],
-	}
+        comments: [],
+        likes: '',
+        liked: false
+    }
+    
+    constructor() {
+        super();
+        this.handleClick = this.handleClick.bind(this);
+      } 
 
     componentDidMount() {
         this.getAllComments();
@@ -45,14 +52,41 @@ class PostItem extends Component {
             })
     }
 
+    handleClick() {
+        this.setState({
+          liked: !this.state.liked
+        });
+        if(this.state.liked === false){
+            let newCount = this.state.likes + 1;
+            this.setState({likes: newCount});
+        } else {
+            let newCount = this.state.likes - 1;
+            this.setState({likes: newCount});
+        }
+
+        const token = localStorage.getItem("token");
+
+        axios.post('http://localhost:3000/api/posts/like', {
+            like: this.state.liked,
+        },{ headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(res => {
+                    console.log(res.data)
+                    //window.location.reload()
+                })
+                .catch(error=>console.log(error))
+      }
+
     render() {
-		let { comments } = this.state;
+        let { comments } = this.state;
         return  (
 			<div>
 			<div className='post-item p-3 mb-3'>
 				<div className="user-post">
 					<div className="title_post d-flex align-items-center">
-                    { this.props.post.User.image === null ?
+                        { this.props.post.User.image === null ?
                         <img className='rounded-circle me-3 mb-3' height="40"  src={avatar} alt="avatar"/> 
                         : <img className='rounded-circle me-3 mb-3' height="40" width="40" src={this.props.post.User.image} alt="avatar"/>
                 	    }
@@ -68,10 +102,13 @@ class PostItem extends Component {
 					<div className="">
 						<div className="description mt-2 mb-2 ps-5">{this.props.post.content}</div>
 						<figure className="text-center"><img className="w-75" src={this.props.post.image}  alt=""/></figure>
+                        <i className="bi bi-hand-thumbs-up me-1">{this.state.likes}</i>
 						<div className="border-top">
-							<button className="like_post mt-2" title="Cliquez pour aimer"><i className="bi bi-hand-thumbs-up me-1"></i>J'aime</button>
+                            { this.state.liked ?
+                            <button className="like_post mt-2 text-primary" onClick={this.handleClick} title="Cliquez pour ne plus aimer"><i className="bi bi-hand-thumbs-up-fill me-1"></i>J'aime</button>
+                            : <button className="like_post mt-2" onClick={this.handleClick} title="Cliquez pour aimer"><i className="bi bi-hand-thumbs-up me-1"></i>J'aime</button>
+                		    }
 						</div>
-						
 					</div>
 				</div>
 			</div>

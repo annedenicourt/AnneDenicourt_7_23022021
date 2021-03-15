@@ -47,7 +47,6 @@ class NewPost extends Component {
             const token = localStorage.getItem("token");
             console.log(token)
             
-            
             let formData = new FormData();
             formData.append('content', fields['content']);
             formData.append('image', this.fileInput.current.files[0]);

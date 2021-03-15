@@ -31,6 +31,11 @@
 .input-file {
     
 }
+
+.btn_delete{
+    background: none;
+    border: none;
+}
 .bouton2 {
     text-decoration: none;
     height: 60px;

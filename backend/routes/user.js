@@ -9,6 +9,6 @@ router.post('/auth/login', userCtrl.login);
 router.get('/users', userCtrl.getAllUsers);
 router.get('/users/monprofil', auth, userCtrl.getCurrentUser);
 router.put('/users/monprofil', auth, multer, userCtrl.modifyUser);
-//router.delete('/', userCtrl.deleteCurrentUser);
+router.delete('/users/monprofil', userCtrl.deleteCurrentUser);
 
 module.exports = router; // pour exporter le router vers app.js

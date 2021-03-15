@@ -15,7 +15,7 @@ router.post('/', auth, multer, postCtrl.createPost);
 //pour modifier un post  
 //router.put('/:id', auth, multer, postCtrl.modifyPost);
 //pour liker un post
-//router.post('/:id/like', auth, postCtrl.likePost)
+router.post('/like', auth, postCtrl.likePost)
 //pour supprimer un post 
 router.delete('/:id', auth, postCtrl.deletePost);
 

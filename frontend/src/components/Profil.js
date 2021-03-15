@@ -69,12 +69,13 @@ class Profil extends Component {
     handleDelete() {
             const token = localStorage.getItem("token");
 
-            axios.delete('http://localhost:3000/api/users', {
+            axios.delete('http://localhost:3000/api/users/monprofil', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
                 .then(() => {
+                    alert("Votre compte a bien été supprimé")
                     window.location.href = '/';
                 })
                 .catch(err => {
@@ -111,9 +112,7 @@ class Profil extends Component {
                             <div className="border-bottom text-white mb-2">Poste</div>
                             <div className="text-muted mb-4 d-flex justify-content-between align-items-center">{user.job}</div>
                             <div className="border-bottom text-white mb-2">Mon compte</div>
-                            <div className="text-muted mb-4"><i className="bi bi-x-circle me-2"></i>Supprimer mon compte</div>
-                            <div className="text-muted mb-4"><i className="bi bi-pencil-square me-2"></i>Modifier mon compte</div>
-                            <div className="text-muted mb-4"><i className="bi bi-pencil me-2"></i>Modifier mon compte</div>
+                            <button className="btn_delete text-muted mb-4" onClick={this.handleDelete}><i className="bi bi-x-circle me-2"></i>Supprimer mon compte</button>
                         </div>
                     </div>
                     <div className="mt-5 mb-5 text-center"><Link to="/forum"><button className="bouton2 border-0 ">Accès forum</button></Link></div>

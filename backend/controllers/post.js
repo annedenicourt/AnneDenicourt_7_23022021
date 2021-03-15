@@ -19,6 +19,17 @@ exports.createPost = (req, res, next) => {
         .catch(error => res.status(400).json({ message: 'erreur création bdd' }))
 }
 
+exports.likePost = (req, res, next) => {
+    console.log(req.body.like)
+    const like = req.body.like
+
+    if(like === false){
+        res.status(200).json("post liké")
+    } else if (like === true) {
+        res.status(200).json("post disliké")
+    }        
+}
+
 exports.deletePost = (req, res, next) => {
     db.Post.destroy({ where: { id: req.params.id } })
         .then(() => res.status(200).json({ message: 'Post supprimé'}))
