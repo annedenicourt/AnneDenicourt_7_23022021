@@ -20,14 +20,30 @@ exports.createPost = (req, res, next) => {
 }
 
 exports.likePost = (req, res, next) => {
-    console.log(req.body.like)
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const userId = decodedToken.userId;
     const like = req.body.like
 
-    if(like === false){
-        res.status(200).json("post liké")
-    } else if (like === true) {
-        res.status(200).json("post disliké")
-    }        
+    db.Post.findOne({ where: { id: req.body.PostId } })
+
+    .then(post => {
+        if (!post) {
+            return res.status(404).json({ error: 'Post introuvable !' })
+        } else if(like === false) {
+            db.Like_post.create({
+                PostId: req.body.PostId,
+                OwnerId: userId
+            })
+            .then(like => res.status(201).json({ message: 'Post liké' }))
+            .catch(error => res.status(400).json({ error }))
+        } else if(like === true) {
+            db.Like_post.destroy({ where: { OwnerId: userId } })
+            .then(like => res.status(201).json({ message: 'Post disliké' }))
+            .catch(error => res.status(400).json({ error }))
+        }
+    })
+    .catch(error => res.status(400).json({ message: "erreur" }))     
 }
 
 exports.deletePost = (req, res, next) => {
@@ -40,13 +56,29 @@ exports.getAllPosts = (req, res, next) => {
     db.Post.findAll({
         include: {
             model: db.User,
-            attributes: ["name", "role", "image"]
+            attributes: ["id", "name", "role", "image"]
         },
         order: [
             ['createdAt', 'DESC']
       ],
     })
         .then(posts => res.status(200).json(posts))
+        .catch(error => res.status(500).json({ error }))
+}
+
+exports.getAllLikePost = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const userId = decodedToken.userId;
+    
+    db.Like_post.findAll({
+        where: { PostId: req.params.id, OwnerId: userId},
+        include: {
+            model: db.User,
+            attributes: ["name"]
+        },
+    })
+        .then(like_posts => res.status(200).json(like_posts))
         .catch(error => res.status(500).json({ error }))
 }
 

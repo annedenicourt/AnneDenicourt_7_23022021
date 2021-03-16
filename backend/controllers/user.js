@@ -64,6 +64,7 @@ exports.getCurrentUser = (req, res, next) => {
     db.User.findOne({ where: { id: userId } })
         .then(user => {
             res.status(200).json({
+                UserId: user.id,
                 UserName: user.name,
                 job: user.job,
                 image: user.image,

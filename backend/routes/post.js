@@ -14,6 +14,8 @@ router.post('/', auth, multer, postCtrl.createPost);
 //router.get('/:id', auth, postCtrl.getOnePost);
 //pour modifier un post  
 //router.put('/:id', auth, multer, postCtrl.modifyPost);
+//pour récupérer tous les likes
+router.get('/:id/likes', postCtrl.getAllLikePost)
 //pour liker un post
 router.post('/like', auth, postCtrl.likePost)
 //pour supprimer un post 

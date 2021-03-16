@@ -4,14 +4,16 @@ import NewComment from './NewComment';
 import { Component } from 'react';
 import axios from 'axios';
 import '../styles/PostItem.css'
+import ButtonLikePost from './ButtonLikePost';
 
 
 class PostItem extends Component {
 
     state = {
         comments: [],
+        like_posts: [],
         likes: '',
-        liked: false
+        liked: false,
     }
     
     constructor() {
@@ -21,16 +23,41 @@ class PostItem extends Component {
 
     componentDidMount() {
         this.getAllComments();
+        this.getAllLikePost()
     }
     getAllComments() {
-		
-		axios.get('http://localhost:3000/api/posts/'+this.props.post.id+'/comments')
+        const token = localStorage.getItem("token");
+
+		axios.get('http://localhost:3000/api/posts/'+this.props.post.id+'/comments', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(res => {
                 this.setState({ comments: res.data });
+                //console.log(res.data)
             })
             .catch(err => {
                 console.log(err);
                 window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
+            })
+    }
+    
+    getAllLikePost() {
+        const token = localStorage.getItem("token");
+
+		axios.get('http://localhost:3000/api/posts/'+this.props.post.id+'/likes', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                this.setState({ like_posts: res.data });
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+                //window.alert('Une erreur est survenue, veuillez réessayer plus tard');
             })
 	}
 
@@ -54,33 +81,35 @@ class PostItem extends Component {
 
     handleClick() {
         this.setState({
-          liked: !this.state.liked
-        });
-        if(this.state.liked === false){
+            liked: !this.state.liked
+          });
+        
+        /*if(this.state.liked === false){
             let newCount = this.state.likes + 1;
             this.setState({likes: newCount});
         } else {
             let newCount = this.state.likes - 1;
             this.setState({likes: newCount});
-        }
-
+        }*/                  
         const token = localStorage.getItem("token");
 
         axios.post('http://localhost:3000/api/posts/like', {
             like: this.state.liked,
+            PostId: this.props.post.id
         },{ headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
                 .then(res => {
                     console.log(res.data)
-                    //window.location.reload()
+                    window.location.reload()
                 })
                 .catch(error=>console.log(error))
       }
 
     render() {
         let { comments } = this.state;
+
         return  (
 			<div>
 			<div className='post-item p-3 mb-3'>
@@ -98,7 +127,6 @@ class PostItem extends Component {
                     		<button href="#" onClick={this.handlePostDelete} className="post_delete" title="Supprimer ce post"><i className="bi bi-x-circle"></i></button> : ''
                 		}
 					</div>
-							
 					<div className="">
 						<div className="description mt-2 mb-2 ps-5">{this.props.post.content}</div>
 						<figure className="text-center"><img className="w-75" src={this.props.post.image}  alt=""/></figure>
@@ -110,6 +138,10 @@ class PostItem extends Component {
                 		    }
 						</div>
 					</div>
+
+                    
+
+
 				</div>
 			</div>
 			<NewComment PostId= {this.props.post.id}/>

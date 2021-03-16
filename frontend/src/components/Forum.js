@@ -66,8 +66,7 @@ class Forum extends Component {
         let { users } = this.state;
         let { posts } = this.state;
         let { user } = this.state;
-
-
+        
         return  (
             <div> <Banner />
                 <div className="row justify-content-center">
@@ -100,7 +99,6 @@ class Forum extends Component {
                                         member_id={id}
                                         job={job}
                                         image={image}
-
                                     />
                                 </div>
                             ))}
@@ -115,6 +113,7 @@ class Forum extends Component {
                                 <div className="border rounded mb-4" key={post.id}>
                                     <PostItem 
                                         post={post}
+                                        UserId={user.UserId}
                                     />
                                 </div>
                             ))}

@@ -21,6 +21,7 @@ db.sequelize = sequelize;
 db.User = require("./User.js")(sequelize, Sequelize);
 db.Post = require("./Post.js")(sequelize, Sequelize);
 db.Comment = require("./Comment.js")(sequelize, Sequelize);
+db.Like_post = require("./Like_post.js")(sequelize, Sequelize);
 
 db.User.hasMany(db.Post);
 db.Post.belongsTo(db.User, { foreignKey: 'UserId', onDelete: 'CASCADE' });
@@ -28,6 +29,12 @@ db.Post.belongsTo(db.User, { foreignKey: 'UserId', onDelete: 'CASCADE' });
 db.Post.hasMany(db.Comment);
 db.Comment.belongsTo(db.Post, { foreignKey: 'PostId', onDelete: 'CASCADE' });
 db.Comment.belongsTo(db.User, { foreignKey: 'OwnerId', onDelete: 'CASCADE' });
+
+db.Like_post.belongsTo(db.Post, { foreignKey: 'PostId', onDelete: 'CASCADE' });
+db.Like_post.belongsTo(db.User, { foreignKey: 'OwnerId', onDelete: 'CASCADE' });
+
+//db.Post.belongsToMany(db.User, { through: Like_post });
+//db.User.belongsToMany(db.Post, { through: Like_post });
 
 module.exports = db;
 
