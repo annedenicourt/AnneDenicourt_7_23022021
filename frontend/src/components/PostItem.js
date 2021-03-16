@@ -53,11 +53,18 @@ class PostItem extends Component {
         })
             .then(res => {
                 this.setState({ like_posts: res.data });
-                console.log(res.data)
+                //console.log(res.data)
+                //console.log(this.state.liked)
+                let {like_posts} = this.state
+                const alreadyLike = like_posts.filter(like => like.OwnerId === this.props.UserId ).length>0
+                console.log(alreadyLike)
+                if(alreadyLike) {
+                    this.setState({ liked: true });
+                }
+                console.log(this.state.liked)
             })
             .catch(err => {
                 console.log(err);
-                //window.alert('Une erreur est survenue, veuillez réessayer plus tard');
             })
 	}
 
@@ -80,6 +87,7 @@ class PostItem extends Component {
     }
 
     handleClick() {
+        let {like_posts} = this.state
         this.setState({
             liked: !this.state.liked
           });
@@ -92,16 +100,22 @@ class PostItem extends Component {
             this.setState({likes: newCount});
         }*/                  
         const token = localStorage.getItem("token");
+        const likeId = like_posts.map(function (like) {return like.id;});
+        console.log(likeId)
+
 
         axios.post('http://localhost:3000/api/posts/like', {
             like: this.state.liked,
-            PostId: this.props.post.id
+            PostId: this.props.post.id,
+            LikeId: likeId
+
         },{ headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
                 .then(res => {
                     console.log(res.data)
+                    console.log(like_posts)
                     window.location.reload()
                 })
                 .catch(error=>console.log(error))
@@ -132,16 +146,12 @@ class PostItem extends Component {
 						<figure className="text-center"><img className="w-75" src={this.props.post.image}  alt=""/></figure>
                         <i className="bi bi-hand-thumbs-up me-1">{this.state.likes}</i>
 						<div className="border-top">
-                            { this.state.liked ?
+                            { this.state.liked === true ?
                             <button className="like_post mt-2 text-primary" onClick={this.handleClick} title="Cliquez pour ne plus aimer"><i className="bi bi-hand-thumbs-up-fill me-1"></i>J'aime</button>
                             : <button className="like_post mt-2" onClick={this.handleClick} title="Cliquez pour aimer"><i className="bi bi-hand-thumbs-up me-1"></i>J'aime</button>
                 		    }
 						</div>
 					</div>
-
-                    
-
-
 				</div>
 			</div>
 			<NewComment PostId= {this.props.post.id}/>

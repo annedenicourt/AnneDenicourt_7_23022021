@@ -38,7 +38,7 @@ exports.likePost = (req, res, next) => {
             .then(like => res.status(201).json({ message: 'Post liké' }))
             .catch(error => res.status(400).json({ error }))
         } else if(like === true) {
-            db.Like_post.destroy({ where: { OwnerId: userId } })
+            db.Like_post.destroy({ where: { id: req.body.LikeId } })
             .then(like => res.status(201).json({ message: 'Post disliké' }))
             .catch(error => res.status(400).json({ error }))
         }
