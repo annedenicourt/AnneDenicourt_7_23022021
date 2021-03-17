@@ -66,6 +66,7 @@ exports.getCurrentUser = (req, res, next) => {
             res.status(200).json({
                 UserId: user.id,
                 UserName: user.name,
+                UserRole: user.role,
                 job: user.job,
                 image: user.image,
                 email: user.email

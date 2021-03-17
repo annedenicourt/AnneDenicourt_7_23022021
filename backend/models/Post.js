@@ -13,6 +13,12 @@ module.exports = (sequelize, Sequelize) => {
     image: { 
       type: Sequelize.STRING
     }, 
+
+    likes: {
+      type:Sequelize.INTEGER,
+      defaultValue: 0,
+    },
+
      createdAt: Sequelize.DATE, 
      updatedAt: Sequelize.DATE, 
 }) 

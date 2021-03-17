@@ -34,7 +34,13 @@ class Forum extends Component {
             })
     }
     getAllPosts() {
-        axios.get('http://localhost:3000/api/posts')
+        const token = localStorage.getItem("token");
+
+        axios.get('http://localhost:3000/api/posts', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(res => {
                 this.setState({ posts: res.data });
                 //console.log(res.data)
@@ -106,14 +112,15 @@ class Forum extends Component {
                     </div>
                         
                     <div className="col-12 col-lg-9">
-                        <NewPost image={user.image} />
+                        <NewPost image={user.image} id={user.UserId}/>
                         <div className='last-post pt-3 pb-3 ms-2 fw-bold'>DERNIERS POSTS</div>
                         <div className='scroll post-list'>
                             {posts.map(post=> (
                                 <div className="border rounded mb-4" key={post.id}>
                                     <PostItem 
                                         post={post}
-                                        UserId={user.UserId}
+                                        currentUserId={user.UserId}
+                                        currentUserRole= {user.UserRole}
                                     />
                                 </div>
                             ))}

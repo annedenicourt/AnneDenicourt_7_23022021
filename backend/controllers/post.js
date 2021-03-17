@@ -23,27 +23,35 @@ exports.likePost = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
     const userId = decodedToken.userId;
-    const like = req.body.like
+    const isliked = req.body.like
 
     db.Post.findOne({ where: { id: req.body.PostId } })
 
     .then(post => {
         if (!post) {
             return res.status(404).json({ error: 'Post introuvable !' })
-        } else if(like === false) {
-            db.Like_post.create({
-                PostId: req.body.PostId,
-                OwnerId: userId
+        } else if(isliked === false) {
+            db.Like_post.create({ PostId: req.body.PostId, OwnerId: userId })
+            .then(like => {
+                //res.status(201).json({ message: 'Post liké' })
+                post.update({ likes: post.likes + 1 })
+                .then(post => res.status(201).json({ message: 'Post liké' }))
+                .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
             })
-            .then(like => res.status(201).json({ message: 'Post liké' }))
             .catch(error => res.status(400).json({ error }))
-        } else if(like === true) {
-            db.Like_post.destroy({ where: { id: req.body.LikeId } })
-            .then(like => res.status(201).json({ message: 'Post disliké' }))
-            .catch(error => res.status(400).json({ error }))
+        } else if(isliked === true) {
+            db.Like_post.destroy({ where: { id: req.body.LikeId, PostId: req.body.PostId } })
+            .then(like => {
+                post.update({ likes: post.likes - 1 })
+                .then(post => res.status(201).json({ message: 'Post disliké' }))
+                .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
+            })
+            .catch(error => res.status(400).json({ message: "problème destroy like" }))
         }
     })
-    .catch(error => res.status(400).json({ message: "erreur" }))     
+    .catch(error => res.status(400).json({ message: "erreur destroy" }))    
+    
+        
 }
 
 exports.deletePost = (req, res, next) => {
@@ -53,6 +61,9 @@ exports.deletePost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const userId = decodedToken.userId;
     db.Post.findAll({
         include: {
             model: db.User,
@@ -87,7 +98,7 @@ exports.getAllComments = (req, res, next) => {
         where: { PostId: req.params.id},
         include: {
             model: db.User,
-            attributes: ["name", "role", "image"]
+            attributes: ["id", "name", "role", "image"]
         }
     }) 
         .then(comments => res.status(200).json(comments))

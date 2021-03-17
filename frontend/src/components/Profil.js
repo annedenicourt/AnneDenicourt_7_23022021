@@ -45,10 +45,14 @@ class Profil extends Component {
         event.preventDefault();
 
         const token = localStorage.getItem("token");
-
         let formData = new FormData();
         formData.append('image', this.fileInput.current.files[0]);
         console.log(formData)
+
+        if (!this.fileInput.current.files[0]) {
+            alert("Vous devez choisir une photo")
+            return false
+        }
 
         axios.put('http://localhost:3000/api/users/monprofil',formData,{
             headers: {

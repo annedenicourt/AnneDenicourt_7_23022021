@@ -4,8 +4,6 @@ import NewComment from './NewComment';
 import { Component } from 'react';
 import axios from 'axios';
 import '../styles/PostItem.css'
-import ButtonLikePost from './ButtonLikePost';
-
 
 class PostItem extends Component {
 
@@ -56,12 +54,14 @@ class PostItem extends Component {
                 //console.log(res.data)
                 //console.log(this.state.liked)
                 let {like_posts} = this.state
-                const alreadyLike = like_posts.filter(like => like.OwnerId === this.props.UserId ).length>0
-                console.log(alreadyLike)
+                //const essai = like_posts.map(function (like) {return like.OwnerId;});
+                //console.log(essai)
+                const alreadyLike = like_posts.filter(like => like.OwnerId === this.props.currentUserId ).length>0
+                //console.log(alreadyLike)
                 if(alreadyLike) {
                     this.setState({ liked: true });
                 }
-                console.log(this.state.liked)
+                //console.log(this.state.liked)
             })
             .catch(err => {
                 console.log(err);
@@ -91,14 +91,7 @@ class PostItem extends Component {
         this.setState({
             liked: !this.state.liked
           });
-        
-        /*if(this.state.liked === false){
-            let newCount = this.state.likes + 1;
-            this.setState({likes: newCount});
-        } else {
-            let newCount = this.state.likes - 1;
-            this.setState({likes: newCount});
-        }*/                  
+                      
         const token = localStorage.getItem("token");
         const likeId = like_posts.map(function (like) {return like.id;});
         console.log(likeId)
@@ -121,8 +114,12 @@ class PostItem extends Component {
                 .catch(error=>console.log(error))
       }
 
+
     render() {
         let { comments } = this.state;
+        console.log(this.props.currentUserId)
+        console.log(this.props.post.User.id)
+        console.log(this.props.currentUserRole)
 
         return  (
 			<div>
@@ -137,14 +134,20 @@ class PostItem extends Component {
 							<a href="time-line.html" title="">{this.props.post.User.name}</a>      
 							<span> a publié le {new Date(this.props.post.createdAt).toLocaleDateString('fr-FR')} à {new Date(this.props.post.createdAt).toLocaleTimeString('fr-FR')}</span>
 						</div>
-						{ this.props.post.User.role && this.props.post.User.role.includes('Moderator') ?
+                        { this.props.currentUserId === this.props.post.User.id ?
+                    		<button href="#" onClick={this.handlePostDelete} className="post_delete" title="Supprimer ce post"><i className="bi bi-x-circle"></i></button> : ''
+                		}
+                        { this.props.currentUserRole === 'Moderator' ?
                     		<button href="#" onClick={this.handlePostDelete} className="post_delete" title="Supprimer ce post"><i className="bi bi-x-circle"></i></button> : ''
                 		}
 					</div>
 					<div className="">
 						<div className="description mt-2 mb-2 ps-5">{this.props.post.content}</div>
 						<figure className="text-center"><img className="w-75" src={this.props.post.image}  alt=""/></figure>
-                        <i className="bi bi-hand-thumbs-up me-1">{this.state.likes}</i>
+                        { this.props.post.likes >0 ?
+                            <i className="bi bi-hand-thumbs-up me-1">{this.state.likes}{this.props.post.likes}</i>
+                        : ''
+                		}
 						<div className="border-top">
                             { this.state.liked === true ?
                             <button className="like_post mt-2 text-primary" onClick={this.handleClick} title="Cliquez pour ne plus aimer"><i className="bi bi-hand-thumbs-up-fill me-1"></i>J'aime</button>
@@ -162,9 +165,11 @@ class PostItem extends Component {
                             content={comment.content}
                             PostId={comment.PostId}
                             date= {comment.createdAt}
-							CommentId= {comment.id}
+                            CommentId= {comment.id}
+                            OwnerId= {comment.OwnerId}
 							UserName= {comment.User.name}
-                            UserRole= {comment.User.role}
+                            currentUserRole= {this.props.currentUserRole}
+                            currentUserId= {this.props.currentUserId}
                             image= {comment.User.image}
                         />
                     </div>
