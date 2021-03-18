@@ -40,7 +40,6 @@ function CommentItem(props) {
                 }
 			</div>
             <div className="p-3 border" id='content_comment'>{props.content}</div>
-            <button className="like_comment mt-1 ms-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cliquez pour aimer">J'aime</button>
         </div>
 	)
 }

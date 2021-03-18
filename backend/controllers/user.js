@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const db = require('../models');
+const fs = require('fs');
 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
@@ -12,11 +13,23 @@ exports.signup = (req, res, next) => {
             job: req.body.job,
             password: hash
         })
-        .then(user =>{
-            res.status(201).json({ message: 'Utilisateur créé !'})
-        })
-        .catch(err => console.log('User_create', err))
-            
+        .then(user => {
+            res.status(201).json({
+                userId: user.id,
+                role: user.role,
+                userName: user.name,
+                token: jwt.sign(
+                    { 
+                        userId: user.id,
+                        role: user.role,
+                        userName: user.name
+                    },
+                    process.env.JWT_RAND_SECRET,
+                    { expiresIn: '24h' }
+                )
+            })
+       })
+        .catch(error => res.status(400).json({ error }));
     })
     .catch(error => res.status(500).json({ error })) 
 };
@@ -79,7 +92,6 @@ exports.modifyUser = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
     const userId = decodedToken.userId;
-    console.log(userId)
 
     db.User.findOne({ where: { id: userId } })
         .then(user => {
@@ -92,13 +104,48 @@ exports.modifyUser = (req, res, next) => {
         .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé !' }))
   };
 
-  exports.deleteCurrentUser = (req, res, next) => {
+exports.deletePictureUser = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
     const userId = decodedToken.userId;
-    console.log(userId)
+
+    db.User.findOne({ where: { id: userId } })
+      .then(user => {
+        const filename = user.image.split('/images/')[1]; // on récupère le nom du fichier à supprimer
+        fs.unlink(`images/${filename}`, () => { // on utilise la fonction unlink du package fs pour supprimer le fichier 
+            user.update({
+                image:null
+             })
+            .then(() => res.status(200).json({ message: 'Photo supprimée'}))
+            .catch(error => res.status(400).json({ error: 'Pb suppression photo' }));
+        });
+      })
+      .catch(error => res.status(500).json({ error }));
+};
+
+/*exports.deleteCurrentUser = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const userId = decodedToken.userId;
 
     db.User.destroy({ where: { id: userId } })
         .then(() => res.status(200).json({ message: 'Compte supprimé'}))
         .catch(error => res.status(400).json({ error: 'Pb suppression compte' }));        
-  };
+  };*/
+
+exports.deleteCurrentUser = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const userId = decodedToken.userId;
+
+    db.User.findOne({ where: { id: userId } })
+      .then(user => {
+        const filename = user.image.split('/images/')[1]; // on récupère le nom du fichier à supprimer
+        fs.unlink(`images/${filename}`, () => { // on utilise la fonction unlink du package fs pour supprimer le fichier 
+            db.User.destroy({ where: { id: userId } })
+            .then(() => res.status(200).json({ message: 'Compte supprimé'}))
+            .catch(error => res.status(400).json({ error: 'Pb suppression compte' }));
+        });
+      })
+      .catch(error => res.status(500).json({ error }));
+};

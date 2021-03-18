@@ -1,6 +1,5 @@
 import '../styles/SignupForm.css'
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from "axios";
 
 
@@ -69,8 +68,8 @@ class SignupForm extends Component {
                 password: fields['password'],
                 job: fields['job']
         }) 
-        //UserDataService.createUser()
         .then(res => {
+            window.localStorage.setItem('token', res.data.token)
             window.location.href = "/forum";
         })
         .catch(

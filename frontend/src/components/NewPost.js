@@ -81,7 +81,7 @@ class NewPost extends Component {
                 <div className="attachments me-4 mb-3">
                     <label htmlFor="image" className="btn_add_file"><i className="bi bi-image me-2" title="Ajouter une image"></i></label>
                     <input type="file" name="image" id="image" className="add_file" onChange={this.loadimage} ref={this.fileInput} />
-                    <button className="button_publish btn" type="submit">Publier</button>
+                    <button className="button_publish btn mb-2" type="submit">Publier</button>
                     <fieldset><div id="imgstore"></div></fieldset> 
                 </div>
             </form>

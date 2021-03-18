@@ -2,6 +2,7 @@ const db = require('../models');
 const Post = require('../models/Post');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 require('dotenv').config();
 
 exports.createPost = (req, res, next) => {
@@ -49,19 +50,10 @@ exports.likePost = (req, res, next) => {
             .catch(error => res.status(400).json({ message: "problème destroy like" }))
         }
     })
-    .catch(error => res.status(400).json({ message: "erreur destroy" }))    
-    
-        
+    .catch(error => res.status(400).json({ message: "erreur destroy" }))         
 }
 
 exports.deletePost = (req, res, next) => {
-    db.Post.destroy({ where: { id: req.params.id } })
-        .then(() => res.status(200).json({ message: 'Post supprimé'}))
-        .catch(error => res.status(400).json({ error: 'Pb suppression post' }));
-};
-
-
-/*exports.deletePost = (req, res, next) => {
     db.Post.findOne({ where: { id: req.params.id } })
       .then(post => {
         const filename = post.image.split('/images/')[1]; // on récupère le nom du fichier à supprimer
@@ -72,7 +64,7 @@ exports.deletePost = (req, res, next) => {
         });
       })
       .catch(error => res.status(500).json({ error }));
-};*/
+};
 
 exports.getAllPosts = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];

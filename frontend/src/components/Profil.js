@@ -47,7 +47,6 @@ class Profil extends Component {
         const token = localStorage.getItem("token");
         let formData = new FormData();
         formData.append('image', this.fileInput.current.files[0]);
-        console.log(formData)
 
         if (!this.fileInput.current.files[0]) {
             alert("Vous devez choisir une photo")
@@ -55,6 +54,29 @@ class Profil extends Component {
         }
 
         axios.put('http://localhost:3000/api/users/monprofil',formData,{
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                this.setState({ user: res.data });
+                window.location.reload()
+            })
+            .catch(err => {
+                console.log(err);
+                window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
+            })
+    }
+
+    handleDeletePicture = (event) => {
+        event.preventDefault();
+
+        const token = localStorage.getItem("token");
+        let formData = new FormData();
+        formData.append('image', this.fileInput.current.files[0]);
+
+        axios.put('http://localhost:3000/api/users/monprofil/mypicture',formData,{
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
@@ -95,9 +117,9 @@ class Profil extends Component {
 
     loadimage = (e1) => {
         var filename = e1.target.files[0]; 
-            var fr = new FileReader();
-            fr.onload = this.imageHandler;  
-            fr.readAsDataURL(filename);
+        var fr = new FileReader();
+        fr.onload = this.imageHandler;  
+        fr.readAsDataURL(filename);
     }
 
     render() {
@@ -110,15 +132,18 @@ class Profil extends Component {
                     <div className="col-8 col-lg-5 mt-5 mx-auto rounded bg-profile" >
                         <div className='avatar rounded-circle mx-auto'>
                             { user.image === null ?
-                                <img className='rounded-circle' height="200px" src={avatar} alt="avatar"/> 
-                                : <img className='rounded-circle' height="200px" src={user.image} alt="avatar"/>
+                                <img className='rounded-circle' height="150px" src={avatar} alt="avatar"/> 
+                                : <img className='rounded-circle' height="150px" src={user.image} alt="avatar"/>
                 	        }
+                        <i className="delete_picture bi bi-x-circle-fill text-white" title="Supprimer la photo de profil" onClick={this.handleDeletePicture}></i>
                         </div>
                         <div className='text-center mt-4'>
                             <label className="label-file text-white" htmlFor="image">Choisir une image</label>
                             <input name="image" id="image" className="input-file text-white" type="file" onChange={this.loadimage} ref={this.fileInput}></input>
-                            <fieldset><div id="imgstore"></div></fieldset> 
-                            <button type="submit" className="button-file btn p-2 mt-4 mb-4" onClick={this.handleSubmit}>Ajouter / modifier photo</button>
+                            <fieldset>
+                                <div id="imgstore"></div>
+                            </fieldset> 
+                            <button type="submit" className="button-file btn p-2 mt-4 mb-4" onClick={this.handleSubmit}>Ajouter</button>
                         </div>
 
                         <div className="pb-4 pe-4 ps-4">

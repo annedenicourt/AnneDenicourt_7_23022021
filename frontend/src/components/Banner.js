@@ -29,7 +29,7 @@ function Banner() {
         <div className='row banner ps-4 pe-4 mb-5'>
             <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
-                    <NavLink className="nav-link" to="/"><img src={logo} height="50" alt='Groupomania'/></NavLink>
+                    <NavLink className="nav-link" to="/forum"><img src={logo} height="50" alt='Groupomania'/></NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                         <span className="navbar-toggler-icon"></span>
                     </button>

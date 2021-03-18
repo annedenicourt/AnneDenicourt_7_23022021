@@ -56,6 +56,7 @@ class PostItem extends Component {
                 let {like_posts} = this.state
                 //const essai = like_posts.map(function (like) {return like.OwnerId;});
                 //console.log(essai)
+                //essaie.includes(this.prop.currentUserId)
                 const alreadyLike = like_posts.filter(like => like.OwnerId === this.props.currentUserId ).length>0
                 //console.log(alreadyLike)
                 if(alreadyLike) {
