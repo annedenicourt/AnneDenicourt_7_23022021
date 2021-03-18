@@ -29,8 +29,14 @@ function CommentItem(props) {
 				<a href="time-line.html" title="">{props.UserName} </a>      
                 <span> a commenté le {new Date(props.date).toLocaleDateString('fr-FR')}</span>
 				<span> à {new Date(props.date).toLocaleTimeString('fr-FR')}</span>
-                {props.currentUserId === props.OwnerId || props.currentUserRole.includes('Moderator') ?
+                {props.currentUserId === props.OwnerId ?
                 <button href="#" className="comment_delete" onClick={handleCommentDelete} title="Supprimer ce commentaire"><i className="bi bi-x-circle"></i></button> : ''
+                }
+                { props.currentUserId === props.OwnerId ?
+                    <button href="#" className="comment_delete" onClick={handleCommentDelete} title="Supprimer ce commentaire"><i className="bi bi-x-circle"></i></button> : ''
+                }
+                { props.currentUserRole === 'Moderator' ?
+                    <button href="#" className="comment_delete" onClick={handleCommentDelete} title="Supprimer ce commentaire"><i className="bi bi-x-circle"></i></button> : ''
                 }
 			</div>
             <div className="p-3 border" id='content_comment'>{props.content}</div>

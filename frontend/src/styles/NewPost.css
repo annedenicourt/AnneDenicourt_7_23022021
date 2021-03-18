@@ -1,15 +1,9 @@
 #content{
     width: 100%;
 }
-.new-postbox {
-    position: relative;
-}
 .attachments{
-    position: absolute;
-    right: 30px;
-    top: 125px;
+    text-align: right;
 }
-
 .btn_add_file {
     cursor: pointer;
     font-size: 1.5em;
@@ -22,4 +16,15 @@
 }
 .add_file {
     display: none;
+}
+.button_publish{
+    background-color: #f05837;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.button_publish:hover {
+    filter: brightness(1.2);
+    color: white;
 }

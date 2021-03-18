@@ -1,9 +1,22 @@
-.like_post {
-    border:none;
-    background-color: white;
+.content_post{
+}
+.count_likes{
+    color: blue;
+    font-size: 0.9em;
+    text-align: right;
 }
 .title_post {
     position: relative;
+    
+}
+.date_post {
+    font-size: 0.8em;
+}
+
+.details_post a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #f05837;
 }
 .post_delete {
     border: none;
@@ -13,9 +26,11 @@
 }
 
 .bi-x-circle {
-    font-size: 1.4em;
+    font-size: 1.2em;
+}
+.like_post {
+    border:none;
+    background: none;
+    font-size: 0.9em;
 }
 
-.bi-hand-thumbs-up-fill {
-    color: blue;
-}

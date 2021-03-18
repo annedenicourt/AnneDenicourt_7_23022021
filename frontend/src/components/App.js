@@ -1,7 +1,6 @@
 import Home from './Home';
 import Register from './Register';
 import Profil from './Profil';
-import Logout from './Logout';
 import '../styles/App.css';
 import Forum from './Forum';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -28,7 +27,6 @@ function App() {
                 <Route path="/register" component={Register}/>
                 <Route path="/forum" component={Forum}/>
                 <Route path="/profil" component={Profil}/>
-                <Route path="/logout" component={Logout}/>
             </Switch>
         </BrowserRouter>
     );

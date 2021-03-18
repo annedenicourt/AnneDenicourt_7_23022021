@@ -8,6 +8,10 @@
     width: 100%;
     object-fit: cover;
 }
+.profile_card h4 {
+    font-weight: bold;
+}
+
 .link_profil {
     text-decoration: none;
 }

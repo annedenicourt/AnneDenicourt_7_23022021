@@ -117,9 +117,8 @@ class PostItem extends Component {
 
     render() {
         let { comments } = this.state;
-        console.log(this.props.currentUserId)
-        console.log(this.props.post.User.id)
-        console.log(this.props.currentUserRole)
+        let {like_posts} = this.state
+        const likeOwnerName = like_posts.map(function (like) {return like.User.name;});
 
         return  (
 			<div>
@@ -130,28 +129,31 @@ class PostItem extends Component {
                         <img className='rounded-circle me-3 mb-3' height="40"  src={avatar} alt="avatar"/> 
                         : <img className='rounded-circle me-3 mb-3' height="40" width="40" src={this.props.post.User.image} alt="avatar"/>
                 	    }
-						<div className="">
-							<a href="time-line.html" title="">{this.props.post.User.name}</a>      
-							<span> a publié le {new Date(this.props.post.createdAt).toLocaleDateString('fr-FR')} à {new Date(this.props.post.createdAt).toLocaleTimeString('fr-FR')}</span>
+						<div className="details_post">
+							<a className="me-2" href=" " title="">{this.props.post.User.name}</a>      
+							<span className="date_post text-muted"> a publié le {new Date(this.props.post.createdAt).toLocaleDateString('fr-FR')} à {new Date(this.props.post.createdAt).toLocaleTimeString('fr-FR')}</span>
 						</div>
                         { this.props.currentUserId === this.props.post.User.id ?
-                    		<button href="#" onClick={this.handlePostDelete} className="post_delete" title="Supprimer ce post"><i className="bi bi-x-circle"></i></button> : ''
+                    		<button onClick={this.handlePostDelete} className="post_delete" title="Supprimer ce post"><i className="bi bi-x-circle"></i></button> : ''
                 		}
                         { this.props.currentUserRole === 'Moderator' ?
-                    		<button href="#" onClick={this.handlePostDelete} className="post_delete" title="Supprimer ce post"><i className="bi bi-x-circle"></i></button> : ''
+                    		<button onClick={this.handlePostDelete} className="post_delete" title="Supprimer ce post"><i className="bi bi-x-circle"></i></button> : ''
                 		}
 					</div>
-					<div className="">
-						<div className="description mt-2 mb-2 ps-5">{this.props.post.content}</div>
-						<figure className="text-center"><img className="w-75" src={this.props.post.image}  alt=""/></figure>
-                        { this.props.post.likes >0 ?
-                            <i className="bi bi-hand-thumbs-up me-1">{this.state.likes}{this.props.post.likes}</i>
-                        : ''
-                		}
-						<div className="border-top">
+					<div className="content_post">
+						<div className="description mt-2 mb-4 ps-5">{this.props.post.content}</div>
+                            { this.props.post.image ?
+						    <figure className="text-center"><img className="w-100" src={this.props.post.image}  alt=""/></figure>
+                            : ''
+                		    }
+                            { this.props.post.likes >0 ?
+                            <div className="count_likes me-4 mb-3"><i className="bi bi-hand-thumbs-up-fill me-1" title={likeOwnerName}></i>{this.props.post.likes}</div>
+                            : ''
+                		    }
+						<div className="border-top border-bottom">
                             { this.state.liked === true ?
-                            <button className="like_post mt-2 text-primary" onClick={this.handleClick} title="Cliquez pour ne plus aimer"><i className="bi bi-hand-thumbs-up-fill me-1"></i>J'aime</button>
-                            : <button className="like_post mt-2" onClick={this.handleClick} title="Cliquez pour aimer"><i className="bi bi-hand-thumbs-up me-1"></i>J'aime</button>
+                            <button className="like_post mt-2 mb-2 text-primary" onClick={this.handleClick} title="Cliquez pour ne plus aimer"><i className="bi bi-hand-thumbs-up-fill me-1"></i>J'aime</button>
+                            : <button className="like_post mt-2 mb-2" onClick={this.handleClick} title="Cliquez pour aimer"><i className="bi bi-hand-thumbs-up me-1"></i>J'aime</button>
                 		    }
 						</div>
 					</div>
@@ -175,7 +177,7 @@ class PostItem extends Component {
                     </div>
                 ))}    
             </div>
-		</div>
+		    </div>
            )
     }
 }

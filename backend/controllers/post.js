@@ -40,7 +40,7 @@ exports.likePost = (req, res, next) => {
             })
             .catch(error => res.status(400).json({ error }))
         } else if(isliked === true) {
-            db.Like_post.destroy({ where: { id: req.body.LikeId, PostId: req.body.PostId } })
+            db.Like_post.destroy({ where: { id: req.body.LikeId, PostId: req.body.PostId, OwnerId: userId } })
             .then(like => {
                 post.update({ likes: post.likes - 1 })
                 .then(post => res.status(201).json({ message: 'Post disliké' }))
@@ -57,8 +57,22 @@ exports.likePost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
     db.Post.destroy({ where: { id: req.params.id } })
         .then(() => res.status(200).json({ message: 'Post supprimé'}))
-        .catch(error => res.status(400).json({ error: 'Pb suppression commentaire' }));
+        .catch(error => res.status(400).json({ error: 'Pb suppression post' }));
 };
+
+
+/*exports.deletePost = (req, res, next) => {
+    db.Post.findOne({ where: { id: req.params.id } })
+      .then(post => {
+        const filename = post.image.split('/images/')[1]; // on récupère le nom du fichier à supprimer
+        fs.unlink(`images/${filename}`, () => { // on utilise la fonction unlink du package fs pour supprimer le fichier 
+            db.Post.destroy({ where: { id: req.params.id } })
+            .then(() => res.status(200).json({ message: 'Post supprimé'}))
+            .catch(error => res.status(400).json({ error: 'Pb suppression post' }));
+        });
+      })
+      .catch(error => res.status(500).json({ error }));
+};*/
 
 exports.getAllPosts = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
@@ -83,7 +97,7 @@ exports.getAllLikePost = (req, res, next) => {
     const userId = decodedToken.userId;
     
     db.Like_post.findAll({
-        where: { PostId: req.params.id, OwnerId: userId},
+        where: { PostId: req.params.id},
         include: {
             model: db.User,
             attributes: ["name"]

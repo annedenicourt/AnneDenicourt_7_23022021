@@ -16,20 +16,27 @@
     object-fit: cover;
 }
 
-.label-file {
-    cursor: pointer;
+.button-file {
     font-weight: bold;
+    font-size: 0.9em;
     color: #282c34;
     background-color: white;
+    border-color: none;
     border-radius: 5px;
     transition:0.5s;
 }
-.label-file:hover {
+.button-file:hover {
     background: #f05837;
     color: white;
 }
+
+.label-file {
+    font-weight: bold;
+    cursor: pointer;
+}
 .input-file {
-    
+    font-size: 0.9em;
+    display: none;
 }
 
 .btn_delete{

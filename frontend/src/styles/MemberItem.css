@@ -1,6 +1,9 @@
 .member-service{
     font-size: 0.7em;
 }
+.member-info2 {
+    font-size: 0.8em;
+}
 
 @media screen and (max-width: 991px) {
     .member-list{

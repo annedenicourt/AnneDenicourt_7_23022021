@@ -88,6 +88,18 @@ class Profil extends Component {
                 })
     }
 
+    imageHandler = (e2) => {
+        var store = document.getElementById('imgstore');
+        store.innerHTML='<img width="200" src="' + e2.target.result +'"/>';
+    }
+
+    loadimage = (e1) => {
+        var filename = e1.target.files[0]; 
+            var fr = new FileReader();
+            fr.onload = this.imageHandler;  
+            fr.readAsDataURL(filename);
+    }
+
     render() {
         let { user } = this.state;
 
@@ -102,11 +114,13 @@ class Profil extends Component {
                                 : <img className='rounded-circle' height="200px" src={user.image} alt="avatar"/>
                 	        }
                         </div>
-                        <div className='text-center'>
-                            <label htmlFor="file"></label>
-                            <input name="image" id="image" className="input-file" type="file" ref={this.fileInput}></input>
-                            <button type="submit" className="label-file p-2 mt-4 mb-4" onClick={this.handleSubmit}>Ajouter/modifier photo</button>
+                        <div className='text-center mt-4'>
+                            <label className="label-file text-white" htmlFor="image">Choisir une image</label>
+                            <input name="image" id="image" className="input-file text-white" type="file" onChange={this.loadimage} ref={this.fileInput}></input>
+                            <fieldset><div id="imgstore"></div></fieldset> 
+                            <button type="submit" className="button-file btn p-2 mt-4 mb-4" onClick={this.handleSubmit}>Ajouter / modifier photo</button>
                         </div>
+
                         <div className="pb-4 pe-4 ps-4">
                             <h5 className=" text-white mb-4">Informations</h5>
                             <div className="border-bottom text-white mb-2">Nom/Pseudo</div>
