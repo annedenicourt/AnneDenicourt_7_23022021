@@ -83,6 +83,24 @@ exports.getAllPosts = (req, res, next) => {
         .catch(error => res.status(500).json({ error }))
 }
 
+exports.getAllPostsByUser = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const userId = decodedToken.userId;
+    db.Post.findAll({
+        where: { UserId: req.params.id},
+        include: {
+            model: db.User,
+            attributes: ["id", "name", "role", "image"]
+        },
+        order: [
+            ['createdAt', 'DESC']
+      ],
+    })
+        .then(posts => res.status(200).json(posts))
+        .catch(error => res.status(500).json({ error }))
+}
+
 exports.getAllLikePost = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);

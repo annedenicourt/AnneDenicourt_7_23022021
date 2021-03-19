@@ -141,6 +141,7 @@ class PostItem extends Component {
                     		<button onClick={this.handlePostDelete} className="post_delete" title="Supprimer ce post"><i className="bi bi-x-circle"></i></button> : ''
                 		}
 					</div>
+    
 					<div className="content_post">
 						<div className="description mt-2 mb-4 ps-5">{this.props.post.content}</div>
                             { this.props.post.image ?

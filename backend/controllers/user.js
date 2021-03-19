@@ -88,6 +88,22 @@ exports.getCurrentUser = (req, res, next) => {
         .catch(error => res.status(500).json({ error: 'erreur bdd' }))
 }
 
+exports.getOneUser = (req, res, next) => {
+
+    db.User.findOne({ where: { id: req.params.id } })
+        .then(user => {
+            res.status(200).json({
+                UserId: user.id,
+                UserName: user.name,
+                UserRole: user.role,
+                job: user.job,
+                image: user.image,
+                email: user.email
+            });
+        })
+        .catch(error => res.status(500).json({ error: 'erreur bdd' }))
+}
+
 exports.modifyUser = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);

@@ -86,25 +86,27 @@ class Forum extends Component {
                         </div>
                         <div className='membres fw-bold mb-2 ms-2 '>MEMBRES</div>
                         <div className='scroll2 member-list border rounded p-2 ms-2'>
-                            {users.map(({ name, id, job, image }) => (
+                            {users.map(({ name, id, job, image, email }) => (
                                 <div key={id}>
                                     <MemberItem
                                         name={name}
                                         member_id={id}
                                         job={job}
                                         image={image}
+                                        email={email}
                                     />
                                 </div>
                             ))}
                         </div>
                         <div className='scroll3 member-list2 d-flex mb-3 p-2'>
-                            {users.map(({ name, id, job, image }) => (
+                            {users.map(({ name, id, job, image, email }) => (
                                 <div key={id}>
                                     <MemberItem2
                                         name={name}
                                         member_id={id}
                                         job={job}
                                         image={image}
+                                        email={email}
                                     />
                                 </div>
                             ))}

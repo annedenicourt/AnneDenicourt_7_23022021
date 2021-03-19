@@ -4,6 +4,7 @@ import Profil from './Profil';
 import '../styles/App.css';
 import Forum from './Forum';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ProfileUser from './ProfileUser';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/register" component={Register}/>
                 <Route path="/forum" component={Forum}/>
                 <Route path="/profil" component={Profil}/>
+                <Route path="/user/:id" component={ProfileUser}/>
             </Switch>
         </BrowserRouter>
     );
