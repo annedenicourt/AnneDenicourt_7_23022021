@@ -1,12 +1,10 @@
-//import Login2 from './Login2';
+import '../styles/Home.css';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import LoginForm from './LoginForm';
-import '../styles/Home.css';
 import logo from '../assets/icon-left-font-monochrome-white.png'
 import img1 from '../assets/pexels-fauxels-3183197.jpg'
 import img2 from '../assets/pexels-fauxels-3184653.jpg'
-
 
 function Home() {
     return ( 
@@ -32,7 +30,6 @@ function Home() {
             </div>
             <Footer />
         </div>
-        );
+    );
 }
-
 export default Home;

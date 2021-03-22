@@ -1,6 +1,6 @@
-import logo from '../assets/icon-left-font-monochrome-white2.png'
 import '../styles/Banner.css'
 import { NavLink } from 'react-router-dom';
+import logo from '../assets/icon-left-font-monochrome-white2.png'
 import Swal from 'sweetalert2';
 
 function Banner() {
@@ -18,7 +18,6 @@ function Banner() {
           })
           .then((result) => {
             if (result.isConfirmed) {
-                Swal.fire("Vous avez été déconnecté(e)");
                 localStorage.clear();
                 return (window.location.href = '/')
             }

@@ -1,7 +1,6 @@
-import avatar from '../assets/avatar2.png'
 import '../styles/ProfileCard.css'
-import { Link } from 'react-router-dom';
-
+import { Link } from 'react-router-dom'
+import avatar from '../assets/avatar2.png'
 
 function ProfileCard({name, image, job}) {
 
@@ -11,8 +10,8 @@ function ProfileCard({name, image, job}) {
                 <div className="text-center text-white">
                     <div className='avatar2 rounded-circle mx-auto'>
                         { image === null ?
-                        <img className='rounded-circle' height="130px" src={avatar} alt="avatar"/> 
-                        : <img className='rounded-circle' height="130px" src={image} alt="avatar"/>
+                            <img className='rounded-circle' height="130px" src={avatar} alt="avatar"/> 
+                            : <img className='rounded-circle' height="130px" src={image} alt="avatar"/>
                 	    }
                     </div>
                     <h4 className="mt-4">Bienvenue</h4>
@@ -24,5 +23,4 @@ function ProfileCard({name, image, job}) {
         </div>
     )
 }
-
 export default ProfileCard

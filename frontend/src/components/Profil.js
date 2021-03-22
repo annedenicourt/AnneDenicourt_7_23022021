@@ -7,17 +7,18 @@ import React from 'react';
 import axios from 'axios';
 import { Component } from 'react';
 
-
-
 class Profil extends Component {
 
     state = {
-        user: {}
+        user: {},
+        file: ""
     }
 
     constructor(props) {
         super(props);
         this.fileInput = React.createRef();
+        //this.handleSubmit = this.handleSubmit.bind(this);
+
       }
 
     componentDidMount() {
@@ -120,16 +121,23 @@ class Profil extends Component {
         var fr = new FileReader();
         fr.onload = this.imageHandler;  
         fr.readAsDataURL(filename);
+        this.setState({
+            file: filename
+          });
+    }
+    reset = () => {
+        window.location.reload()
     }
 
     render() {
-        let { user } = this.state;
+        let { user, file } = this.state;
+
 
         return  (
             <div className="bg-profilepage"> 
                 <Banner />
                 <div className="row">
-                    <div className="col-8 col-lg-5 mt-5 mx-auto rounded bg-profile" >
+                    <div className="col-8 col-lg-4 mt-5 mx-auto rounded bg-profile" >
                         <div className='avatar rounded-circle mx-auto'>
                             { user.image === null ?
                                 <img className='rounded-circle' height="150px" src={avatar} alt="avatar"/> 
@@ -138,12 +146,17 @@ class Profil extends Component {
                         <i className="delete_picture bi bi-x-circle-fill text-white" title="Supprimer la photo de profil" onClick={this.handleDeletePicture}></i>
                         </div>
                         <div className='text-center mt-4'>
-                            <label className="label-file text-white" htmlFor="image">Choisir une image</label>
+                            <label className="label-file text-white mb-3" htmlFor="image">Choisir une image</label>
                             <input name="image" id="image" className="input-file text-white" type="file" onChange={this.loadimage} ref={this.fileInput}></input>
-                            <fieldset>
-                                <div id="imgstore"></div>
-                            </fieldset> 
-                            <button type="submit" className="button-file btn p-2 mt-4 mb-4" onClick={this.handleSubmit}>Ajouter</button>
+                            <div id="imgstore"></div>
+                            { file ?
+                                <button type="submit" className="button-file btn p-2 mt-4 mb-4 me-2" onClick={this.handleSubmit}>Ajouter</button>
+                                : ''
+                            }
+                            { file ?
+                                <button type="submit" className="button-file btn p-2 mt-4 mb-4" onClick={this.reset}>Annuler</button>
+                                : ''
+                            }
                         </div>
 
                         <div className="pb-4 pe-4 ps-4">

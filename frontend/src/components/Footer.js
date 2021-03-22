@@ -1,6 +1,4 @@
-//import logo from '../assets/icon-left-font-monochrome-white.png'
 import '../styles/Footer.css'
-
 
 function Footer() {
 	return  <footer className="text-white" id='bg-footer'>
@@ -21,7 +19,6 @@ function Footer() {
     
 </footer>
 }
-
 export default Footer
 
 

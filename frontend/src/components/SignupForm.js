@@ -18,44 +18,53 @@ class SignupForm extends Component {
 
   handleValidation() {
     let { fields } = this.state;
-    let formIsValid = true
     let errors = {};
+    let formIsValid = true
 
     // validation name
     if (!fields['name']) {
-        errors['name'] = 'Ce champ ne peut pas être vide';
+        formIsValid = false;
+        errors['name'] = 'Ce champ ne peut pas être vide'; 
     } else if (fields['name'].length < 3) {
-        errors['name'] = 'Le nom d\'utilisateur doit contenir au minimum 3 caractères';
+        formIsValid = false;
+        errors['name'] = 'Le nom d\'utilisateur doit contenir au minimum 3 caractères';  
     } else if (fields['name'].length > 20) {
+        formIsValid = false;
         errors['name'] = 'Le nom d\'utilisateur doit contenir au maximum 20 caractères';
     }
       
     // validation email 
     if (!fields['email']) {
+        formIsValid = false;
         errors['email'] = 'Ce champ ne peut pas être vide';
     } else if (!fields['email'].match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i)) {
+        formIsValid = false;
         errors['email'] = 'L\'email n\'est pas valide';
     }
 
     // validation poste travail 
     if (!fields['job']) {
+        formIsValid = false;
         errors['job'] = 'Ce champ ne peut pas être vide';
     }
 
     // validation confirm_password
     if (!fields['confirm_password']) {
+        formIsValid = false;
         errors['confirm_password'] = 'Ce champ ne peut pas être vide';
     } else if (fields['confirm_password']!== fields['password']) {
+        formIsValid = false;
         errors['confirm_password'] = 'Le mot de passe n\'est pas identique';
     }
     // validation password 
     if (!/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(fields['password'])) {
+        formIsValid = false;
         errors['password'] = '8 caractères min. dont 1 minuscule, 1 majuscule, 1 chiffre et 1 caractère spécial';
     }
     
     this.setState({ errors });
+    return formIsValid
 
-    return formIsValid;
   }
 
   handleFormSubmit = (event,data) => {

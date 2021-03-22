@@ -1,11 +1,9 @@
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import Register from './Register';
 import Profil from './Profil';
-import '../styles/App.css';
 import Forum from './Forum';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProfileUser from './ProfileUser';
-
 
 function App() {
     const token = localStorage.getItem("token");
@@ -20,7 +18,6 @@ function App() {
                 </Switch>
             </BrowserRouter>)
       }
-
     return ( 
         <BrowserRouter>     
             <Switch>
@@ -33,9 +30,4 @@ function App() {
         </BrowserRouter>
     );
 }
-
-
-
-
-
 export default App;

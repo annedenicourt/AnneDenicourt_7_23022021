@@ -1,8 +1,17 @@
+.member-name {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #f05837;
+}
 .member-service{
     font-size: 0.7em;
 }
 .member-info2 {
+    text-decoration: none;
+    font-weight: bold;
     font-size: 0.8em;
+    color: #f05837;
 }
 
 @media screen and (max-width: 991px) {

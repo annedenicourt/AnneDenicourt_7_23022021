@@ -16,7 +16,7 @@ function MemberItem({ member_id, name, image, job, email}) {
                         : <img className='rounded-circle me-2' height="40" width="40" src={image} alt="avatar"/>
                 	}
 					<div className="member-info">
-						<Link className="" to ={{
+						<Link className="member-name" to ={{
 							pathname: `/user/${member_id}`
 						}}>{name}</Link>
 						<div className="member-service text-muted fst-italic ">{job}</div>
@@ -27,5 +27,4 @@ function MemberItem({ member_id, name, image, job, email}) {
 	</div>
 	)
 }
-
 export default MemberItem

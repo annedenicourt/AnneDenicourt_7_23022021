@@ -1,5 +1,5 @@
-import avatar from '../assets/avatar2.png';
 import '../styles/CommentItem.css'
+import avatar from '../assets/avatar2.png';
 import axios from 'axios';
 
 function CommentItem(props) {
@@ -22,16 +22,13 @@ function CommentItem(props) {
 	return (
 		<div className="p-3">
             <div className="title_comment mb-2 text-muted">
-            { props.image === null ?
-                <img className='rounded-circle me-3' height="30"  src={avatar} alt="avatar"/> 
-                : <img className='rounded-circle me-3' height="30" width="30" src={props.image} alt="avatar"/>
+                { props.image === null ?
+                    <img className='rounded-circle me-3' height="30"  src={avatar} alt="avatar"/> 
+                    : <img className='rounded-circle me-3' height="30" width="30" src={props.image} alt="avatar"/>
                 }
-				<a href="time-line.html" title="">{props.UserName} </a>      
+				<a href=" ">{props.UserName} </a>      
                 <span> a commenté le {new Date(props.date).toLocaleDateString('fr-FR')}</span>
 				<span> à {new Date(props.date).toLocaleTimeString('fr-FR')}</span>
-                {props.currentUserId === props.OwnerId ?
-                <button href="#" className="comment_delete" onClick={handleCommentDelete} title="Supprimer ce commentaire"><i className="bi bi-x-circle"></i></button> : ''
-                }
                 { props.currentUserId === props.OwnerId ?
                     <button href="#" className="comment_delete" onClick={handleCommentDelete} title="Supprimer ce commentaire"><i className="bi bi-x-circle"></i></button> : ''
                 }
@@ -43,5 +40,4 @@ function CommentItem(props) {
         </div>
 	)
 }
-
 export default CommentItem

@@ -21,14 +21,13 @@ class LoginForm extends Component {
       
     // validation email 
     if (!fields['email']) {
+        formIsValid = false;
         errors['email'] = 'Ce champ ne peut pas être vide';
     }
     // validation password 
     if (!fields['password']) {
-        errors['password'] = 'Ce champ ne peut pas être vide';
-    }
-    if (Object.keys(errors).length !== 0) {
         formIsValid = false;
+        errors['password'] = 'Ce champ ne peut pas être vide';
     }
     
     this.setState({ errors });
@@ -40,7 +39,6 @@ class LoginForm extends Component {
     event.preventDefault();
     if (this.handleValidation()) {
         let { fields } = this.state;
-        console.log(fields)
         axios.post('http://localhost:3000/api/auth/login', {
                 email: fields['email'],
                 password: fields['password']
@@ -50,7 +48,7 @@ class LoginForm extends Component {
             window.location.href = "/forum";
         })
         .catch(
-        error=>console.log(error))
+            error=>console.log(error))
     }
   }
 

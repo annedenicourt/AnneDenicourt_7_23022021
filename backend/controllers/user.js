@@ -63,7 +63,11 @@ exports.login = (req, res, next) => {
 };
 
 exports.getAllUsers = (req, res, next) => {
-    db.User.findAll()
+    db.User.findAll({
+        order: [
+            ['name', 'ASC']
+      ],
+    })
         .then(users => res.status(200).json(users))
         .catch(error => res.status(500).json({ error }))
 }
@@ -156,12 +160,18 @@ exports.deleteCurrentUser = (req, res, next) => {
 
     db.User.findOne({ where: { id: userId } })
       .then(user => {
-        const filename = user.image.split('/images/')[1]; // on récupère le nom du fichier à supprimer
-        fs.unlink(`images/${filename}`, () => { // on utilise la fonction unlink du package fs pour supprimer le fichier 
-            db.User.destroy({ where: { id: userId } })
-            .then(() => res.status(200).json({ message: 'Compte supprimé'}))
-            .catch(error => res.status(400).json({ error: 'Pb suppression compte' }));
-        });
+        if(user.image) {
+            const filename = user.image.split('/images/')[1]; // on récupère le nom du fichier à supprimer
+            console.log(user.image)
+            fs.unlink(`images/${filename}`, () => { // on utilise la fonction unlink du package fs pour supprimer le fichier 
+                user.destroy({ where: { id: userId } })
+                .then(() => res.status(200).json({ message: 'Compte supprimé'}))
+                .catch(error => res.status(400).json({ error: 'Pb suppression compte' }));
+            });
+        }
+       user.destroy({ where: { id: userId } })
+        .then(() => res.status(200).json({ message: 'Compte supprimé'}))
+        .catch(error => res.status(400).json({ error: 'Pb suppression compte' }));
       })
-      .catch(error => res.status(500).json({ error }));
+      .catch(error => res.status(500).json({ error:"pb base de données" }));
 };

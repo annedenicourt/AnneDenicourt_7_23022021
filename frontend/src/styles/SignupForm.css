@@ -3,18 +3,15 @@
   padding-right: 40px;
   background: #f05837;
 }
-
 .err_message2 {
     color: white;
     margin-top: -20px;
     font-size: 0.7em;
   }
-  
   .err_message2::before {
     display: inline;
     content: "⚠ ";
   }
-
   .btnSubmit{
     text-decoration: none;
     width: 60%;
@@ -30,7 +27,6 @@
   background-color: #282c34;
   font-weight: bold;
 }
-
 @media screen and (max-width: 499px) {
   .login-form-1{
       padding-left: 10px;

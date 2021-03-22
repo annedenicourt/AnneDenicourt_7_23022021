@@ -72,15 +72,16 @@ class ProfileUser extends Component {
                             : <img className='rounded-circle' height="130px" src={user.image} alt="avatar"/>
                 	        }
                         </div>
-                        <div className="mt-5 mb-4">{user.UserName}</div>
-                        <div className="fst-italic text-muted mt-5">{user.job} <br/>chez Groupomania</div>
-                        <div className="mt-5">{user.email}</div>
+                        <h5 className="fw-bold mt-2 mb-3">{user.UserName}</h5>
+                        <div className="fst-italic text-muted mt-4">{user.job} <br/>chez Groupomania</div>
+                        <div className="mt-4">{user.email}</div>
                     </div>
                 </div>
             </div>
         </div> 
 
         <div className="scroll col-12 col-lg-9">
+        <div className='membres fw-bold mb-2 ms-2 '>SES DERNIÈRES PUBLICATIONS</div>
         {posts.map(post=> (
             <div className="border rounded mb-4" key={post.id}>
                 <PostItem 

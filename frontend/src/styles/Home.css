@@ -5,6 +5,14 @@
     margin-top: -90px;
     height: 400px;
 }
+.title {
+    margin-top: -150px;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 2.2em;
+}
+.title_register {
+    font-family: 'Shadows Into Light', cursive;
+}
 .bouton {
     text-decoration: none;
     height: 60px;
@@ -21,14 +29,6 @@
     background: #f05837;
     color: white;
 }
-.title {
-    margin-top: -150px;
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 2.2em;
-}
-.title_register {
-    font-family: 'Shadows Into Light', cursive;
-}
 @media screen and (max-width: 991px) {
     #carousel {
        display: none;
@@ -38,7 +38,6 @@
         font-size: 2em;
     }
 }
-
 @media screen and (max-width: 499px) {
     #carousel {
        display: none;

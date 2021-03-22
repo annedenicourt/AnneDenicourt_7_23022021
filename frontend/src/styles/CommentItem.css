@@ -2,27 +2,16 @@
     font-size: 0.9em;
     position: relative;
 }
+.comment_delete {
+    border: none;
+    background: white;
+    position: absolute;
+    right: 15px;
+}
 #content_comment{
     width: 100%;
     border-radius: 30px;
     background-color: grey;
     filter: brightness(190%);
     font-size: 0.9em;
-}
-.like_comment {
-    border:none;
-    background-color: white;
-    font-size: 0.8em;
-}
-
-.like_comment:hover {
-  color:tomato;
-  transition: 0.5s;
-}
-
-.comment_delete {
-    border: none;
-    background: white;
-    position: absolute;
-    right: 15px;
 }
