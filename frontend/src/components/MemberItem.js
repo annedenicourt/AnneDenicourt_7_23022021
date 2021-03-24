@@ -2,8 +2,6 @@ import '../styles/MemberItem.css'
 import avatar from '../assets/avatar2.png'
 import { Link } from 'react-router-dom';
 
-
-
 function MemberItem({ member_id, name, image, job, email}) {
 	
 	return ( 

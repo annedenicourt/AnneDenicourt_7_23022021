@@ -1,22 +1,14 @@
-.content_post{
-}
-.count_likes{
-    color: blue;
-    font-size: 0.9em;
-    text-align: right;
-}
 .title_post {
     position: relative;
     
 }
-.date_post {
-    font-size: 0.8em;
-}
-
 .details_post a {
     text-decoration: none;
     font-weight: bold;
     color: #f05837;
+}
+.date_post {
+    font-size: 0.8em;
 }
 .post_delete {
     border: none;
@@ -24,9 +16,13 @@
     position: absolute;
     right: 10px;
 }
-
 .bi-x-circle {
     font-size: 1.2em;
+}
+.count_likes{
+    color: blue;
+    font-size: 0.9em;
+    text-align: right;
 }
 .like_post {
     border:none;

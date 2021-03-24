@@ -21,7 +21,14 @@
     top: 115px;
     right: 15px;
 }
-
+.label-file {
+    font-weight: bold;
+    cursor: pointer;
+}
+.input-file {
+    font-size: 0.9em;
+    display: none;
+}
 .button-file {
     font-weight: bold;
     font-size: 0.8em;
@@ -35,16 +42,6 @@
     background: #f05837;
     color: white;
 }
-
-.label-file {
-    font-weight: bold;
-    cursor: pointer;
-}
-.input-file {
-    font-size: 0.9em;
-    display: none;
-}
-
 .btn_delete{
     background: none;
     border: none;

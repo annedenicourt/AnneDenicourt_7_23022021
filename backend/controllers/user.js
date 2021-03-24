@@ -93,7 +93,6 @@ exports.getCurrentUser = (req, res, next) => {
 }
 
 exports.getOneUser = (req, res, next) => {
-
     db.User.findOne({ where: { id: req.params.id } })
         .then(user => {
             res.status(200).json({
@@ -115,13 +114,24 @@ exports.modifyUser = (req, res, next) => {
 
     db.User.findOne({ where: { id: userId } })
         .then(user => {
+            if(user.image) {
+                const filename = user.image.split('/images/')[1]; // on récupère le nom du fichier à supprimer
+                console.log(user.image)
+                fs.unlink(`images/${filename}`, () => { // on utilise la fonction unlink du package fs pour supprimer le fichier 
+                    user.update({
+                        image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
+                    })
+                    .then(() => res.status(200).json({ message: 'Utilisateur modifié'}))
+                    .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour' }));
+                });
+            }
             user.update({
                 image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
             })
-            .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
-            .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour !' }));
+            .then(() => res.status(200).json({ message: 'Utilisateur modifié' }))
+            .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour' }));
         })
-        .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé !' }))
+        .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé' }))
   };
 
 exports.deletePictureUser = (req, res, next) => {
@@ -142,16 +152,6 @@ exports.deletePictureUser = (req, res, next) => {
       })
       .catch(error => res.status(500).json({ error }));
 };
-
-/*exports.deleteCurrentUser = (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
-    const userId = decodedToken.userId;
-
-    db.User.destroy({ where: { id: userId } })
-        .then(() => res.status(200).json({ message: 'Compte supprimé'}))
-        .catch(error => res.status(400).json({ error: 'Pb suppression compte' }));        
-  };*/
 
 exports.deleteCurrentUser = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];

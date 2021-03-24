@@ -13,11 +13,6 @@ class NewComment extends Component {
         errors: {}
     }
 
-    constructor(props) {
-        super(props);
-        this.newCommentForm = React.createRef();
-    }
-
     handleSubmit = (event) => {
         event.preventDefault();
 
@@ -42,7 +37,6 @@ class NewComment extends Component {
                 window.location.reload()
             })
             .catch(error=>console.log(error))
-        
     }
 
     handleChange = (event) => {
@@ -53,12 +47,12 @@ class NewComment extends Component {
 
     render() {
         return (
-            <form className="mb-3" onSubmit={this.handleSubmit} ref={this.newCommentForm}>
+            <form className="mb-3" onSubmit={this.handleSubmit}>
                 <div className="new-comment d-flex p-3">
                     <img className='me-3' src={avatar} height='30' alt=""/>
                     <label htmlFor='content'></label>
-                    <textarea className="form-control" name='content' id='content_newcomment'  placeholder="Ecrivez un commentaire..." onChange={this.handleChange} value={this.state.fields['content']} />
-                    <div className="emojis">
+                    <textarea className="form-control" name='content' id='content_newcomment' placeholder="Ecrivez un commentaire..." onChange={this.handleChange} value={this.state.fields['content']} />
+                    <div className="send_comment">
                         <button className="comment-button" type="submit" title="Cliquez pour envoyer"><i className="bi bi-arrow-right-circle-fill"></i></button>
                     </div>
                 </div>
@@ -66,5 +60,4 @@ class NewComment extends Component {
         )
     }
 }
-
 export default NewComment;

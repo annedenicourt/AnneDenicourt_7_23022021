@@ -1,6 +1,5 @@
 const express = require('express'); // pour importer application Express
 const bodyParser = require('body-parser'); // pour importer le package body parser
-//const sauceRoutes = require('./routes/sauce'); // pour importer notre router sauce
 const userRoutes = require('./routes/user'); // pour importer notre router user
 const postRoutes = require('./routes/post'); // pour importer notre router user
 const commentRoutes = require('./routes/comment'); // pour importer notre router user
@@ -9,15 +8,9 @@ require('dotenv').config();
 
 const app = express();
 const cors = require('cors')
-
-
-
 const db = require("./models");
+
 db.sequelize.sync()
-// // drop the table if it already exists
-//db.sequelize.sync({ force: true }).then(() => {
-//console.log("Drop and re-sync db.");
-//});
 
 app.use(cors())
 app.use(bodyParser.json()); // pour transformer le corps de la requête en objet JS

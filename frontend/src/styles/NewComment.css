@@ -6,7 +6,7 @@
 .new-comment {
     position: relative;
 }
-.emojis{
+.send_comment{
     position: absolute;
     right: 30px;
     top: 18px;

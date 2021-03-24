@@ -56,14 +56,20 @@ exports.likePost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
     db.Post.findOne({ where: { id: req.params.id } })
       .then(post => {
-        const filename = post.image.split('/images/')[1]; // on récupère le nom du fichier à supprimer
-        fs.unlink(`images/${filename}`, () => { // on utilise la fonction unlink du package fs pour supprimer le fichier 
-            db.Post.destroy({ where: { id: req.params.id } })
-            .then(() => res.status(200).json({ message: 'Post supprimé'}))
-            .catch(error => res.status(400).json({ error: 'Pb suppression post' }));
-        });
+        if(post.image) {
+            const filename = post.image.split('/images/')[1]; // on récupère le nom du fichier à supprimer
+            console.log(post.image)
+            fs.unlink(`images/${filename}`, () => { // on utilise la fonction unlink du package fs pour supprimer le fichier 
+                post.destroy({ where: { id: req.params.id } })
+                .then(() => res.status(200).json({ message: 'Post supprimé'}))
+                .catch(error => res.status(400).json({ error: 'Pb suppression post' }));
+            });
+        }
+       post.destroy({ where: { id: req.params.id } })
+        .then(() => res.status(200).json({ message: 'Post supprimé'}))
+        .catch(error => res.status(400).json({ error: 'Pb suppression post' }));
       })
-      .catch(error => res.status(500).json({ error }));
+      .catch(error => res.status(500).json({ error:"pb base de données" }));
 };
 
 exports.getAllPosts = (req, res, next) => {

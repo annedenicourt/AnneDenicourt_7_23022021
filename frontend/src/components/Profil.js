@@ -17,9 +17,7 @@ class Profil extends Component {
     constructor(props) {
         super(props);
         this.fileInput = React.createRef();
-        //this.handleSubmit = this.handleSubmit.bind(this);
-
-      }
+    }
 
     componentDidMount() {
         this.getCurrentUser();
@@ -123,7 +121,7 @@ class Profil extends Component {
         fr.readAsDataURL(filename);
         this.setState({
             file: filename
-          });
+        });
     }
     reset = () => {
         window.location.reload()
@@ -131,7 +129,6 @@ class Profil extends Component {
 
     render() {
         let { user, file } = this.state;
-
 
         return  (
             <div className="bg-profilepage"> 
@@ -154,7 +151,7 @@ class Profil extends Component {
                                 : ''
                             }
                             { file ?
-                                <button type="submit" className="button-file btn p-2 mt-4 mb-4" onClick={this.reset}>Annuler</button>
+                                <button type="button" className="button-file btn p-2 mt-4 mb-4" onClick={this.reset}>Annuler</button>
                                 : ''
                             }
                         </div>

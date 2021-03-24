@@ -54,49 +54,42 @@ class ProfileUser extends Component {
         })
     }
 
-
     render() {
 
     let {posts, user} = this.state
 
         return(
             <div className="row justify-content-center ">
-        <Banner />
-        <div className="col-12 col-lg-3 ">
-            <div className="profile_card ms-2 ">
-                <div className="col bg-dark p-3 rounded mb-4">
-                    <div className="text-center text-white">
-                        <div className='avatar2 rounded-circle mx-auto'>
-                            { user.image === null ?
-                            <img className='rounded-circle' height="130px" src={avatar} alt="avatar"/> 
-                            : <img className='rounded-circle' height="130px" src={user.image} alt="avatar"/>
-                	        }
+            <Banner />
+            <div className="col-12 col-lg-3 ">
+                <div className="profile_card ms-2 ">
+                    <div className="col bg-dark p-3 rounded mb-4">
+                        <div className="text-center text-white">
+                            <div className='avatar2 rounded-circle mx-auto'>
+                                { user.image === null ?
+                                    <img className='rounded-circle' height="130px" src={avatar} alt="avatar"/> 
+                                    : <img className='rounded-circle' height="130px" src={user.image} alt="avatar"/>
+                	            }
+                            </div>
+                            <h5 className="fw-bold mt-2 mb-3">{user.UserName}</h5>
+                            <div className="fst-italic text-muted mt-4">{user.job} <br/>chez Groupomania</div>
+                            <div className="mt-4">{user.email}</div>
                         </div>
-                        <h5 className="fw-bold mt-2 mb-3">{user.UserName}</h5>
-                        <div className="fst-italic text-muted mt-4">{user.job} <br/>chez Groupomania</div>
-                        <div className="mt-4">{user.email}</div>
                     </div>
                 </div>
+            </div> 
+            <div className="scroll col-12 col-lg-9">
+                <div className='membres fw-bold mb-2 ms-2 '>SES DERNIÈRES PUBLICATIONS</div>
+                {posts.map(post=> (
+                    <div className="border rounded mb-4" key={post.id}>
+                        <PostItem 
+                        post={post}
+                        />
+                    </div>
+                ))}
             </div>
-        </div> 
-
-        <div className="scroll col-12 col-lg-9">
-        <div className='membres fw-bold mb-2 ms-2 '>SES DERNIÈRES PUBLICATIONS</div>
-        {posts.map(post=> (
-            <div className="border rounded mb-4" key={post.id}>
-                <PostItem 
-                    post={post}
-                />
-                </div>
-            ))}
-                    
-
-            
+            <Footer />   
         </div>
-        <Footer />   
-    </div>
-
-
         )
     }
 }

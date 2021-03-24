@@ -9,15 +9,13 @@ class NewPost extends Component {
         fields: {
             content: '',
         },
-        errors: {}
+        errors: {},
+        file: ""
     }
-
     constructor(props) {
         super(props);
         this.fileInput = React.createRef();
-        this.newPostForm = React.createRef();
-        //this.handleSubmit = this.handleSubmit.bind(this);
-      }
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -60,15 +58,23 @@ class NewPost extends Component {
 
     loadimage = (e1) => {
         var filename = e1.target.files[0]; 
-            var fr = new FileReader();
-            fr.onload = this.imageHandler;  
-            fr.readAsDataURL(filename);
+        var fr = new FileReader();
+        fr.onload = this.imageHandler;  
+        fr.readAsDataURL(filename);
+        this.setState({
+            file: filename
+        });
+    }
+
+    reset = () => {
+        window.location.reload()
     }
 
     render() {
+        let { file } = this.state;
 
         return (
-            <form className="border mb-3" onSubmit={this.handleSubmit} ref={this.newPostForm}>
+            <form className="border mb-3 bg-white" onSubmit={this.handleSubmit}>
                 <div className="d-flex p-3">
                     { this.props.image === null ?
                         <img className='rounded-circle me-3' height="50" width="50" src={avatar} alt="avatar"/> 
@@ -82,13 +88,16 @@ class NewPost extends Component {
                     <label htmlFor="image" className="btn_add_file"><i className="bi bi-image me-2" title="Ajouter une image"></i></label>
                     <input type="file" name="image" id="image" className="add_file" onChange={this.loadimage} ref={this.fileInput} />
                     <button className="button_publish btn mb-2" type="submit">Publier</button>
-                    <fieldset><div id="imgstore"></div></fieldset> 
+                    <fieldset><div id="imgstore"></div></fieldset>
+                    { file ?
+                        <button type="button" className="btn btn-outline-secondary p-2 mt-4 mb-4" onClick={this.reset}>Annuler</button>
+                        : ''
+                    }
                 </div>
             </form>
         )
     }
 }
-
 export default NewPost;
 
 

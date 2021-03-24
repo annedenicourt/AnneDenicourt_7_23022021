@@ -24,7 +24,13 @@ class Forum extends Component {
         this.getCurrentUser();
     }
     getAllUsers() {
-        axios.get('http://localhost:3000/api/users')
+        const token = localStorage.getItem("token");
+
+        axios.get('http://localhost:3000/api/users',{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
             .then(res => {
                 this.setState({ users: res.data });
             })
@@ -43,11 +49,10 @@ class Forum extends Component {
         })
             .then(res => {
                 this.setState({ posts: res.data });
-                //console.log(res.data)
             })
             .catch(err => {
                 console.log(err);
-                window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
+                alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
             })
     }
 
@@ -69,9 +74,7 @@ class Forum extends Component {
     }
 
     render() {
-        let { users } = this.state;
-        let { posts } = this.state;
-        let { user } = this.state;
+        let { users, posts, user } = this.state;
         
         return  (
             <div> <Banner />
@@ -85,7 +88,7 @@ class Forum extends Component {
                             />
                         </div>
                         <div className='membres fw-bold mb-2 ms-2 '>MEMBRES</div>
-                        <div className='scroll2 member-list border rounded p-2 ms-2'>
+                        <div className='scroll2 member-list border rounded p-2 ms-2 bg-white'>
                             {users.map(({ name, id, job, image, email }) => (
                                 <div key={id}>
                                     <MemberItem
@@ -118,21 +121,20 @@ class Forum extends Component {
                         <div className='last-post pt-3 pb-3 ms-2 fw-bold'>DERNIERS POSTS</div>
                         <div className='scroll post-list'>
                             {posts.map(post=> (
-                                <div className="border rounded mb-4" key={post.id}>
+                                <div className="border rounded mb-4 bg-white" key={post.id}>
                                     <PostItem 
                                         post={post}
                                         currentUserId={user.UserId}
                                         currentUserRole= {user.UserRole}
                                     />
                                 </div>
-                            ))}
-                               
+                            ))}   
                         </div>
                     </div>   
                 </div>
                 <Footer />
-            </div>)
+            </div>
+            )
     }
 }
-
 export default Forum;

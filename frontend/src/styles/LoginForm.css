@@ -25,7 +25,6 @@
         padding-right: 40px;
     }
 }
-
 @media screen and (min-width: 1200px) {
     .login-form-2{
         padding-left: 40px;
@@ -33,7 +32,6 @@
     }
     
 }
-
 @media screen and (max-width:501px) {
     .login-form-2{
         padding-left: 10px;

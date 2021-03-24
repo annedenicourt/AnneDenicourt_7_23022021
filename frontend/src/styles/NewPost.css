@@ -23,7 +23,6 @@
     font-weight: bold;
     font-size: 0.8em;
 }
-
 .button_publish:hover {
     filter: brightness(1.2);
     color: white;

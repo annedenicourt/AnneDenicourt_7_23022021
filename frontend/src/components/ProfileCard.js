@@ -14,7 +14,7 @@ function ProfileCard({name, image, job}) {
                             : <img className='rounded-circle' height="130px" src={image} alt="avatar"/>
                 	    }
                     </div>
-                    <h4 className="mt-4">Bienvenue</h4>
+                    <h4 className="mt-3">Bienvenue</h4>
                     <div className="mb-4">{name}</div>
                     <div className="fst-italic text-muted">{job} <br/>chez Groupomania</div>
                     <Link className="link_profil text-white" to="/profil"><div className="mt-4"><i className="bi bi-box-arrow-up-right me-2"></i>Voir mon profil</div></Link>

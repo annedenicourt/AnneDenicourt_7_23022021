@@ -4,17 +4,25 @@ const multer = require('../middleware/multer-config'); // pour importer le middl
 const auth = require('../middleware/auth'); // pour importer le middleware auth
 const userCtrl = require('../controllers/user'); // pour importer les controleurs
 
+//pour créer un nouveau user 
 router.post('/auth/signup', userCtrl.signup);
+//pour connecter le user 
 router.post('/auth/login', userCtrl.login);
 
-router.get('/users', userCtrl.getAllUsers);
-router.get('/users/user/:id', userCtrl.getOneUser);
+//pour récupérer tous les users
+router.get('/users', auth, userCtrl.getAllUsers);
+//pour récupérer un seul user
+router.get('/users/user/:id', auth, userCtrl.getOneUser);
+//pour récupérer le user qui est connecté
 router.get('/users/monprofil', auth, userCtrl.getCurrentUser);
 
+//pour mettre à jour le profil du user connecté
 router.put('/users/monprofil', auth, multer, userCtrl.modifyUser);
+//pour supprimer la photo de profil du user
 router.put('/users/monprofil/mypicture', auth, multer, userCtrl.deletePictureUser);
 
-router.delete('/users/monprofil', userCtrl.deleteCurrentUser);
+//pour supprimer le compte du user connecté
+router.delete('/users/monprofil', auth, userCtrl.deleteCurrentUser);
 
 module.exports = router; // pour exporter le router vers app.js
 

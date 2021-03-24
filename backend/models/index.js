@@ -33,9 +33,6 @@ db.Comment.belongsTo(db.User, { foreignKey: 'OwnerId', onDelete: 'CASCADE' });
 db.Like_post.belongsTo(db.Post, { foreignKey: 'PostId', onDelete: 'CASCADE' });
 db.Like_post.belongsTo(db.User, { foreignKey: 'OwnerId', onDelete: 'CASCADE' });
 
-//db.Post.belongsToMany(db.User, { through: Like_post });
-//db.User.belongsToMany(db.Post, { through: Like_post });
-
 module.exports = db;
 
 

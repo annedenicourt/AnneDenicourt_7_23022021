@@ -8,11 +8,11 @@
     margin-top: -20px;
     font-size: 0.7em;
   }
-  .err_message2::before {
+.err_message2::before {
     display: inline;
     content: "⚠ ";
   }
-  .btnSubmit{
+.btnSubmit{
     text-decoration: none;
     width: 60%;
     color: #282c34;
