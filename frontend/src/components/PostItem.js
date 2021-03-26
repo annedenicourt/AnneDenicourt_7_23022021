@@ -108,21 +108,20 @@ class PostItem extends Component {
     render() {
         let { comments, like_posts } = this.state;
         const likeOwnerName = like_posts.map(function (like) {return like.User.name;});
-
         return  (
 			<div>
 			<div className='post-item p-3 mb-3'>
 				<div className="user-post">
 					<div className="title_post d-flex align-items-center">
-                        { this.props.post.User.image === null ?
+                        { this.props.image === null ?
                         <img className='rounded-circle me-3 mb-3' height="40"  src={avatar} alt="avatar"/> 
-                        : <img className='rounded-circle me-3 mb-3' height="40" width="40" src={this.props.post.User.image} alt="avatar"/>
+                        : <img className='rounded-circle me-3 mb-3' height="40" width="40" src={this.props.image} alt="avatar"/>
                 	    }
 						<div className="details_post">
-							<a className="me-2" href=" ">{this.props.post.User.name}</a>      
+							<a className="me-2" href=" ">{this.props.name}</a>      
 							<span className="date_post text-muted"> a publié le {new Date(this.props.post.createdAt).toLocaleDateString('fr-FR')} à {new Date(this.props.post.createdAt).toLocaleTimeString('fr-FR')}</span>
 						</div>
-                        { this.props.currentUserId === this.props.post.User.id ?
+                        { this.props.currentUserId === this.props.id ?
                     		<button onClick={this.handlePostDelete} className="post_delete" title="Supprimer ce post"><i className="bi bi-x-circle"></i></button> : ''
                 		}
                         { this.props.currentUserRole === 'Moderator' ?
@@ -149,7 +148,7 @@ class PostItem extends Component {
 					</div>
 				</div>
 			</div>
-			<NewComment PostId= {this.props.post.id}/>
+			<NewComment PostId= {this.props.post.id} currentUserImage={this.props.currentUserImage}/>
 			<div className=''>
                 {comments.map(comment => (
                     <div key={comment.id}>
@@ -172,3 +171,6 @@ class PostItem extends Component {
     }
 }
 export default PostItem;
+
+
+

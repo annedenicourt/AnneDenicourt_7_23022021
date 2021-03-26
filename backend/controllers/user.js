@@ -85,7 +85,7 @@ exports.getCurrentUser = (req, res, next) => {
                 UserName: user.name,
                 UserRole: user.role,
                 job: user.job,
-                image: user.image,
+                UserImage: user.image,
                 email: user.email
             });
         })

@@ -136,9 +136,9 @@ class Profil extends Component {
                 <div className="row">
                     <div className="col-8 col-lg-4 mt-5 mx-auto rounded bg-profile" >
                         <div className='avatar rounded-circle mx-auto'>
-                            { user.image === null ?
+                            { user.UserImage === null ?
                                 <img className='rounded-circle' height="150px" src={avatar} alt="avatar"/> 
-                                : <img className='rounded-circle' height="150px" src={user.image} alt="avatar"/>
+                                : <img className='rounded-circle' height="150px" src={user.UserImage} alt="avatar"/>
                 	        }
                         <i className="delete_picture bi bi-x-circle-fill text-white" title="Supprimer la photo de profil" onClick={this.handleDeletePicture}></i>
                         </div>

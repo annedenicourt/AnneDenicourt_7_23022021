@@ -8,16 +8,20 @@ require('dotenv').config();
 exports.createPost = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
-    const userId = decodedToken.userId;
+    const userId = decodedToken.userId;  
+    const userName = decodedToken.userName; 
     
-    db.Post.create({
-        UserId: userId,
-        content: req.body.content,
-        image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
-    })
-        .then(post => res.status(201).json({ message: 'Post créé' }))
-        
-        .catch(error => res.status(400).json({ message: 'erreur création bdd' }))
+    db.User.findOne({ where: { id: userId } }) 
+        .then(user => {
+            db.Post.create({
+                UserId: userId,
+                content: req.body.content,
+                image: ( req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null )
+            })
+            .then(post => res.status(201).json({ post }))
+            .catch(error => res.status(400).json({ message: 'erreur création bdd' }))
+        })
+        .catch(error => res.status(500).json({ error:"pb base de données" }));        
 }
 
 exports.likePost = (req, res, next) => {
@@ -34,7 +38,6 @@ exports.likePost = (req, res, next) => {
         } else if(isliked === false) {
             db.Like_post.create({ PostId: req.body.PostId, OwnerId: userId })
             .then(like => {
-                //res.status(201).json({ message: 'Post liké' })
                 post.update({ likes: post.likes + 1 })
                 .then(post => res.status(201).json({ message: 'Post liké' }))
                 .catch(error => res.status(500).json({ error: ' Erreur update post' })) 
@@ -76,6 +79,8 @@ exports.getAllPosts = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
     const userId = decodedToken.userId;
+    const userName = decodedToken.userName;  
+
     db.Post.findAll({
         include: {
             model: db.User,

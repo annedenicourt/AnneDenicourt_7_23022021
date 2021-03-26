@@ -1,7 +1,7 @@
-#content_newcomment{
+.content_newcomment{
     width: 100%;
     border-radius: 30px;
-    height: 0px;
+    height: 20px !important
 }
 .new-comment {
     position: relative;

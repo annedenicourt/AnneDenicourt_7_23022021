@@ -5,17 +5,36 @@ import Banner from './Banner';
 import Footer from './Footer';
 import PostItem from './PostItem';
 
-
 class ProfileUser extends Component {
 
     state = {
         posts: [],
-        user: {}
+        user: {},
+        currentUser: {}
     }
 
     componentDidMount() {
+        this.getCurrentUser();
         this.getAllPostsByUser();
         this.getOneUser()
+    }
+
+    getCurrentUser() {
+        const token = localStorage.getItem("token");
+
+        axios.get('http://localhost:3000/api/users/monprofil',{
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                this.setState({ currentUser: res.data });
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err);
+                window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
+            })
     }
 
     getOneUser() {
@@ -56,7 +75,7 @@ class ProfileUser extends Component {
 
     render() {
 
-    let {posts, user} = this.state
+    let {posts, user, currentUser } = this.state
 
         return(
             <div className="row justify-content-center ">
@@ -81,9 +100,16 @@ class ProfileUser extends Component {
             <div className="scroll col-12 col-lg-9">
                 <div className='membres fw-bold mb-2 ms-2 '>SES DERNIÈRES PUBLICATIONS</div>
                 {posts.map(post=> (
-                    <div className="border rounded mb-4" key={post.id}>
-                        <PostItem 
+                    <div className="border rounded mb-4 bg-white" key={post.id}>
+                        <PostItem                           
                         post={post}
+                        user={user}
+                        id={post.User.id}                                       
+                        name={post.User.name}
+                        image={post.User.image}
+                        currentUserId={user.UserId}
+                        currentUserRole= {user.UserRole}
+                        currentUserImage= {currentUser.UserImage}
                         />
                     </div>
                 ))}

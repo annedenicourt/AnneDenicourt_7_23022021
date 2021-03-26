@@ -15,7 +15,22 @@ class Forum extends Component {
     state = {
         users: [],
         posts: [],
-        user: {}
+        user: {},
+        isNew:false
+    }
+
+    constructor(props) {
+        super(props)
+        this.addPost = this.addPost.bind(this);
+    }
+
+    addPost(post) {
+        let { posts } = this.state;
+        let addNewPost = [post, ...posts]
+        //console.log(addNewPost)
+        this.setState({ posts: addNewPost }, () =>
+        console.log(this.state.posts))   
+        console.log(post)      
     }
 
     componentDidMount() {
@@ -23,6 +38,7 @@ class Forum extends Component {
         this.getAllPosts();
         this.getCurrentUser();
     }
+
     getAllUsers() {
         const token = localStorage.getItem("token");
 
@@ -41,7 +57,6 @@ class Forum extends Component {
     }
     getAllPosts() {
         const token = localStorage.getItem("token");
-
         axios.get('http://localhost:3000/api/posts', {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -75,7 +90,6 @@ class Forum extends Component {
 
     render() {
         let { users, posts, user } = this.state;
-        
         return  (
             <div> <Banner />
                 <div className="row justify-content-center ">
@@ -83,7 +97,7 @@ class Forum extends Component {
                         <div>
                             <ProfileCard
                                 name={user.UserName}
-                                image={user.image}
+                                image={user.UserImage}
                                 job={user.job}
                             />
                         </div>
@@ -101,7 +115,7 @@ class Forum extends Component {
                                 </div>
                             ))}
                         </div>
-                        <div className='scroll3 member-list2 d-flex mb-3 p-2'>
+                        <div className='scroll3 member-list2 d-flex ms-2 mb-3 p-2 bg-white'>
                             {users.map(({ name, id, job, image, email }) => (
                                 <div key={id}>
                                     <MemberItem2
@@ -117,15 +131,20 @@ class Forum extends Component {
                     </div>
                         
                     <div className="col-12 col-lg-9">
-                        <NewPost image={user.image} id={user.UserId}/>
+                        <NewPost user={user} addPost={this.addPost} currentUserImage={user.UserImage} id={user.UserId} />
                         <div className='last-post pt-3 pb-3 ms-2 fw-bold'>DERNIERS POSTS</div>
                         <div className='scroll post-list'>
                             {posts.map(post=> (
-                                <div className="border rounded mb-4 bg-white" key={post.id}>
-                                    <PostItem 
+                                <div className="border rounded ms-2 mb-4 bg-white" key={post.id}>
+                                    <PostItem                             
                                         post={post}
+                                        user={user}
+                                        id={post.User.id}                                       
+                                        name={post.User.name}
+                                        image={post.User.image}
                                         currentUserId={user.UserId}
                                         currentUserRole= {user.UserRole}
+                                        currentUserImage= {user.UserImage}
                                     />
                                 </div>
                             ))}   

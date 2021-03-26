@@ -13,13 +13,3 @@
     font-size: 0.8em;
     color: #f05837;
 }
-@media screen and (max-width: 991px) {
-    .member-list{
-        display: none;
-    } 
-}
-@media screen and (min-width: 992px) {
-    .member-item2{
-        display: none;
-    } 
-}

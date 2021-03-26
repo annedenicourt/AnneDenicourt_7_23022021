@@ -1,6 +1,7 @@
 import '../styles/LoginForm.css'
 import { Component } from 'react';
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 
 class LoginForm extends Component {
@@ -45,8 +46,9 @@ class LoginForm extends Component {
                 window.location.href = "/forum";
             })
             .catch(
-                error=>console.log(error))
-    }
+                error=>Swal.fire('Attention', 'Email ou mot de passe incorrect', 'warning'),
+                )
+        }
     }
 
     handleChange = (event) => {
