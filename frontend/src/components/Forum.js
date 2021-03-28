@@ -22,15 +22,7 @@ class Forum extends Component {
     constructor(props) {
         super(props)
         this.addPost = this.addPost.bind(this);
-    }
-
-    addPost(post) {
-        let { posts } = this.state;
-        let addNewPost = [post, ...posts]
-        //console.log(addNewPost)
-        this.setState({ posts: addNewPost }, () =>
-        console.log(this.state.posts))   
-        console.log(post)      
+        this.deletePost = this.deletePost.bind(this);
     }
 
     componentDidMount() {
@@ -64,6 +56,7 @@ class Forum extends Component {
         })
             .then(res => {
                 this.setState({ posts: res.data });
+                console.log(res.data)
             })
             .catch(err => {
                 console.log(err);
@@ -86,6 +79,21 @@ class Forum extends Component {
                 console.log(err);
                 window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
             })
+    }
+
+    addPost(post) {
+        console.log(post)
+        let { posts } = this.state;
+        posts = [post, ...posts]
+        //console.log(addNewPost)
+        this.setState({ posts }, () =>
+        console.log(this.state.posts))   
+    }
+
+    deletePost(postId) {
+        let { posts } = this.state;
+        posts = posts.filter(post => post.id !== postId);
+        this.setState({ posts });
     }
 
     render() {
@@ -142,9 +150,11 @@ class Forum extends Component {
                                         id={post.User.id}                                       
                                         name={post.User.name}
                                         image={post.User.image}
+                                        role={post.User.role}
                                         currentUserId={user.UserId}
                                         currentUserRole= {user.UserRole}
                                         currentUserImage= {user.UserImage}
+                                        deletePost= {this.deletePost}
                                     />
                                 </div>
                             ))}   

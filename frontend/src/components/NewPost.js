@@ -42,7 +42,11 @@ class NewPost extends Component {
             .then(res => {
                 console.log(res.data)
                 const post = res.data.post;
-                post.User =  {name: this.props.user.UserName, image: this.props.user.UserImage, id: this.props.user.UserId }
+                post.User =  {name: this.props.user.UserName, image: this.props.user.UserImage, id: this.props.user.UserId, role: this.props.user.UserRole }
+                console.log(post.User.id)
+                console.log(post.User.name)
+                console.log(post.User.image)
+                console.log(post.User.role)
                 this.props.addPost(post);
 
                 this.newPostForm.current.reset()

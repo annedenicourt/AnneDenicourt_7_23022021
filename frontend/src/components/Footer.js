@@ -1,6 +1,7 @@
 import '../styles/Footer.css'
 
 function Footer() {
+    
 	return  <footer className="text-white" id='bg-footer'>
     
         <div className="container">

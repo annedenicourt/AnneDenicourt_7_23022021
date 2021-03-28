@@ -4,6 +4,8 @@ import Register from './Register';
 import Profil from './Profil';
 import Forum from './Forum';
 import ProfileUser from './ProfileUser';
+import Test from './Test';
+
 
 function App() {
     const token = localStorage.getItem("token");
@@ -26,6 +28,7 @@ function App() {
                 <Route path="/forum" component={Forum}/>
                 <Route path="/profil" component={Profil}/>
                 <Route path="/user/:id" component={ProfileUser}/>
+                <Route path="/test" component={Test}/>
             </Switch>
         </BrowserRouter>
     );
