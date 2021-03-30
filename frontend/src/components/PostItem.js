@@ -72,7 +72,8 @@ class PostItem extends Component {
         })
 		    .then(res => {
                 console.log(res.data)
-                window.location.reload()
+                this.props.deletePost(this.props.post.id);
+                //window.location.reload()
             })
             .catch((err) => {
                 console.log(err);

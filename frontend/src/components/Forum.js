@@ -84,9 +84,9 @@ class Forum extends Component {
     addPost(post) {
         console.log(post)
         let { posts } = this.state;
-        posts = [post, ...posts]
+        let addNewPost = [post, ...posts]
         //console.log(addNewPost)
-        this.setState({ posts }, () =>
+        this.setState({ posts: addNewPost }, () =>
         console.log(this.state.posts))   
     }
 

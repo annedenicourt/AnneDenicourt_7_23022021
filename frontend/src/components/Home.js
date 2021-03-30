@@ -12,9 +12,11 @@ function Home() {
             <div className="col col-md-12 col-lg-6 d-flex flex-column align-items-center">
                 <img className='logo-home' src={logo} alt='Groupomania'/>
                 <h2 className='title text-white pb-5'>Connecting people</h2>
-                <div className="col-8 mt-5"><LoginForm /></div>
-                <h4 className="title_register text-white">Pas encore inscrit ?</h4>
-                <Link className="mb-5 mt-3" to="/register"><button className="bouton border-0">INSCRIVEZ-VOUS</button></Link>
+                <div className="col-8 mt-5 text-center">
+                    <LoginForm />
+                    <h4 className="title_register text-white mb-4">Pas encore inscrit ?</h4>
+                    <Link className="mb-5 mt-3" to="/register"><button className="bouton border-0">INSCRIVEZ-VOUS</button></Link>
+                </div>
             </div>
             <div className="col-6 p-0">
                 <div id="carousel" className="carousel slide" data-bs-ride="carousel">

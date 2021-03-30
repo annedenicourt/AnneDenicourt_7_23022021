@@ -13,9 +13,11 @@ function Login () {
             <div className="col col-md-12 col-lg-6 d-flex flex-column align-items-center">
                 <img className='logo-home' src={logo} alt='Groupomania'/>
                 <h2 className='title text-white pb-5'>Connecting people</h2>
-                <div className="col-8"><SignupForm /></div>
-                <h4 className="title_register text-white">Déjà inscrit ?</h4>
-                 <Link className="mb-5 mt-3" to="/"><button className="bouton border-0">CONNECTEZ-VOUS</button></Link>
+                <div className="col-8 text-center">
+                    <SignupForm />
+                    <h4 className="title_register text-white mb-4">Déjà inscrit ?</h4>
+                    <Link className="mb-5 mt-3" to="/"><button className="bouton border-0">CONNECTEZ-VOUS</button></Link>
+                </div>
             </div>
             <div className="col-6 p-0">
                 <div id="carousel" className="carousel slide" data-bs-ride="carousel">

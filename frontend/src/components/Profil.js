@@ -1,17 +1,31 @@
 import '../styles/Profil.css'
 import { Link } from 'react-router-dom';
+import { Component } from 'react';
 import Banner from './Banner';
 import Footer from './Footer';
 import avatar from '../assets/avatar2.png'
 import React from 'react';
 import axios from 'axios';
-import { Component } from 'react';
+import Swal from 'sweetalert2';
+
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
+import AvatarImageCropper from 'react-avatar-image-cropper';
+
 
 class Profil extends Component {
 
     state = {
         user: {},
-        file: ""
+        file: "",
+        src: null,
+        crop: {
+            unit: '%',
+            width: 30,
+            aspect: 4 / 4,
+        },
+        croppedImageUrl: null,
+        croppedImage: null,
     }
 
     constructor(props) {
@@ -45,7 +59,8 @@ class Profil extends Component {
 
         const token = localStorage.getItem("token");
         let formData = new FormData();
-        formData.append('image', this.fileInput.current.files[0]);
+        formData.append('image', this.state.croppedImage);
+        console.log(formData)
 
         if (!this.fileInput.current.files[0]) {
             alert("Vous devez choisir une photo")
@@ -100,7 +115,16 @@ class Profil extends Component {
                 }
             })
                 .then(() => {
-                    alert("Votre compte a bien été supprimé")
+                    Swal.fire({
+                        title: "Êtes-vous sûr(e) ?",
+                        text: "Une fois votre compte supprimé, vous ne pourrez plus accéder au forum",
+                        icon: "warning",
+                        showDenyButton: true,
+                        confirmButtonText: 'Supprimer mon compte',
+                        denyButtonText: 'Annuler',
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33', 
+                      })
                     window.location.href = '/';
                 })
                 .catch(err => {
@@ -109,26 +133,89 @@ class Profil extends Component {
                 })
     }
 
-    imageHandler = (e2) => {
-        var store = document.getElementById('imgstore');
-        store.innerHTML='<img width="200" src="' + e2.target.result +'"/>';
+    onSelectFile = e => {
+        let filename = e.target.files[0];
+        if (e.target.files && e.target.files.length > 0) {
+          const reader = new FileReader();
+          reader.addEventListener('load', () =>
+            this.setState({ src: reader.result })
+          );
+          reader.readAsDataURL(filename);
+          this.setState({
+            file: filename
+            });
+        }
+    };
+
+    onImageLoaded = image => {
+        this.imageRef = image;
+    };
+    onCropChange = (crop, percentCrop) => {
+        this.setState({ crop });
+    };
+    onCropComplete = crop => {
+        if (this.imageRef && crop.width && crop.height) {
+            const croppedImageUrl = this.getCroppedImg(
+            this.imageRef,
+            crop,
+            'newFile.jpeg'
+            );
+            this.setState({ croppedImageUrl });
+            console.log(this.state.croppedImageUrl)
+        }
+    };
+    
+    getCroppedImg(image, crop, fileName) {
+        const canvas = document.createElement('canvas');
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+        canvas.width = crop.width;
+        canvas.height = crop.height;
+        const ctx = canvas.getContext('2d');
+    
+        ctx.drawImage(
+            image,
+            crop.x * scaleX,
+            crop.y * scaleY,
+            crop.width * scaleX,
+            crop.height * scaleY,
+            0,
+            0,
+            crop.width,
+            crop.height
+        );
+
+        const reader = new FileReader()
+        canvas.toBlob(blob => {
+            reader.readAsDataURL(blob)
+            reader.onloadend = () => {
+                this.dataURLtoFile(reader.result, 'cropped.jpg')
+            }
+        })
     }
 
-    loadimage = (e1) => {
-        var filename = e1.target.files[0]; 
-        var fr = new FileReader();
-        fr.onload = this.imageHandler;  
-        fr.readAsDataURL(filename);
-        this.setState({
-            file: filename
-        });
-    }
+    dataURLtoFile(dataurl, filename) {
+        let arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+               
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        let croppedImage = new File([u8arr], filename, {type:mime});
+        this.setState({croppedImage: croppedImage })
+        console.log(this.state.croppedImage)
+    } 
+
     reset = () => {
         window.location.reload()
     }
 
     render() {
         let { user, file } = this.state;
+        const { crop, croppedImageUrl, src } = this.state;
 
         return  (
             <div className="bg-profilepage"> 
@@ -144,8 +231,19 @@ class Profil extends Component {
                         </div>
                         <div className='text-center mt-4'>
                             <label className="label-file text-white mb-3" htmlFor="image">Choisir une image</label>
-                            <input name="image" id="image" className="input-file text-white" type="file" onChange={this.loadimage} ref={this.fileInput}></input>
-                            <div id="imgstore"></div>
+                            <input name="image" id="image" className="input-file text-white" type="file" accept="image/*" onChange={this.onSelectFile} ref={this.fileInput} ></input>
+                            <div id="imgstore"></div> 
+                            
+                            <div>
+
+                            {src && (
+                            <ReactCrop src={src} crop={crop} ruleOfThirds circularCrop
+                            onImageLoaded={this.onImageLoaded} onComplete={this.onCropComplete} onChange={this.onCropChange}
+                            />
+                            )}
+                            {croppedImageUrl && (
+                             <img alt="Crop" style={{ maxWidth: '100%' }} src={croppedImageUrl} />
+                            )}
                             { file ?
                                 <button type="submit" className="button-file btn p-2 mt-4 mb-4 me-2" onClick={this.handleSubmit}>Ajouter</button>
                                 : ''
@@ -154,6 +252,7 @@ class Profil extends Component {
                                 <button type="button" className="button-file btn p-2 mt-4 mb-4" onClick={this.reset}>Annuler</button>
                                 : ''
                             }
+                            </div>
                         </div>
 
                         <div className="pb-4 pe-4 ps-4">
