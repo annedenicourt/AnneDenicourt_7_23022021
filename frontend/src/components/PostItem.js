@@ -17,6 +17,8 @@ class PostItem extends Component {
     constructor() {
         super();
         this.handleClick = this.handleClick.bind(this);
+        this.addComment = this.addComment.bind(this);
+        this.deleteComment = this.deleteComment.bind(this);
       } 
 
     componentDidMount() {
@@ -105,6 +107,19 @@ class PostItem extends Component {
             .catch(error=>console.log(error))
     }
 
+    addComment(comment) {
+        let { comments } = this.state;
+        let addNewComment = [comment, ...comments]
+        //console.log(addNewPost)
+        this.setState({ comments: addNewComment }, () =>
+        console.log(this.state.comments))   
+    }
+    deleteComment(commentId) {
+        let { comments } = this.state;
+        comments = comments.filter(comment => comment.id !== commentId);
+        this.setState({ comments });
+    }
+
 
     render() {
         let { comments, like_posts } = this.state;
@@ -149,7 +164,7 @@ class PostItem extends Component {
 					</div>
 				</div>
 			</div>
-			<NewComment PostId= {this.props.post.id} currentUserImage={this.props.currentUserImage}/>
+			<NewComment user={this.props.user} addComment={this.addComment} PostId= {this.props.post.id} currentUserImage={this.props.currentUserImage}/>
 			<div className=''>
                 {comments.map(comment => (
                     <div key={comment.id}>
@@ -163,6 +178,7 @@ class PostItem extends Component {
                             currentUserRole= {this.props.currentUserRole}
                             currentUserId= {this.props.currentUserId}
                             image= {comment.User.image}
+                            deleteComment= {this.deleteComment}
                         />
                     </div>
                 ))}    

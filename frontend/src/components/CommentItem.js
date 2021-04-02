@@ -14,7 +14,8 @@ function CommentItem(props) {
         })
             .then(res => {
                 console.log(res.data)
-                window.location.reload()
+                props.deleteComment(props.CommentId);
+                //window.location.reload()
             })
             .catch(error=>console.log(error))
     }

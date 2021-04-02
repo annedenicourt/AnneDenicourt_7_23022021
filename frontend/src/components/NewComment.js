@@ -34,7 +34,14 @@ class NewComment extends Component {
         })
             .then(res => {
                 console.log(res.data)
-                window.location.reload()
+                const comment = res.data.comment;
+                comment.User =  {name: this.props.user.UserName, image: this.props.user.UserImage, id: this.props.user.UserId, role: this.props.user.UserRole }
+                this.props.addComment(comment);
+
+                //this.newPostForm.current.reset()
+                this.setState({ fields: { content: '' } })
+                //window.location.reload()
+
             })
             .catch(error=>console.log(error))
     }

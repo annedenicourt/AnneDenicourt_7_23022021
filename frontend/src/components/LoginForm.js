@@ -45,9 +45,7 @@ class LoginForm extends Component {
                 window.localStorage.setItem('token', res.data.token)
                 window.location.href = "/forum";
             })
-            .catch(
-                error=>Swal.fire('Attention', 'Email ou mot de passe incorrect', 'warning'),
-                )
+            .catch(error=>Swal.fire('Attention', 'Email ou mot de passe incorrect', 'warning'))
         }
     }
 

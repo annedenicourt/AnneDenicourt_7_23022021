@@ -3,7 +3,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #FDF8F5;
+  background-color: #FDF8F5 !important;
   /*background-image: url('./assets/joe-woods-4Zaq5xY5M_c-unsplash.jpg');*/
   
 }

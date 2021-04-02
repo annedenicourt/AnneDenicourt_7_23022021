@@ -3,11 +3,14 @@ const router = express.Router(); // pour créér notre router avec la fonction r
 const multer = require('../middleware/multer-config'); // pour importer le middleware multer
 const auth = require('../middleware/auth'); // pour importer le middleware auth
 const userCtrl = require('../controllers/user'); // pour importer les controleurs
+const authCtrl = require('../controllers/auth'); // pour importer les controleurs
 
 //pour créer un nouveau user 
-router.post('/auth/signup', userCtrl.signup);
+router.post('/auth/signup', authCtrl.signup);
 //pour connecter le user 
-router.post('/auth/login', userCtrl.login);
+router.post('/auth/login', authCtrl.login);
+//pour connecter le user via API Google
+router.post('/auth/google', authCtrl.loginGoogle);
 
 //pour récupérer tous les users
 router.get('/users', auth, userCtrl.getAllUsers);

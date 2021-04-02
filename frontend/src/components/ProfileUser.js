@@ -69,7 +69,7 @@ class ProfileUser extends Component {
         })
         .catch(err => {
             console.log(err);
-            window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
+            alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
         })
     }
 
@@ -99,6 +99,10 @@ class ProfileUser extends Component {
             </div> 
             <div className="scroll col-12 col-lg-9">
                 <div className='membres fw-bold mb-2 ms-2 '>SES DERNIÈRES PUBLICATIONS</div>
+                {this.state.posts.length <=0 ?
+                    <div className='fw-bold text-center mt-5 ms-2 '>{user.UserName} n'a encore rien publié</div>
+                    : ""
+                }
                 {posts.map(post=> (
                     <div className="border rounded mb-4 bg-white" key={post.id}>
                         <PostItem                           

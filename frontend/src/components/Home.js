@@ -5,6 +5,7 @@ import LoginForm from './LoginForm';
 import logo from '../assets/icon-left-font-monochrome-white.png'
 import img1 from '../assets/pexels-fauxels-3183197.jpg'
 import img2 from '../assets/pexels-fauxels-3184653.jpg'
+import LoginGoogle from './LoginGoogle';
 
 function Home() {
     return ( 
@@ -12,6 +13,7 @@ function Home() {
             <div className="col col-md-12 col-lg-6 d-flex flex-column align-items-center">
                 <img className='logo-home' src={logo} alt='Groupomania'/>
                 <h2 className='title text-white pb-5'>Connecting people</h2>
+                <LoginGoogle />
                 <div className="col-8 mt-5 text-center">
                     <LoginForm />
                     <h4 className="title_register text-white mb-4">Pas encore inscrit ?</h4>

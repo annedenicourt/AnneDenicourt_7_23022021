@@ -10,8 +10,6 @@ import Swal from 'sweetalert2';
 
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import AvatarImageCropper from 'react-avatar-image-cropper';
-
 
 class Profil extends Component {
 
@@ -115,16 +113,7 @@ class Profil extends Component {
                 }
             })
                 .then(() => {
-                    Swal.fire({
-                        title: "Êtes-vous sûr(e) ?",
-                        text: "Une fois votre compte supprimé, vous ne pourrez plus accéder au forum",
-                        icon: "warning",
-                        showDenyButton: true,
-                        confirmButtonText: 'Supprimer mon compte',
-                        denyButtonText: 'Annuler',
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33', 
-                      })
+                    localStorage.clear()
                     window.location.href = '/';
                 })
                 .catch(err => {
@@ -136,12 +125,12 @@ class Profil extends Component {
     onSelectFile = e => {
         let filename = e.target.files[0];
         if (e.target.files && e.target.files.length > 0) {
-          const reader = new FileReader();
-          reader.addEventListener('load', () =>
+            const reader = new FileReader();
+            reader.addEventListener('load', () =>
             this.setState({ src: reader.result })
-          );
-          reader.readAsDataURL(filename);
-          this.setState({
+            );
+            reader.readAsDataURL(filename);
+            this.setState({
             file: filename
             });
         }
@@ -191,6 +180,7 @@ class Profil extends Component {
             reader.onloadend = () => {
                 this.dataURLtoFile(reader.result, 'cropped.jpg')
             }
+            console.log(reader.result)
         })
     }
 
@@ -269,6 +259,7 @@ class Profil extends Component {
                     </div>
                     <div className="mt-5 mb-5 text-center"><Link to="/forum"><button className="bouton2 border-0 ">Accès forum</button></Link></div>
                 </div>
+
                 <Footer />
             </div>)
         }
