@@ -2,8 +2,10 @@ import '../styles/Banner.css'
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/icon-left-font-monochrome-white2.png'
 import Swal from 'sweetalert2';
+require('dotenv').config();
 
 function Banner() {
+    const role = localStorage.getItem("role");
 
     function handleLogout() {
         Swal.fire({
@@ -37,6 +39,10 @@ function Banner() {
                             <li className="nav-item"><NavLink className="nav-link fw-bold" to="/forum">FORUM</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link fw-bold" to="/profil">MON PROFIL<i className="bi bi-person-circle ms-2"></i></NavLink></li>
                             <li className="logout nav-item nav-link fw-bold" onClick={handleLogout}>SE DECONNECTER</li>
+                            {role === 'Moderator' ?
+                            <li className="nav-item ms-3"><NavLink className="nav-link border rounded fw-bold" to="/admin/dashboard"><i className="bi bi-key-fill me-2"></i>ACCES ADMIN</NavLink></li>
+                            : ""
+                            }
                         </ul>
                     </div>
                 </div>

@@ -76,6 +76,22 @@ exports.modifyUser = (req, res, next) => {
         .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé' }))
   };
 
+exports.modifyUserJob = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
+    const userId = decodedToken.userId;
+
+    db.User.findOne({ where: { id: userId } })
+        .then(user => {
+            user.update({
+                job: req.body.job
+            })
+            .then(() => res.status(200).json({ message: 'Job modifié' }))
+            .catch(error => res.status(400).json({ error: 'Impossible de mettre à jour' }));
+        })
+        .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé' }))
+  };
+
 exports.deletePictureUser = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);

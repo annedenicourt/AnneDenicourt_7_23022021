@@ -42,6 +42,9 @@
     background: #f05837;
     color: white;
 }
+.bi-pencil-square {
+    cursor: pointer;
+}
 .btn_delete{
     background: none;
     border: none;
@@ -61,4 +64,7 @@
     box-shadow: 3px 3px 3px grey;
     background: #f05837;
     color: white;
+}
+#change_job {
+    display: none;
 }

@@ -6,14 +6,14 @@ import Footer from './Footer';
 import avatar from '../assets/avatar2.png'
 import React from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
-
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
 class Profil extends Component {
-
     state = {
+        fields: {
+            job: '',
+        },
         user: {},
         file: "",
         src: null,
@@ -25,16 +25,13 @@ class Profil extends Component {
         croppedImageUrl: null,
         croppedImage: null,
     }
-
     constructor(props) {
         super(props);
         this.fileInput = React.createRef();
     }
-
     componentDidMount() {
         this.getCurrentUser();
     }
-
     getCurrentUser() {
         const token = localStorage.getItem("token");
 
@@ -51,7 +48,6 @@ class Profil extends Component {
                 window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
             })
     }
-
     handleSubmit = (event) => {
         event.preventDefault();
 
@@ -80,7 +76,42 @@ class Profil extends Component {
                 window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
             })
     }
+    onUpdateJob = (event) => {
+        event.preventDefault();
 
+        const token = localStorage.getItem("token");
+        let { job } = this.state.fields;
+        console.log(job)
+
+        axios.put('http://localhost:3000/api/users/monprofil/job', {
+            job: job,  
+            }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then(res => {
+                this.setState({ user: res.data });
+                window.location.reload()
+            })
+            .catch(err => {
+                console.log(err);
+                window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
+            })
+    }
+    handleChangeJob = (event) => {
+        let { fields } = this.state;
+        fields[event.target.name] = event.target.value.trim();
+        this.setState({
+            fields
+        })
+    }
+    onClickJob() {
+        document.getElementById('change_job').style.display = 'inline'
+    }
+    onCloseJob(){
+        document.getElementById('change_job').style.display = 'none'
+    }
     handleDeletePicture = (event) => {
         event.preventDefault();
 
@@ -103,7 +134,6 @@ class Profil extends Component {
                 window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
             })
     }
-
     handleDelete() {
             const token = localStorage.getItem("token");
 
@@ -121,7 +151,6 @@ class Profil extends Component {
                     window.alert('Une erreur est survenue, veuillez réessayer plus tard. Si le problème persiste, contactez l\'administrateur du site');
                 })
     }
-
     onSelectFile = e => {
         let filename = e.target.files[0];
         if (e.target.files && e.target.files.length > 0) {
@@ -135,7 +164,6 @@ class Profil extends Component {
             });
         }
     };
-
     onImageLoaded = image => {
         this.imageRef = image;
     };
@@ -173,7 +201,6 @@ class Profil extends Component {
             crop.width,
             crop.height
         );
-
         const reader = new FileReader()
         canvas.toBlob(blob => {
             reader.readAsDataURL(blob)
@@ -183,7 +210,6 @@ class Profil extends Component {
             console.log(reader.result)
         })
     }
-
     dataURLtoFile(dataurl, filename) {
         let arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -198,7 +224,6 @@ class Profil extends Component {
         this.setState({croppedImage: croppedImage })
         console.log(this.state.croppedImage)
     } 
-
     reset = () => {
         window.location.reload()
     }
@@ -221,48 +246,46 @@ class Profil extends Component {
                         </div>
                         <div className='text-center mt-4'>
                             <label className="label-file text-white mb-3" htmlFor="image">Choisir une image</label>
-                            <input name="image" id="image" className="input-file text-white" type="file" accept="image/*" onChange={this.onSelectFile} ref={this.fileInput} ></input>
-                            <div id="imgstore"></div> 
-                            
+                            <input name="image" id="image" className="input-file text-white" type="file" accept="image/*" onChange={this.onSelectFile} ref={this.fileInput} ></input>                            
                             <div>
-
-                            {src && (
-                            <ReactCrop src={src} crop={crop} ruleOfThirds circularCrop
-                            onImageLoaded={this.onImageLoaded} onComplete={this.onCropComplete} onChange={this.onCropChange}
-                            />
-                            )}
-                            {croppedImageUrl && (
-                             <img alt="Crop" style={{ maxWidth: '100%' }} src={croppedImageUrl} />
-                            )}
-                            { file ?
-                                <button type="submit" className="button-file btn p-2 mt-4 mb-4 me-2" onClick={this.handleSubmit}>Ajouter</button>
-                                : ''
-                            }
-                            { file ?
-                                <button type="button" className="button-file btn p-2 mt-4 mb-4" onClick={this.reset}>Annuler</button>
-                                : ''
-                            }
+                                {src && (
+                                    <ReactCrop src={src} crop={crop} ruleOfThirds circularCrop
+                                    onImageLoaded={this.onImageLoaded} onComplete={this.onCropComplete} onChange={this.onCropChange}
+                                    />)}
+                                {croppedImageUrl && (
+                                    <img alt="Crop" style={{ maxWidth: '100%' }} src={croppedImageUrl} />)}
+                                { file ?
+                                    <button type="submit" className="button-file btn p-2 mt-4 mb-4 me-2" onClick={this.handleSubmit}>Ajouter</button>
+                                    : ''
+                                }
+                                { file ?
+                                    <button type="button" className="button-file btn p-2 mt-4 mb-4" onClick={this.reset}>Annuler</button>
+                                    : ''
+                                }
                             </div>
                         </div>
-
                         <div className="pb-4 pe-4 ps-4">
                             <h5 className=" text-white mb-4">Informations</h5>
                             <div className="border-bottom text-white mb-2">Nom/Pseudo</div>
                             <div className="text-muted mb-4 d-flex justify-content-between align-items-center">{user.UserName}</div>
                             <div className="border-bottom text-white mb-2">Email</div>
                             <div className="text-muted mb-4 d-flex justify-content-between align-items-center">{user.email}</div>
-                            <div className="border-bottom text-white mb-2">Poste</div>
-                            <div className="text-muted mb-4 d-flex justify-content-between align-items-center">{user.job}</div>
+                            <div className="border-bottom text-white mb-2">Poste occupé</div>
+                            <div className="btn_delete text-muted mb-4">{user.job}<i className="bi bi-pencil-square ms-2" title="Modifier le poste" onClick={this.onClickJob}></i></div>
+                            <div id="change_job">
+                                <label htmlFor="job" className="form-label text-white">Quel poste occupez-vous ?</label>
+                                <input type="text" name="job" id="job" className="form-control" value={this.state.fields['job']} onChange={this.handleChangeJob}/>
+                                <button type="submit" className="btn btn-light mt-2 mb-2" onClick={this.onUpdateJob}>Enregistrer</button>
+                                <button type="submit" className="btn btn-light mt-2 mb-2 ms-2" onClick={this.onCloseJob}>Annuler</button>
+                            </div>
                             <div className="border-bottom text-white mb-2">Mon compte</div>
-                            <button className="btn_delete text-muted mb-4" onClick={this.handleDelete}><i className="bi bi-x-circle me-2"></i>Supprimer mon compte</button>
+                            <div className="btn_delete text-muted mb-4" onClick={this.handleDelete}>Supprimer mon compte<i className="bi bi-x-circle ms-2" title="Supprimer le compte"></i></div>
                         </div>
                     </div>
                     <div className="mt-5 mb-5 text-center"><Link to="/forum"><button className="bouton2 border-0 ">Accès forum</button></Link></div>
                 </div>
-
                 <Footer />
             </div>)
         }
     }
-
 export default Profil

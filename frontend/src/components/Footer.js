@@ -8,7 +8,7 @@ function Footer() {
             <div className="row">
                 <div className="col">
                     <ul className="list-inline text-center pt-3">
-                        <li className="list-inline-item"><a href="index.html">Mentions légales</a></li>
+                        <li className="list-inline-item"><a href=" ">Mentions légales</a></li>
                         <li className="list-inline-item">&middot;</li>
                         <li className="list-inline-item"><a href="mailto:contact@groupomania.com">Nous contacter</a></li>
                         <li className="list-inline-item">&middot;</li>

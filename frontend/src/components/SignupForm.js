@@ -79,6 +79,7 @@ class SignupForm extends Component {
         }) 
         .then(res => {
             window.localStorage.setItem('token', res.data.token)
+            window.localStorage.setItem('role', res.data.role)
             window.location.href = "/forum";
         })
         .catch(

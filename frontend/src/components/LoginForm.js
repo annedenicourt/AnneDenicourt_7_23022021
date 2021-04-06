@@ -43,6 +43,7 @@ class LoginForm extends Component {
             }) 
             .then(res => {
                 window.localStorage.setItem('token', res.data.token)
+                window.localStorage.setItem('role', res.data.role)
                 window.location.href = "/forum";
             })
             .catch(error=>Swal.fire('Attention', 'Email ou mot de passe incorrect', 'warning'))

@@ -1,0 +1,27 @@
+.button_nav.active {
+    background-color:  #f05837 !important;
+
+}.header_card {
+    margin-top: -25px;
+    background:#282c34;
+}
+.button_card {
+    background-color: #f05837;
+    border: none;
+}
+.button_card:hover {
+    background-color: #f05837;
+    filter: brightness(90%);
+}
+.scroll4 {
+    overflow-y: auto;
+    height: 1400px;
+}
+.counter_container {
+    background-color: #282c34;
+    width: 300px;
+    height: 300px;
+}
+.counter_user {
+    font-size: 8em;
+}
