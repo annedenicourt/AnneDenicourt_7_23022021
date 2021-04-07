@@ -80,8 +80,8 @@ class Database extends Component {
                     <div className="scroll4 col-12 col-lg-10">
                         <h4 className='border-bottom pb-3 mt-5 mb-2 ms-3 '>DATABASE GROUPOMANIA</h4>
                         <div className='membres fw-bold mt-5 mb-2 ms-3 '>TABLE Users</div>
-                        <div className='member-list p-2 ms-2'>
-                            <table className="table bg-white text-center">
+                        <div className='p-2 ms-2'>
+                            <table className="table bg-white shadow rounded text-center">
                                 <thead>
                                     <tr>
                                         <th scope="col">Id</th>
@@ -108,8 +108,8 @@ class Database extends Component {
                             <div className='fw-bold'><i className="bi bi-arrow-return-right me-3"></i>{users_quantity} utilisateurs sont inscrits</div>
                         </div>
                         <div className='membres fw-bold mt-5 mb-2 ms-3 '>TABLE Posts</div>
-                        <div className='member-list p-2 ms-2'>
-                            <table className="table bg-white">
+                        <div className='p-2 ms-2'>
+                            <table className="table bg-white shadow rounded">
                                 <thead>
                                     <tr>
                                         <th scope="col">Post Id</th>
@@ -134,8 +134,8 @@ class Database extends Component {
                             <div className='fw-bold'><i className="bi bi-arrow-return-right me-3"></i>{posts_quantity} posts ont été publiés</div>                        
                         </div> 
                         <div className='membres fw-bold mt-5 mb-2 ms-3 '>TABLE Comments</div>
-                        <div className='member-list p-2 ms-2'>
-                            <table className="table bg-white">
+                        <div className='p-2 ms-2'>
+                            <table className="table bg-white shadow rounded">
                                 <thead>
                                     <tr>
                                         <th scope="col">Comment Id</th>

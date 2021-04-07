@@ -5,6 +5,11 @@ require('dotenv').config();
 const db = require('../models');
 
 exports.signup = (req, res, next) => {
+    const regexPassword = /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/ // on utilise un regex pour le mot de passe
+     if (!regexPassword.test(req.body.password)){ 
+        res.status(406).json({ message: 'Mot de passe incorrect' })  
+        return false
+     }
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
         db.User.create ({
@@ -92,9 +97,8 @@ exports.loginGoogle = async (req, res, next) => {
                     password: password
                 })
                 .then(user => {
-                    console.log(user.id)
-                    console.log(user.name)
                     res.status(201).json({
+                        role: user.role,
                         token: jwt.sign(
                             { 
                                 userId: user.id,
@@ -111,6 +115,7 @@ exports.loginGoogle = async (req, res, next) => {
                 console.log(user.id)
                 console.log(user.name)
                 res.status(201).json({
+                    role: user.role,
                     token: jwt.sign(
                         { 
                             userId: user.id,

@@ -41,7 +41,7 @@ class Users extends Component {
 
                     <div className="col-12 col-lg-10 p-0">
                     <h4 className='border-bottom pb-3 mt-5 mb-2 ms-3 '>USERS GROUPOMANIA</h4>
-                        <div className='scroll4 member-list p-2 ms-2'>
+                        <div className='scroll4 p-2 ms-2'>
                             {users.map(({ name, id, job, image, email, role }) => (
                                 <div key={id}>
                                     <MemberItem3

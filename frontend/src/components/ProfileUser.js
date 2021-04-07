@@ -29,7 +29,6 @@ class ProfileUser extends Component {
         })
             .then(res => {
                 this.setState({ currentUser: res.data });
-                console.log(res.data)
             })
             .catch(err => {
                 console.log(err);

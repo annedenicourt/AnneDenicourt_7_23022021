@@ -56,7 +56,6 @@ class Forum extends Component {
         })
             .then(res => {
                 this.setState({ posts: res.data });
-                console.log(res.data)
             })
             .catch(err => {
                 console.log(err);

@@ -70,7 +70,7 @@ class MemberItem3 extends Component {
     render() {
         return  (
             <div className="d-flex">
-                <Card className="mb-3 mt-5 w-75 mx-auto" >
+                <Card className="mb-3 mt-5 w-75 mx-auto shadow rounded" >
                     <div className="header_card rounded me-4 ms-4 p-3 text-white fw-bold">User ID {this.props.member_id}</div>                   
                     <Card.Body>
                         <Card.Title className='d-flex justify-content-between'>
@@ -81,7 +81,7 @@ class MemberItem3 extends Component {
                             {this.props.name}
                             </Card.Text>
                             <Card.Text>
-                                <Button onClick={this.deleteUser} className="button_card me-1">Supprimer le compte</Button>
+                                <Button onClick={this.deleteUser} className="button_card me-1" size="sm">Supprimer le compte</Button>
                             </Card.Text>
                         </Card.Title>
                         <Card.Text className='text-muted border-bottom d-flex'>Poste occupé</Card.Text>
@@ -92,8 +92,8 @@ class MemberItem3 extends Component {
                         <Card.Text className='d-flex justify-content-between'>
                         {this.props.role}
                         { this.props.role === 'SuperUser' ?
-                                <Button onClick={this.updateModerator} className="button_card me-1" ><i className="bi bi-check-circle me-2"></i>Choisir comme modérateur</Button>
-                                : <Button onClick={this.cancelModerator} className="button_card me-1"><i className="bi bi-x-circle me-2"></i>Retirer comme modérateur</Button>
+                                <Button onClick={this.updateModerator} className="button_card" size="sm"><i className="bi bi-check-circle me-2"></i>Choisir comme modérateur</Button>
+                                : <Button onClick={this.cancelModerator} className="button_card" size="sm"><i className="bi bi-x-circle me-2"></i>Retirer comme modérateur</Button>
                 	            }
                         </Card.Text>                        
                     </Card.Body>

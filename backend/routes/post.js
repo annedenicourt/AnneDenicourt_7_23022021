@@ -3,6 +3,7 @@ const router = express.Router(); // pour créer un routeur Express
 const auth = require('../middleware/auth'); // pour importer le middleware auth
 const multer = require('../middleware/multer-config'); // pour importer le middleware multer
 const postCtrl = require('../controllers/post'); // pour importer le controleur
+const adminCtrl = require('../controllers/admin')
 
 //pour enregistrer des posts dans la BDD
 router.post('/', auth, multer, postCtrl.createPost);
@@ -18,5 +19,9 @@ router.get('/users/:id', auth, postCtrl.getAllPostsByUser);
 router.get('/:id/likes', postCtrl.getAllLikePost)
 //pour supprimer un post 
 router.delete('/:id', auth, postCtrl.deletePost);
+
+// ********* ADMIN ********* //
+//pour récupérer les derniers posts
+router.get('/admin', auth, adminCtrl.getNewPostsAdmin);
 
 module.exports = router;

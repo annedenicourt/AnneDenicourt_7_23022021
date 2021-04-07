@@ -33,6 +33,8 @@ router.put('/users/monprofil/mypicture', auth, multer, userCtrl.deletePictureUse
 router.delete('/users/monprofil', auth, userCtrl.deleteCurrentUser);
 
 // ********* ADMIN ********* //
+//pour récupérer les derniers inscrits
+router.get('/users/admin', auth, adminCtrl.getNewUsersAdmin);
 //pour mettre à jour le role du user par admin
 router.put('/users/user/:id/role', auth, adminCtrl.modifyUserRole);
 //pour supprimer le user par admin
