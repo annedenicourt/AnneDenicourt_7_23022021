@@ -112,8 +112,6 @@ exports.loginGoogle = async (req, res, next) => {
                 })
                 .catch(error => res.status(400).json({ error }) )
             } else {
-                console.log(user.id)
-                console.log(user.name)
                 res.status(201).json({
                     role: user.role,
                     token: jwt.sign(

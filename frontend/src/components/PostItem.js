@@ -75,7 +75,6 @@ class PostItem extends Component {
 		    .then(res => {
                 console.log(res.data)
                 this.props.deletePost(this.props.post.id);
-                //window.location.reload()
             })
             .catch((err) => {
                 console.log(err);
@@ -95,8 +94,8 @@ class PostItem extends Component {
             like: this.state.liked,
             PostId: this.props.post.id,
             LikeId: likeId
-
-            },{ headers: {
+            },
+            { headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
@@ -110,7 +109,6 @@ class PostItem extends Component {
     addComment(comment) {
         let { comments } = this.state;
         let addNewComment = [comment, ...comments]
-        //console.log(addNewPost)
         this.setState({ comments: addNewComment }, () =>
         console.log(this.state.comments))   
     }

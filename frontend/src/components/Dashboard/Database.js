@@ -1,6 +1,7 @@
 import Sidebar from './Sidebar';
 import { Component } from 'react';
 import axios from 'axios';
+import logo from '../../assets/groupomania_logo.png'
 
 class Database extends Component {
 
@@ -78,7 +79,7 @@ class Database extends Component {
                     </div> 
 
                     <div className="scroll4 col-12 col-lg-10">
-                        <h4 className='border-bottom pb-3 mt-5 mb-2 ms-3 '>DATABASE GROUPOMANIA</h4>
+                        <h4 className='fw-bold text-center rounded pb-1 mt-3 mb-2'><img src={logo} height='80' alt=""/>DATABASE<img src={logo} height='80' alt=""/></h4>
                         <div className='membres fw-bold mt-5 mb-2 ms-3 '>TABLE Users</div>
                         <div className='p-2 ms-2'>
                             <table className="table bg-white shadow rounded text-center">
@@ -92,8 +93,8 @@ class Database extends Component {
                                         <th scope="col">Rôle</th>
                                     </tr>
                                 </thead>
-                                {users.map(({ name, id, job, image, email, role }) => (
                                 <tbody>
+                                {users.map(({ name, id, job, image, email, role }) => (
                                     <tr key={id}>
                                         <th scope="row">{id}</th>
                                         <td><img className='rounded-circle'src={image} height="30" alt="" /></td>
@@ -102,8 +103,9 @@ class Database extends Component {
                                         <td>{job}</td>
                                         <td>{role}</td>
                                     </tr>
-                                </tbody>                               
+                                                               
                                 ))}
+                                </tbody>
                             </table>
                             <div className='fw-bold'><i className="bi bi-arrow-return-right me-3"></i>{users_quantity} utilisateurs sont inscrits</div>
                         </div>
@@ -119,17 +121,18 @@ class Database extends Component {
                                         <th scope="col">Likes</th>
                                     </tr>
                                 </thead>
-                                {posts.map(post => (
                                 <tbody>
+                                    {posts.map(post => (
+                                
                                     <tr key={post.id}>
                                         <th scope="row">{post.id}</th>
                                         <td>{post.UserId}</td>
                                         <td><img className=''src={post.image} height="30" alt="" /></td>
                                         <td>{post.content}</td>
                                         <td>{post.likes}</td>
-                                    </tr>
-                                </tbody>                               
+                                    </tr>                             
                                 ))}
+                                </tbody>
                             </table>
                             <div className='fw-bold'><i className="bi bi-arrow-return-right me-3"></i>{posts_quantity} posts ont été publiés</div>                        
                         </div> 
@@ -144,16 +147,17 @@ class Database extends Component {
                                         <th scope="col">Content</th>
                                     </tr>
                                 </thead>
-                                {comments.map(comment => (
                                 <tbody>
+                                    {comments.map(comment => (
+                                
                                     <tr key={comment.id}>
                                         <th scope="row">{comment.id}</th>
                                         <td>{comment.PostId}</td>
                                         <td>{comment.OwnerId}</td>
                                         <td>{comment.content}</td>
-                                    </tr>
-                                </tbody>                               
+                                    </tr>                        
                                 ))}
+                                </tbody> 
                             </table>
                             <div className='fw-bold'><i className="bi bi-arrow-return-right me-3"></i>{comments_quantity} commentaires ont été publiés</div>                        
                         </div>   

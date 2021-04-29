@@ -44,8 +44,6 @@ class NewPost extends Component {
                 const post = res.data.post;
                 post.User =  {name: this.props.user.UserName, image: this.props.user.UserImage, id: this.props.user.UserId, role: this.props.user.UserRole }
                 this.props.addPost(post);
-
-                this.newPostForm.current.reset()
                 this.setState({ fields: { content: '' } })
                 this.setState({file: ""})
                 var store = document.getElementById('imgstore');
@@ -81,7 +79,7 @@ class NewPost extends Component {
         let { file } = this.state;
 
         return (
-            <form className="border ms-2 mb-3 bg-white" onSubmit={this.handleSubmit} ref={this.newPostForm}>
+            <form className="border rounded ms-2 mb-3 bg-white" onSubmit={this.handleSubmit} ref={this.newPostForm}>
                 
                 <div className="d-flex p-3">
                     { this.props.currentUserImage === null ?

@@ -2,18 +2,13 @@
     background-image: url('../assets/pexels-picjumbocom-461077.jpg');
     background-size: cover ;
 }
-
 .login-logo img{
     width: 20%;
     border-radius: 4.5rem;
 }
-
-
 @media screen and (max-width: 991px) {
-    
     .login-logo img{
         width: 10%;
-        
     }
 }
 

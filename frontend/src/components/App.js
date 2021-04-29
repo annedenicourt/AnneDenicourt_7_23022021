@@ -4,17 +4,14 @@ import Register from './Register';
 import Profil from './Profil';
 import Forum from './Forum';
 import ProfileUser from './ProfileUser';
-import Test from './Test';
 import Dashboard from './Dashboard/Dashboard';
 import Users from './Dashboard/Users';
 import Database from './Dashboard/Database';
 require('dotenv').config();
-const jwt = require('jsonwebtoken');
 
 function App() {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
-    console.log(token)
     console.log(role)
 
     if(!token) {
@@ -23,7 +20,6 @@ function App() {
                 <Switch>
                     <Route path="/" exact component={Home}/>
                     <Route path="/register" component={Register}/>
-                    <Route path="/test" component={Test}/>
                 </Switch>
             </BrowserRouter>)
     } else if(role === 'Moderator') {
@@ -38,7 +34,6 @@ function App() {
                     <Route path="/forum" component={Forum}/>
                     <Route path="/profil" component={Profil}/>
                     <Route path="/user/:id" component={ProfileUser}/>
-                    <Route path="/test" component={Test}/>
                 </Switch>
             </BrowserRouter>
         );
@@ -52,7 +47,6 @@ function App() {
                 <Route path="/forum" component={Forum}/>
                 <Route path="/profil" component={Profil}/>
                 <Route path="/user/:id" component={ProfileUser}/>
-                <Route path="/test" component={Test}/>
             </Switch>
         </BrowserRouter>
     );

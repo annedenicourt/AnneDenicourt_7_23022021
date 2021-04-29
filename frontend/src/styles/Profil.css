@@ -48,6 +48,7 @@
 .btn_delete{
     background: none;
     border: none;
+    cursor: pointer;
 }
 .bouton2 {
     text-decoration: none;

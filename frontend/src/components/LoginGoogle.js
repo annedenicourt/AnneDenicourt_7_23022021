@@ -1,5 +1,5 @@
 import React from "react";
-import {GoogleLogin, GoogleLogout} from 'react-google-login'
+import {GoogleLogin} from 'react-google-login'
 import axios from "axios";
 require('dotenv').config();
 
@@ -33,12 +33,10 @@ function LoginGoogle() {
                 buttonText="SE CONNECTER AVEC GOOGLE"
                 onSuccess={onSuccess}
                 onFailure={onFailure}
-                 cookiePolicy={'single_host_origin'}
+                cookiePolicy={'single_host_origin'}
             />
         </div>
-
     )
 }
-
 export default LoginGoogle
 

@@ -18,7 +18,6 @@ exports.getCurrentUser = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, process.env.JWT_RAND_SECRET);
     const userId = decodedToken.userId;
-    console.log(userId)
 
     db.User.findOne({ where: { id: userId } })
         .then(user => {

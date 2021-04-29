@@ -80,7 +80,7 @@ class ProfileUser extends Component {
             <div className="row justify-content-center ">
             <Banner />
             <div className="col-12 col-lg-3 ">
-                <div className="profile_card ms-2 ">
+                <div className="profile_card me-2 ms-2 ">
                     <div className="col bg-dark p-3 rounded mb-4">
                         <div className="text-center text-white">
                             <div className='avatar2 rounded-circle mx-auto'>
@@ -103,7 +103,7 @@ class ProfileUser extends Component {
                     : ""
                 }
                 {posts.map(post=> (
-                    <div className="border rounded mb-4 bg-white" key={post.id}>
+                    <div className="border rounded mb-4 me-2 ms-2 bg-white" key={post.id}>
                         <PostItem                           
                         post={post}
                         user={user}

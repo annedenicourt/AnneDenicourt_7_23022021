@@ -1,5 +1,6 @@
 import '../../styles/Dashboard.css';
 import avatar from '../../assets/avatar2.png';
+import logo from '../../assets/groupomania_logo.png'
 import { Component } from 'react';
 import Sidebar from './Sidebar';
 import axios from 'axios';
@@ -97,9 +98,7 @@ class Dashboard extends Component {
                         <Sidebar />
                     </div>
                     <div className="col-12 col-lg-10 mx-auto">
-
-                        <h4 className='border-bottom pb-3 mt-5 mb-5 ms-3 '>BIENVENUE CHEZ GROUPOMANIA</h4>
-
+                    <h4 className='fw-bold text-center rounded pb-1 mt-3 mb-2'><img src={logo} height='80' alt=""/>TABLEAU DE BORD<img src={logo} height='80' alt=""/></h4>
                         <div className="row bg_counter d-lg-flex mb-5 p-3 justify-content-evenly">
                             <div className="counter_container mt-5 mb-5 bg-dark shadow rounded-circle d-flex flex-column justify-content-center align-items-center">
                                 <CountUp className="counter_user rounded-circle text-white fw-bold" end={users_quantity} />
@@ -110,9 +109,7 @@ class Dashboard extends Component {
                                 <div className="text-white fw-bold">posts</div>
                             </div>
                         </div>
-
                         <div className="row d-lg-flex mt-5 pt-5 justify-content-evenly">
-
                             <div className="col-10 col-lg-4 icon_card mb-5 bg-white shadow rounded">
                                 <div className="icon"><i className="text-white rounded bi bi-person-plus-fill"></i></div>
                                 <div className="mb-4 mt-2 border-bottom text-end fw-bold">Nouveaux inscrits</div>
@@ -128,7 +125,6 @@ class Dashboard extends Component {
                                     </div>
                                 ))}
                             </div>
-
                             <div className="col-10 col-lg-4 icon_card bg-white mb-5 shadow rounded">
                             <div className="icon"><i className="text-white rounded bi bi-newspaper"></i></div>
                                 <div className="mb-4 mt-2 border-bottom text-end fw-bold">Activité récente</div>

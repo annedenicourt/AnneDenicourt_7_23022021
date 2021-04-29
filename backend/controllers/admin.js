@@ -1,7 +1,7 @@
 const db = require('../models');
+const fs = require('fs');
 
 exports.modifyUserRole = (req, res, next) => {
-
     db.User.findOne({ where: { id: req.params.id } })
         .then(user => {
             user.update({

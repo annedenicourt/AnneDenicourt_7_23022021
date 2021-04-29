@@ -54,7 +54,6 @@ class Profil extends Component {
         const token = localStorage.getItem("token");
         let formData = new FormData();
         formData.append('image', this.state.croppedImage);
-        console.log(formData)
 
         if (!this.fileInput.current.files[0]) {
             alert("Vous devez choisir une photo")
@@ -81,7 +80,6 @@ class Profil extends Component {
 
         const token = localStorage.getItem("token");
         let { job } = this.state.fields;
-        console.log(job)
 
         axios.put('http://localhost:3000/api/users/monprofil/job', {
             job: job,  
@@ -222,7 +220,6 @@ class Profil extends Component {
         }
         let croppedImage = new File([u8arr], filename, {type:mime});
         this.setState({croppedImage: croppedImage })
-        console.log(this.state.croppedImage)
     } 
     reset = () => {
         window.location.reload()

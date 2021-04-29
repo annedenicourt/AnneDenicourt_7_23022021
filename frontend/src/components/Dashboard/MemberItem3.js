@@ -59,7 +59,7 @@ class MemberItem3 extends Component {
             })
             .then(res => {
                 console.log(res.data)
-                //window.location.reload()
+                window.location.reload()
             })
             .catch(err => {
                 console.log(err);
@@ -70,7 +70,7 @@ class MemberItem3 extends Component {
     render() {
         return  (
             <div className="d-flex">
-                <Card className="mb-3 mt-5 w-75 mx-auto shadow rounded" >
+                <Card className="col-10 mb-3 mt-5 mx-auto shadow rounded" >
                     <div className="header_card rounded me-4 ms-4 p-3 text-white fw-bold">User ID {this.props.member_id}</div>                   
                     <Card.Body>
                         <Card.Title className='d-flex justify-content-between'>
@@ -78,10 +78,10 @@ class MemberItem3 extends Component {
                             <img className='rounded-circle me-2' height="40"  src={avatar} alt="avatar"/> 
                             : <img className='rounded-circle me-2' height="40" width="40" src={this.props.image} alt="avatar"/>
                 	        }
-                            {this.props.name}
+                            <span className='fs-6 fw-bold'>{this.props.name}</span>
                             </Card.Text>
                             <Card.Text>
-                                <Button onClick={this.deleteUser} className="button_card me-1" size="sm">Supprimer le compte</Button>
+                                <Button onClick={this.deleteUser} className="button_card me-1" size="sm" title="Supprimer le compte">Supprimer</Button>
                             </Card.Text>
                         </Card.Title>
                         <Card.Text className='text-muted border-bottom d-flex'>Poste occupé</Card.Text>

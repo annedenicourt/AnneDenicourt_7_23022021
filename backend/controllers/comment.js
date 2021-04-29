@@ -21,7 +21,7 @@ exports.createComment = (req, res, next) => {
             .then(comment => res.status(201).json({ comment }))
             .catch(error => res.status(400).json({ error }))
         })
-    .catch(error => res.status(400).json({ message: "erreur" }))
+        .catch(error => res.status(400).json({ message: "erreur" }))
 }
 
 exports.deleteComment = (req, res, next) => {

@@ -12,7 +12,6 @@ module.exports = {
     }
   };
 
-
   /*module.exports = {
     HOST: "localhost",
     USER: "annedenicourt",

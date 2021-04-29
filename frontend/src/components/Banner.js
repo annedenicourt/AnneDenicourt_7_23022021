@@ -38,9 +38,9 @@ function Banner() {
                         <ul className="navbar-nav">
                             <li className="nav-item"><NavLink className="nav-link fw-bold" to="/forum">FORUM</NavLink></li>
                             <li className="nav-item"><NavLink className="nav-link fw-bold" to="/profil">MON PROFIL<i className="bi bi-person-circle ms-2"></i></NavLink></li>
-                            <li className="logout nav-item nav-link fw-bold" onClick={handleLogout}>SE DECONNECTER</li>
+                            <li className="logout nav-item nav-link fw-bold me-3" onClick={handleLogout}>SE DECONNECTER</li>
                             {role === 'Moderator' ?
-                            <li className="nav-item ms-3"><NavLink className="nav-link border rounded fw-bold" to="/admin/dashboard"><i className="bi bi-key-fill me-2"></i>ACCES ADMIN</NavLink></li>
+                            <li className="nav-item"><NavLink className="nav-link border rounded fw-bold ps-2" to="/admin/dashboard"><i className="bi bi-key-fill me-2"></i>ACCES ADMIN</NavLink></li>
                             : ""
                             }
                         </ul>

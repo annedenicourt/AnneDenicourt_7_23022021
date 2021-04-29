@@ -32,7 +32,6 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       defaultValue: "SuperUser",
     },
-  
      createdAt: Sequelize.DATE, 
      updatedAt: Sequelize.DATE, 
 }) 

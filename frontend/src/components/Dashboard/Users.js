@@ -2,6 +2,7 @@ import Sidebar from './Sidebar';
 import { Component } from 'react';
 import axios from 'axios';
 import MemberItem3 from './MemberItem3';
+import logo from '../../assets/groupomania_logo.png'
 
 class Users extends Component {
 
@@ -40,7 +41,7 @@ class Users extends Component {
                     </div> 
 
                     <div className="col-12 col-lg-10 p-0">
-                    <h4 className='border-bottom pb-3 mt-5 mb-2 ms-3 '>USERS GROUPOMANIA</h4>
+                    <h4 className='fw-bold text-center rounded pb-1 mt-3 mb-2'><img src={logo} height='80' alt=""/>USERS<img src={logo} height='80' alt=""/></h4>
                         <div className='scroll4 p-2 ms-2'>
                             {users.map(({ name, id, job, image, email, role }) => (
                                 <div key={id}>

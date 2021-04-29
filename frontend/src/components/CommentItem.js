@@ -1,6 +1,7 @@
 import '../styles/CommentItem.css'
 import avatar from '../assets/avatar2.png';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function CommentItem(props) {
 
@@ -13,9 +14,7 @@ function CommentItem(props) {
             }
         })
             .then(res => {
-                console.log(res.data)
                 props.deleteComment(props.CommentId);
-                //window.location.reload()
             })
             .catch(error=>console.log(error))
     }
@@ -27,7 +26,7 @@ function CommentItem(props) {
                     <img className='rounded-circle me-3' height="30"  src={avatar} alt="avatar"/> 
                     : <img className='rounded-circle me-3' height="30" width="30" src={props.image} alt="avatar"/>
                 }
-				<a href=" ">{props.UserName} </a>      
+                <Link className="" to ={{ pathname: `/user/${props.OwnerId}`}}>{props.UserName}</Link>     
                 <span> a commenté le {new Date(props.date).toLocaleDateString('fr-FR')}</span>
 				<span> à {new Date(props.date).toLocaleTimeString('fr-FR')}</span>
                 { props.currentUserId === props.OwnerId ?

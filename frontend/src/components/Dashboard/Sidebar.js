@@ -7,7 +7,7 @@ class Sidebar extends Component {
     render() {
         return  (
             <div className="bg-homepage"> 
-               <NavLink to="/forum"><img className="border-bottom mt-3 pb-2" width='180' src={logo} alt="logo groupomania" /></NavLink>
+               <NavLink to="/forum"><img className="border-bottom mt-3 pb-2" width='100%' src={logo} alt="logo groupomania" /></NavLink>
                 <nav className="nav-pills navbar-dark mt-5">
                     <ul className="navbar-nav">
                         <li className="nav-item mb-3"><NavLink className="button_nav nav-link text-center fw-bold" to="/admin/dashboard"><i className="bi bi-layout-text-window-reverse me-3"></i>DASHBOARD</NavLink></li>
